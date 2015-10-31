@@ -45,7 +45,7 @@
 	<c:set var="currentUrl" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
 
 	<ul class="nav nav-list">
-	
+		<c:if test="${loginUser.position.id == 1 or loginUser.department.id == 1}">
 	
 		<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoice'}">class="active"</c:if>>
 			<a href="${pageContext.request.contextPath}/invoice"> 
@@ -60,7 +60,11 @@
 				<span class="menu-text">ออกใบจ่ายค่าพาหนะ</span>
 			</a>
 		</li>
+		
+		</c:if>
        				
+       	<c:if test="${loginUser.position.id == 1 or loginUser.department.id == 2}">
+       	
 		<li <c:if test="${fn:startsWith(currentUrl, '/report')}">class="active open"</c:if>>
 			<a href="#" class="dropdown-toggle">
 				<i class="icon-tag"></i>
@@ -76,6 +80,8 @@
 				</li>
 			</ul>
 		</li>
+		
+		</c:if>
 	</ul>
 
 

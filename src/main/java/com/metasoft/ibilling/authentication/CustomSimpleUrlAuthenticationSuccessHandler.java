@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -17,6 +19,8 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.metasoft.ibilling.dao.DepartmentDao;
+import com.metasoft.ibilling.dao.PositionDao;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.UserService;
 
@@ -26,16 +30,16 @@ import com.metasoft.ibilling.service.UserService;
  */
 @Component
 public class CustomSimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-//    protected Log logger = LogFactory.getLog(this.getClass());
+    protected Log logger = LogFactory.getLog(this.getClass());
  
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-//    @Autowired
-//    private InsuranceDao insuranceDao;
-//    
-//    @Autowired
-//    private PositionDao positionDao;
-//
+    @Autowired
+    private DepartmentDao departmentDao;
+    
+    @Autowired
+    private PositionDao positionDao;
+
     @Autowired
 	 private UserService userService;
  
@@ -59,12 +63,8 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
         // create comboBox
         HttpSession session = request.getSession();
         
-//        session.setAttribute("claimTypes", ClaimType.values());
-//        session.setAttribute("jobStatuses", JobStatus.values());
-//        session.setAttribute("receiveMoneyTypes", ReceiveMoneyType.values());
-//        session.setAttribute("insurances", insuranceDao.findAllOrder());
-//        session.setAttribute("positions", positionDao.findAll());
-//        session.setAttribute("agents", userService.findAll());
+        session.setAttribute("positions", positionDao.findAll());
+        session.setAttribute("departments", departmentDao.findAll());
          
     	User secUser = userService.findByUserName(authentication.getName());
     	session.setAttribute("loginUser", secUser);

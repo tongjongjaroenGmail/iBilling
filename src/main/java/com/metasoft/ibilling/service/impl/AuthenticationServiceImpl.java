@@ -31,7 +31,7 @@ public class AuthenticationServiceImpl implements UserDetailsService {
 
 	}
 
-	// Converts com.mkyong.users.model.User user to
+	// Converts user to
 	// org.springframework.security.core.userdetails.User
 	private User buildUserForAuthentication(com.metasoft.ibilling.model.User user, List<GrantedAuthority> authorities) {
 		return new User(user.getUserName(), user.getPassword(), user.isEnable(), true, true, true, authorities);
