@@ -11,7 +11,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<project.svndir>claimWeb</project.svndir>
+		<project.svndir>iBilling</project.svndir>
 		<spring.version>3.2.0.RELEASE</spring.version>
 		<spring-security.version>3.2.5.RELEASE</spring-security.version>
 		<hibernate.version>4.2.3.Final</hibernate.version>

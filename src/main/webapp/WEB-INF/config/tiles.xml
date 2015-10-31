@@ -5,10 +5,7 @@
 
 <tiles-definitions>
 	<definition name="login" template="/WEB-INF/jsp/login.jsp"></definition>
-    <definition name="reportTracking" template="/WEB-INF/jsp/claim/report/trackingRPT.jsp"></definition>
-    
     <definition name="403" template="/WEB-INF/jsp/403.jsp">
-
     </definition>
  
     <definition name="base.definition" template="/WEB-INF/jsp/mainTemplate.jsp">
@@ -22,46 +19,5 @@
     <definition name="mainPage" extends="base.definition">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/jsp/mainPage.jsp"></put-attribute>
-    </definition>
-    
-    <definition name="claimSearch" extends="base.definition">
-		<put-attribute name="title" value=""></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/jsp/claim/claim/claimSearch.jsp"></put-attribute>
-    </definition>
-    
-    <definition name="claimImport" extends="base.definition">
-		<put-attribute name="title" value=""></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/jsp/claim/import/import.jsp"></put-attribute>
-    </definition>
-    
-     <definition name="reportWork" extends="base.definition">
-		<put-attribute name="title" value=""></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/jsp/report/workSearch.jsp"></put-attribute>
-    </definition>
-    
-     <!--     laborPaySearch -->
-	<definition name="laborPaySearch" extends="base.definition">
-		<put-attribute name="title" value=""></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/jsp/claim/report/laborPaySearch.jsp"></put-attribute>
-    </definition>
-    
-      <!--     operationSearch -->
-	<definition name="operationSearch" extends="base.definition">
-		<put-attribute name="title" value=""></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/jsp/claim/report/operationSearch.jsp"></put-attribute>
-    </definition>
-    
-    
-      <!--     trackingSearch -->
-	<definition name="trackingSearch" extends="base.definition">
-		<put-attribute name="title" value=""></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/jsp/claim/report/trackingSearch.jsp"></put-attribute>
-    </definition>
-    
-       <!--     billingSearch -->
-	<definition name="reportBilling" extends="base.definition">
-		<put-attribute name="title" value=""></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/jsp/report/billingSearch.jsp"></put-attribute>
-    </definition>
-    
+    </definition> 
 </tiles-definitions>

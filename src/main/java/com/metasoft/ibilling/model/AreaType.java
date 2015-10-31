@@ -1,13 +1,15 @@
 package com.metasoft.ibilling.model;
 
-public enum ClaimType {
+public enum AreaType {
 
-	follow(0, "ติดตาม");
+	bkk(0, "กทม"),
+	perimeter(1, "ปริมณฑล"),
+	country(2, "ตจว");
 
 	private int id;
 	private String name;
 
-	private ClaimType(int id, String name) {
+	private AreaType(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -28,8 +30,8 @@ public enum ClaimType {
 		this.name = name;
 	}
 
-	public static ClaimType getById(int id) {
-		for (ClaimType e : values()) {
+	public static AreaType getById(int id) {
+		for (AreaType e : values()) {
 			if (e.getId() == id)
 				return e;
 		}

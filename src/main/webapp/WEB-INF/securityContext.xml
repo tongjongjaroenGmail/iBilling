@@ -36,7 +36,7 @@
 		<security:authentication-provider user-service-ref="authenticationService" />
 	</security:authentication-manager>
 
-	<bean id="ajaxTimeoutRedirectFilter" class="com.metasoft.claim.filter.AjaxTimeoutRedirectFilter">
+	<bean id="ajaxTimeoutRedirectFilter" class="com.metasoft.ibilling.filter.AjaxTimeoutRedirectFilter">
 	    <property name="customSessionExpiredErrorCode" value="901"/>
 	</bean>
 </beans>

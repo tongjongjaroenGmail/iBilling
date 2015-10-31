@@ -17,13 +17,8 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.metasoft.ibilling.dao.standard.InsuranceDao;
-import com.metasoft.ibilling.dao.standard.PositionDao;
-import com.metasoft.ibilling.model.ClaimType;
-import com.metasoft.ibilling.model.JobStatus;
-import com.metasoft.ibilling.model.ReceiveMoneyType;
-import com.metasoft.ibilling.model.SecUser;
-import com.metasoft.ibilling.service.security.UserService;
+import com.metasoft.ibilling.model.User;
+import com.metasoft.ibilling.service.UserService;
 
 /**
  * @author 
@@ -35,12 +30,12 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
  
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-    @Autowired
-    private InsuranceDao insuranceDao;
-    
-    @Autowired
-    private PositionDao positionDao;
-
+//    @Autowired
+//    private InsuranceDao insuranceDao;
+//    
+//    @Autowired
+//    private PositionDao positionDao;
+//
     @Autowired
 	 private UserService userService;
  
@@ -64,15 +59,14 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
         // create comboBox
         HttpSession session = request.getSession();
         
-        session.setAttribute("claimTypes", ClaimType.values());
-        session.setAttribute("jobStatuses", JobStatus.values());
-        session.setAttribute("receiveMoneyTypes", ReceiveMoneyType.values());
-        session.setAttribute("insurances", insuranceDao.findAllOrder());
-        session.setAttribute("positions", positionDao.findAll());
-        session.setAttribute("positions", positionDao.findAll());
-        session.setAttribute("agents", userService.findAll());
+//        session.setAttribute("claimTypes", ClaimType.values());
+//        session.setAttribute("jobStatuses", JobStatus.values());
+//        session.setAttribute("receiveMoneyTypes", ReceiveMoneyType.values());
+//        session.setAttribute("insurances", insuranceDao.findAllOrder());
+//        session.setAttribute("positions", positionDao.findAll());
+//        session.setAttribute("agents", userService.findAll());
          
-    	SecUser secUser = userService.findByUserName(authentication.getName());
+    	User secUser = userService.findByUserName(authentication.getName());
     	session.setAttribute("loginUser", secUser);
  
         redirectStrategy.sendRedirect(request, response, targetUrl);

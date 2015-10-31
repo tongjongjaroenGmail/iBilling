@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.metasoft.ibilling.service.security.UserService;
+import com.metasoft.ibilling.service.UserService;
 
 /**
  * @author 
@@ -84,48 +84,5 @@ public class SiteController extends BaseController
     public String mainPage()
     {	
 		return "mainPage";
-    }
-    
-    @RequestMapping(value = "/claimSearch", method = RequestMethod.GET)
-    public String claimSearch()
-    {	
-		return "claimSearch";
-    }
-    
-    @RequestMapping(value = "/trackingSearch", method = RequestMethod.GET)
-    public String trackingSearch()
-    {	
-		return "trackingSearch";
-    }
-    
-    @RequestMapping(value = "/reportBilling", method = RequestMethod.GET)
-    public String billingSearch()
-    {	
-		return "reportBilling";
-    }
-    
-    @RequestMapping(value = "/laborPaySearch", method = RequestMethod.GET)
-    public String laborPaySearch()
-    {	
-		return "laborPaySearch";
-    }
-    
-    @RequestMapping(value = "/operationSearch", method = RequestMethod.GET)
-    public String operationSearch()
-    {	
-		return "operationSearch";
-    }
-
-    
-    @RequestMapping(value = "/claimImport", method = RequestMethod.GET)
-    public String claimImport()
-    {	
-		return "claimImport";
-    }
-    
-    @RequestMapping(value = "/reportWork", method = RequestMethod.GET)
-    public String reportWork()
-    {	
-		return "reportWork";
     }
 }

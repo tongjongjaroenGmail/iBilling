@@ -9,18 +9,20 @@
 
 	<tx:annotation-driven />
                
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-    	<property name="jndiName" value="${dataSource.jndiName}"/>
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan">
 		    <list>
-		        <value>com.metasoft.claim.model</value>
+		        <value>com.metasoft.ibilling.model</value>
 		    </list>
 		</property>
-		<!-- <property name="packagesToScan" value="com.vialink.echantiers.model" /> -->
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>

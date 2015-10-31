@@ -1,13 +1,13 @@
 package com.metasoft.ibilling.model;
 
-public enum ClaimType {
+public enum ServiceType {
 
-	follow(0, "ติดตาม");
+	home(0, "หน้าร้าน"), cont(1, "ต่อเนื่อง"), service(2, "บริการ"), sameArea(3, "พื้นที่เดียวกัน");
 
 	private int id;
 	private String name;
 
-	private ClaimType(int id, String name) {
+	private ServiceType(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -28,11 +28,12 @@ public enum ClaimType {
 		this.name = name;
 	}
 
-	public static ClaimType getById(int id) {
-		for (ClaimType e : values()) {
+	public static ServiceType getById(int id) {
+		for (ServiceType e : values()) {
 			if (e.getId() == id)
 				return e;
 		}
 		return null;
 	}
+
 }
