@@ -53,7 +53,7 @@
 							<div class="center">
 								<h1>
 					
-									<span class="red">Claim Recovery</span>
+									<span class="red">iBilling</span>
 									<span class="white">Application</span>
 								</h1>
 								<h4 class="blue">&copy; Meta Soft</h4>
