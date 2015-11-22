@@ -55,16 +55,16 @@
 			</a>
 			<ul class="submenu">
 				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceSearchPage'}">class="active"</c:if>>
-					<a href="${pageContext.request.contextPath}/invoiceSearchPage"> 
+					<a href="${pageContext.request.contextPath}/invoiceGroupPage"> 
 						<i class="icon-double-angle-right"></i> 
-						<span class="menu-text">ค้นหาข้อมูลวางบิล</span>
+						<span class="menu-text">จัดชุดวางบิล</span>
 					</a>
 				</li>
 				
 				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoice/group'}">class="active"</c:if>>
-					<a href="${pageContext.request.contextPath}/invoice/group"> 
+					<a href="${pageContext.request.contextPath}/invoiceSearchPage"> 
 						<i class="icon-double-angle-right"></i> 
-						<span class="menu-text">จัดชุดวางบิล</span>
+						<span class="menu-text">ค้นหาข้อมูลวางบิล</span>
 					</a>
 				</li>
 			</ul>

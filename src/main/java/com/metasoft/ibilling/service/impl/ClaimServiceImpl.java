@@ -77,7 +77,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				}
 				
 			// TODO ค่าสำรวจ รอสูตร
-				vo.setSurveyPrice(123.45f);
+				vo.setSurveyPrice(0f);
 				
 				vo.setSurInvest(NumberToolsUtil.nullToFloat(claim.getSurInvest()));
 				vo.setSurTrans(NumberToolsUtil.nullToFloat(claim.getSurTrans()));

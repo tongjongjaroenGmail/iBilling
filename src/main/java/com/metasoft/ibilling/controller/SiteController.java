@@ -86,8 +86,14 @@ public class SiteController extends BaseController
 		return "mainPage";
     }
     
+    @RequestMapping(value = "/invoiceGroupPage", method = RequestMethod.GET)
+    public String invoiceGroupPage()
+    {	
+		return "invoiceGroupPage";
+    }
+    
     @RequestMapping(value = "/invoiceSearchPage", method = RequestMethod.GET)
-    public String inviceSearch()
+    public String invoiceSearchPage()
     {	
 		return "invoiceSearchPage";
     }
