@@ -58,6 +58,13 @@ public class NumberToolsUtil {
 		}
 		return Double.parseDouble(o.toString());
 	}
+	
+	public static Float nullToFloat(Object o) {
+		if (o == null) {
+			return 0f;
+		}
+		return Float.parseFloat(o.toString());
+	}
 
 	public static Integer nullToInteger(Object o) {
 		if (o == null) {

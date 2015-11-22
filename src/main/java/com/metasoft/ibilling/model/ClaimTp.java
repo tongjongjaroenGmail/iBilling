@@ -1,15 +1,15 @@
 package com.metasoft.ibilling.model;
 
-public enum ClaimType {
+public enum ClaimTp {
 
-	follow(0, "ติดตาม"),
-	party(1, "เคลมสด"),
-	noParty(2, "เคลมแห้ง");
+	insurance(0, "ประกันภัย"),
+	person(1, "บุคคล"),
+	none(2, "ไม่มี");
 
 	private int id;
 	private String name;
 
-	private ClaimType(int id, String name) {
+	private ClaimTp(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -30,8 +30,8 @@ public enum ClaimType {
 		this.name = name;
 	}
 
-	public static ClaimType getById(int id) {
-		for (ClaimType e : values()) {
+	public static ClaimTp getById(int id) {
+		for (ClaimTp e : values()) {
 			if (e.getId() == id)
 				return e;
 		}

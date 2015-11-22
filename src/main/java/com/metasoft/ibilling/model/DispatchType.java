@@ -1,15 +1,14 @@
 package com.metasoft.ibilling.model;
 
-public enum ClaimType {
+public enum DispatchType {
 
-	follow(0, "ติดตาม"),
-	party(1, "เคลมสด"),
-	noParty(2, "เคลมแห้ง");
+	w4(0, "ว.4"),
+	meet(1, "นัดหมาย");
 
 	private int id;
 	private String name;
 
-	private ClaimType(int id, String name) {
+	private DispatchType(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
@@ -30,8 +29,8 @@ public enum ClaimType {
 		this.name = name;
 	}
 
-	public static ClaimType getById(int id) {
-		for (ClaimType e : values()) {
+	public static DispatchType getById(int id) {
+		for (DispatchType e : values()) {
 			if (e.getId() == id)
 				return e;
 		}
