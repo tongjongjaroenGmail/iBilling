@@ -85,4 +85,10 @@ public class SiteController extends BaseController
     {	
 		return "mainPage";
     }
+    
+    @RequestMapping(value = "/invoiceSearchPage", method = RequestMethod.GET)
+    public String inviceSearch()
+    {	
+		return "invoiceSearchPage";
+    }
 }
