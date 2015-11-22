@@ -46,41 +46,80 @@
 
 	<ul class="nav nav-list">
 		<c:if test="${loginUser.position.id == 1 or loginUser.department.id == 1}">
-	
-		<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoice'}">class="active"</c:if>>
-			<a href="${pageContext.request.contextPath}/invoice"> 
-				<i class="icon-double-angle-right"></i> 
-				<span class="menu-text">ออกใบวางบิล</span>
+		
+		<li <c:if test="${fn:startsWith(currentUrl, '/invoice')}">class="active open"</c:if>>
+			<a href="#" class="dropdown-toggle">
+				<i class="icon-tag"></i>
+				<span class="menu-text">วางบิลทิพยฯ</span>
+				<b class="arrow icon-angle-down"></b>
 			</a>
+			<ul class="submenu">
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceSearchPage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/invoiceSearchPage"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">ค้นหาข้อมูลวางบิล</span>
+					</a>
+				</li>
+				
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoice/group'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/invoice/group"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">จัดชุดวางบิล</span>
+					</a>
+				</li>
+			</ul>
 		</li>
 		
-		<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/travelingExpenses'}">class="active"</c:if>>
-			<a href="${pageContext.request.contextPath}/travelingExpenses"> 
-				<i class="icon-double-angle-right"></i> 
-				<span class="menu-text">ออกใบจ่ายค่าพาหนะ</span>
+		<li <c:if test="${fn:startsWith(currentUrl, '/survey')}">class="active open"</c:if>>
+			<a href="#" class="dropdown-toggle">
+				<i class="icon-tag"></i>
+				<span class="menu-text">จ่ายค่าสำรวจพนักงาน</span>
+				<b class="arrow icon-angle-down"></b>
 			</a>
+			<ul class="submenu">
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/survey/search'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/survey/search"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">ค้นหาข้อมูลใบสำรวจ</span>
+					</a>
+				</li>
+				
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/survey/create'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/survey/create"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">สร้างใบจ่ายค่าสำรวจพนักงาน</span>
+					</a>
+				</li>
+			</ul>
 		</li>
 		
 		</c:if>
        				
        	<c:if test="${loginUser.position.id == 1 or loginUser.department.id == 2}">
        	
-		<li <c:if test="${fn:startsWith(currentUrl, '/report')}">class="active open"</c:if>>
+       	<li <c:if test="${fn:startsWith(currentUrl, '/report')}">class="active open"</c:if>>
 			<a href="#" class="dropdown-toggle">
 				<i class="icon-tag"></i>
-				<span class="menu-text">รายงาน</span>
+				<span class="menu-text">ข้อมูลเคลม</span>
 				<b class="arrow icon-angle-down"></b>
 			</a>
 			<ul class="submenu">
-				<li <c:if test="${fn:startsWith(currentUrl, '/report')}">class="active"</c:if>>
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/report/claim'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/report/claim"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">ตรวจสอบเคลม</span>
+					</a>
+				</li>
+				
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/report/statisticsSurvey'}">class="active"</c:if>>
 					<a href="${pageContext.request.contextPath}/report/statisticsSurvey"> 
 						<i class="icon-double-angle-right"></i> 
-						<span class="menu-text">สถิติงานสำรวจ</span>
+						<span class="menu-text">รายงานสถิติงานสำรวจ</span>
 					</a>
 				</li>
 			</ul>
 		</li>
-		
+
 		</c:if>
 	</ul>
 
