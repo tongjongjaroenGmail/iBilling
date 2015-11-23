@@ -165,4 +165,11 @@ public class Invoice extends BaseModel {
 		this.updateDate = updateDate;
 	}
 
+	public InvoiceStatus getInvoiceStatus() {
+		return invoiceStatus;
+	}
+
+	public void setInvoiceStatus(InvoiceStatus invoiceStatus) {
+		this.invoiceStatus = invoiceStatus;
+	}
 }

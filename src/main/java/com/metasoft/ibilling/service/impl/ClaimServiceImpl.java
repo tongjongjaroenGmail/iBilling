@@ -10,13 +10,18 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.vo.CheckClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
 import com.metasoft.ibilling.dao.BranchDao;
 import com.metasoft.ibilling.dao.ClaimDao;
+import com.metasoft.ibilling.dao.SurveyEmployeeDao;
 import com.metasoft.ibilling.model.Branch;
 import com.metasoft.ibilling.model.Claim;
+import com.metasoft.ibilling.model.ClaimStatus;
+import com.metasoft.ibilling.model.SurveyEmployee;
 import com.metasoft.ibilling.service.ClaimService;
 import com.metasoft.ibilling.util.DateToolsUtil;
 import com.metasoft.ibilling.util.NumberToolsUtil;
@@ -28,6 +33,9 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	
 	@Autowired
 	private BranchDao branchDao;
+	
+	@Autowired
+	private SurveyEmployeeDao surveyEmployeeDao;
 
 	/**
 	 * 
@@ -40,17 +48,17 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	}
 
 	@Override
-	public ClaimSearchResultVoPaging searchPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selBranch,int start, int length) {	
+	public ClaimSearchResultVoPaging searchGroupClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selBranch,int start, int length) {	
 		Date dispatchDateStart = null;
 		Date dispatchDateEnd = null;
 		Branch branch = null;
 
 		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
-			dispatchDateStart = DateToolsUtil.convertStringToDate(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
+			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
 		}
 
 		if (StringUtils.isNotBlank(txtDispatchDateEnd)) {
-			dispatchDateEnd = DateToolsUtil.convertStringToDate(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
+			dispatchDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
 		}
 
 		if (selBranch != null && selBranch != 0) {
@@ -101,5 +109,66 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		return voPaging;
 	}
 
+	@Override
+	public CheckClaimSearchResultVoPaging searchCheckClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd, String claimNo,
+			Integer employeeId, Integer claimStatus, int start, int length) {	
+		Date dispatchDateStart = null;
+		Date dispatchDateEnd = null;
+		SurveyEmployee surveyEmployee = null;
+		ClaimStatus claimStatusEnum = null;
+
+		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
+			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (StringUtils.isNotBlank(txtDispatchDateEnd)) {
+			dispatchDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (employeeId != null && employeeId != 0) {
+			surveyEmployee = surveyEmployeeDao.findById(employeeId);
+		}
+		
+		if (claimStatus != null) {
+			claimStatusEnum = ClaimStatus.getById(claimStatus);
+		}
+		
+		ClaimPaging claimPaging = claimDao.searchCheckClaimPaging(dispatchDateStart, dispatchDateEnd, claimNo,surveyEmployee,claimStatusEnum, start, length);
+
+		CheckClaimSearchResultVoPaging voPaging = new CheckClaimSearchResultVoPaging();
+		voPaging.setDraw(claimPaging.getDraw());
+		voPaging.setRecordsFiltered(claimPaging.getRecordsFiltered());
+		voPaging.setRecordsTotal(claimPaging.getRecordsTotal());
+		voPaging.setData(new ArrayList<CheckClaimSearchResultVo>());
+		if (claimPaging != null && claimPaging.getData() != null) {
+			for (Claim claim : claimPaging.getData()) {
+				CheckClaimSearchResultVo vo = new CheckClaimSearchResultVo();
+				vo.setClaimId(claim.getId().intValue());
+				vo.setClaimNo(StringUtils.trimToEmpty(claim.getClaimNo()));
+				
+				if (claim.getSurveyEmployee() != null) {
+					vo.setEmployeeCode(StringUtils.trimToEmpty(claim.getSurveyEmployee().getCode()));
+				}
+				
+				vo.setCenter(StringUtils.trimToEmpty(claim.getCenter()));
+				
+				if (claim.getDispatchDate() != null) {
+					vo.setDispatchDate(DateToolsUtil.convertToString(claim.getDispatchDate(), DateToolsUtil.LOCALE_TH));
+				}
+
+				if (claim.getClaimType() != null) {
+					vo.setClaimType(claim.getClaimType().getName());
+				}
+				
+			// TODO ค่าสำรวจ รอสูตร
+				vo.setSurveyTip(0f);
+				vo.setSurveyEmp(0f);
+
+				voPaging.getData().add(vo);
+			}
+		}
+
+		return voPaging;
+	}
 
 }

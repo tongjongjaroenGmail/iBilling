@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import com.metasoft.ibilling.dao.BranchDao;
 import com.metasoft.ibilling.dao.DepartmentDao;
 import com.metasoft.ibilling.dao.PositionDao;
+import com.metasoft.ibilling.dao.SurveyEmployeeDao;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.UserService;
 
@@ -46,6 +47,9 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
     
     @Autowired
 	private BranchDao branchDao;
+    
+    @Autowired
+	private SurveyEmployeeDao surveyEmployeeDao;
  
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, 
@@ -70,6 +74,7 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
         session.setAttribute("positions", positionDao.findAll());
         session.setAttribute("departments", departmentDao.findAll());
         session.setAttribute("branchs", branchDao.findAll());
+        session.setAttribute("surveyEmployees", surveyEmployeeDao.findAll());
          
     	User secUser = userService.findByUserName(authentication.getName());
     	session.setAttribute("loginUser", secUser);

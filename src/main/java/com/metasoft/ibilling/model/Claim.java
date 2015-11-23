@@ -75,13 +75,17 @@ public class Claim extends BaseModel {
 	// ชื่อผู้จ่ายงาน
 	private String dispatchBy;
 
-	// ชื่อพนักงานสำรวจ
-	private String surveyor;
+//	// ชื่อพนักงานสำรวจ
+//	private String surveyor;
+//
+//	// รหัสพนักงานสำรวจ
+//	private String empcode;
+	@ManyToOne
+	@JoinColumn(name = "survey_employee_id")
+	private SurveyEmployee surveyEmployee;
 
-	// รหัสพนักงานสำรวจ
-	private String empcode;
-
-	// @Column(name = "") // ศูนย์
+	// ศูนย์
+	private String center;
 
 	@ManyToOne
 	@JoinColumn(name = "branch_id")
@@ -117,9 +121,10 @@ public class Claim extends BaseModel {
 	// แยกย้าย (Y/N)
 	private Boolean disperse;
 
-	@Column(name = "wrkTime", nullable = true, columnDefinition = "boolean DEFAULT null")
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "wrk_time")
 	// เวร (ใน/นอก)
-	private Boolean wrkTime;
+	private WorkTime wrkTime;
 
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "service_type")
@@ -130,9 +135,9 @@ public class Claim extends BaseModel {
 	// อำเภอที่ตรวจสอบ
 	private String serviceAmphur;
 
-	@Column(name = "survice_province")
+	@Column(name = "service_province")
 	// จังหวัดที่ตรวจสอบ
-	private String surviceProvince;
+	private String serviceProvince;
 
 	@Column(name = "noti_result")
 	// ผลคดี(รับแจ้ง)
@@ -304,6 +309,66 @@ public class Claim extends BaseModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "update_date")
 	private Date updateDate;
+	
+	// ค่าสำรวจพนักงาน
+	// ค่าบริการ
+	@Column(name = "survey_invest")
+	private Float surveyInvest;
+
+	// ค่าพาหนะ
+	@Column(name = "survey_trans")
+	private Float surveyTrans;
+
+	// ค่าประจำวัน
+	@Column(name = "survey_daily")
+	private Float surveyDaily;
+
+	// ค่ารูป
+	@Column(name = "survey_photo")
+	private Float surveyPhoto;
+
+	// ค่าเรียกร้อง
+	@Column(name = "survey_claim")
+	private Float surveyClaim;
+
+	// ค่าโทรศัพท์
+	@Column(name = "survey_tel")
+	private Float surveyTel;
+
+	// ค่าเงื่อนไขฝ่ายถูก
+	@Column(name = "survey_condition_right")
+	private Float surveyConditionRight;
+
+	// ค่าใช้จ่ายอื่นๆ
+	@Column(name = "survey_other")
+	private Float surveyOther;
+	
+	// ค่าปรับ
+	@Column(name = "survey_fine")
+	private Float surveyFine;
+	
+	@ManyToOne
+	@JoinColumn(name = "pay_survey_id")
+	private PaySurvey paySurvey;
+	
+	private String remark;
+	
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public PaySurvey getPaySurvey() {
+		return paySurvey;
+	}
+
+	public void setPaySurvey(PaySurvey paySurvey) {
+		this.paySurvey = paySurvey;
+	}
 
 	public Invoice getInvoice() {
 		return invoice;
@@ -401,20 +466,20 @@ public class Claim extends BaseModel {
 		this.dispatchBy = dispatchBy;
 	}
 
-	public String getSurveyor() {
-		return surveyor;
+	public SurveyEmployee getSurveyEmployee() {
+		return surveyEmployee;
 	}
 
-	public void setSurveyor(String surveyor) {
-		this.surveyor = surveyor;
+	public void setSurveyEmployee(SurveyEmployee surveyEmployee) {
+		this.surveyEmployee = surveyEmployee;
 	}
 
-	public String getEmpcode() {
-		return empcode;
+	public String getCenter() {
+		return center;
 	}
 
-	public void setEmpcode(String empcode) {
-		this.empcode = empcode;
+	public void setCenter(String center) {
+		this.center = center;
 	}
 
 	public Branch getBranch() {
@@ -473,11 +538,13 @@ public class Claim extends BaseModel {
 		this.disperse = disperse;
 	}
 
-	public Boolean getWrkTime() {
+	
+
+	public WorkTime getWrkTime() {
 		return wrkTime;
 	}
 
-	public void setWrkTime(Boolean wrkTime) {
+	public void setWrkTime(WorkTime wrkTime) {
 		this.wrkTime = wrkTime;
 	}
 
@@ -497,12 +564,12 @@ public class Claim extends BaseModel {
 		this.serviceAmphur = serviceAmphur;
 	}
 
-	public String getSurviceProvince() {
-		return surviceProvince;
+	public String getServiceProvince() {
+		return serviceProvince;
 	}
 
-	public void setSurviceProvince(String surviceProvince) {
-		this.surviceProvince = surviceProvince;
+	public void setServiceProvince(String serviceProvince) {
+		this.serviceProvince = serviceProvince;
 	}
 
 	public String getNotiResult() {
@@ -820,7 +887,76 @@ public class Claim extends BaseModel {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	
-	
 
+	public Float getSurveyInvest() {
+		return surveyInvest;
+	}
+
+	public void setSurveyInvest(Float surveyInvest) {
+		this.surveyInvest = surveyInvest;
+	}
+
+	public Float getSurveyTrans() {
+		return surveyTrans;
+	}
+
+	public void setSurveyTrans(Float surveyTrans) {
+		this.surveyTrans = surveyTrans;
+	}
+
+	public Float getSurveyDaily() {
+		return surveyDaily;
+	}
+
+	public void setSurveyDaily(Float surveyDaily) {
+		this.surveyDaily = surveyDaily;
+	}
+
+	public Float getSurveyPhoto() {
+		return surveyPhoto;
+	}
+
+	public void setSurveyPhoto(Float surveyPhoto) {
+		this.surveyPhoto = surveyPhoto;
+	}
+
+	public Float getSurveyClaim() {
+		return surveyClaim;
+	}
+
+	public void setSurveyClaim(Float surveyClaim) {
+		this.surveyClaim = surveyClaim;
+	}
+
+	public Float getSurveyTel() {
+		return surveyTel;
+	}
+
+	public void setSurveyTel(Float surveyTel) {
+		this.surveyTel = surveyTel;
+	}
+
+	public Float getSurveyConditionRight() {
+		return surveyConditionRight;
+	}
+
+	public void setSurveyConditionRight(Float surveyConditionRight) {
+		this.surveyConditionRight = surveyConditionRight;
+	}
+
+	public Float getSurveyOther() {
+		return surveyOther;
+	}
+
+	public void setSurveyOther(Float surveyOther) {
+		this.surveyOther = surveyOther;
+	}
+
+	public Float getSurveyFine() {
+		return surveyFine;
+	}
+
+	public void setSurveyFine(Float surveyFine) {
+		this.surveyFine = surveyFine;
+	}
 }

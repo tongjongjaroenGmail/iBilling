@@ -26,39 +26,42 @@ public class PaySurvey extends BaseModel {
 
 	private String code;
 
-	// ค่าบริการ
-	private Float invest;
-
-	// ค่าพาหนะ
-	private Float trans;
-
-	// ค่าประจำวัน
-	private Float daily;
-
-	// ค่ารูป
-	private Float photo;
-
-	// ค่าเรียกร้อง
-	private Float claim;
-
-	// ค่าโทรศัพท์
-	private Float tel;
-
-	// ค่าประกันตัว
-	private Float insure;
-
-	// ค่ารถยก
-	private Float towcar;
-
-	// ค่าใช้จ่ายอื่นๆ
-	private Float other;
+//	// ค่าบริการ
+//	private Float invest;
+//
+//	// ค่าพาหนะ
+//	private Float trans;
+//
+//	// ค่าประจำวัน
+//	private Float daily;
+//
+//	// ค่ารูป
+//	private Float photo;
+//
+//	// ค่าเรียกร้อง
+//	private Float claim;
+//
+//	// ค่าโทรศัพท์
+//	private Float tel;
+//
+//	// ค่าประกันตัว
+//	private Float insure;
+//
+//	// ค่ารถยก
+//	private Float towcar;
+//
+//	// ค่าใช้จ่ายอื่นๆ
+//	private Float other;
+//	
+//	// ค่าเงื่อนไขฝ่ายถูก
+//	private Float right;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pay_date")
 	// วันที่วางบิล
 	private Date payDate;
 
-	private Float tax; // ภาษี
+//	private Float tax; // ภาษี
 
 	// จำนวนเคลม
 	// ยอดรวมก่อนภาษี
@@ -76,92 +79,12 @@ public class PaySurvey extends BaseModel {
 		this.code = code;
 	}
 
-	public Float getInvest() {
-		return invest;
-	}
-
-	public void setInvest(Float invest) {
-		this.invest = invest;
-	}
-
-	public Float getTrans() {
-		return trans;
-	}
-
-	public void setTrans(Float trans) {
-		this.trans = trans;
-	}
-
-	public Float getDaily() {
-		return daily;
-	}
-
-	public void setDaily(Float daily) {
-		this.daily = daily;
-	}
-
-	public Float getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(Float photo) {
-		this.photo = photo;
-	}
-
-	public Float getClaim() {
-		return claim;
-	}
-
-	public void setClaim(Float claim) {
-		this.claim = claim;
-	}
-
-	public Float getTel() {
-		return tel;
-	}
-
-	public void setTel(Float tel) {
-		this.tel = tel;
-	}
-
-	public Float getInsure() {
-		return insure;
-	}
-
-	public void setInsure(Float insure) {
-		this.insure = insure;
-	}
-
-	public Float getTowcar() {
-		return towcar;
-	}
-
-	public void setTowcar(Float towcar) {
-		this.towcar = towcar;
-	}
-
-	public Float getOther() {
-		return other;
-	}
-
-	public void setOther(Float other) {
-		this.other = other;
-	}
-
 	public Date getPayDate() {
 		return payDate;
 	}
 
 	public void setPayDate(Date payDate) {
 		this.payDate = payDate;
-	}
-
-	public Float getTax() {
-		return tax;
-	}
-
-	public void setTax(Float tax) {
-		this.tax = tax;
 	}
 
 	public static long getSerialversionuid() {
@@ -171,5 +94,9 @@ public class PaySurvey extends BaseModel {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	
+	
+	
 
 }

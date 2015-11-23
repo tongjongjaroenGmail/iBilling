@@ -97,4 +97,10 @@ public class SiteController extends BaseController
     {	
 		return "invoiceSearchPage";
     }
+    
+    @RequestMapping(value = "/claimSearchPage", method = RequestMethod.GET)
+    public String claimSearchPage()
+    {	
+		return "claimSearchPage";
+    }
 }

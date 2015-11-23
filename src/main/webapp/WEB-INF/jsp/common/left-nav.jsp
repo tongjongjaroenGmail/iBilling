@@ -54,14 +54,14 @@
 				<b class="arrow icon-angle-down"></b>
 			</a>
 			<ul class="submenu">
-				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceSearchPage'}">class="active"</c:if>>
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceGroupPage'}">class="active"</c:if>>
 					<a href="${pageContext.request.contextPath}/invoiceGroupPage"> 
 						<i class="icon-double-angle-right"></i> 
 						<span class="menu-text">จัดชุดวางบิล</span>
 					</a>
 				</li>
 				
-				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoice/group'}">class="active"</c:if>>
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceSearchPage'}">class="active"</c:if>>
 					<a href="${pageContext.request.contextPath}/invoiceSearchPage"> 
 						<i class="icon-double-angle-right"></i> 
 						<span class="menu-text">ค้นหาข้อมูลวางบิล</span>
@@ -97,15 +97,16 @@
        				
        	<c:if test="${loginUser.position.id == 1 or loginUser.department.id == 2}">
        	
-       	<li <c:if test="${fn:startsWith(currentUrl, '/report')}">class="active open"</c:if>>
+       	<li <c:if test="${fn:startsWith(currentUrl, '/report') or 
+       					requestScope['javax.servlet.forward.servlet_path'] == '/claimSearchPage'}">class="active open"</c:if>>
 			<a href="#" class="dropdown-toggle">
 				<i class="icon-tag"></i>
 				<span class="menu-text">ข้อมูลเคลม</span>
 				<b class="arrow icon-angle-down"></b>
 			</a>
 			<ul class="submenu">
-				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/report/claim'}">class="active"</c:if>>
-					<a href="${pageContext.request.contextPath}/report/claim"> 
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/claimSearchPage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/claimSearchPage"> 
 						<i class="icon-double-angle-right"></i> 
 						<span class="menu-text">ตรวจสอบเคลม</span>
 					</a>

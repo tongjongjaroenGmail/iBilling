@@ -76,11 +76,11 @@ public class InvoiceServiceImpl extends ModelBasedServiceImpl<InvoiceDao, Invoic
 		Date createDateEnd = null;
 
 		if (StringUtils.isNotBlank(txtCreateDateStart)) {
-			createDateStart = DateToolsUtil.convertStringToDate(txtCreateDateStart, DateToolsUtil.LOCALE_TH);
+			createDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtCreateDateStart, DateToolsUtil.LOCALE_TH);
 		}
 
 		if (StringUtils.isNotBlank(txtCreateDateEnd)) {
-			createDateEnd = DateToolsUtil.convertStringToDate(txtCreateDateEnd, DateToolsUtil.LOCALE_TH);
+			createDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtCreateDateEnd, DateToolsUtil.LOCALE_TH);
 		}
 		
 		InvoicePaging invoicePaging = invoiceDao.searchPaging(createDateStart, createDateEnd, invoiceCode, start, length);

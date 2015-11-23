@@ -68,7 +68,7 @@ public class InvoiceAjaxController extends BaseAjaxController {
 			resultPaging.setRecordsTotal(0L);
 			resultPaging.setData(new ArrayList<ClaimSearchResultVo>());
 		}else{
-			resultPaging = claimService.searchPaging(txtDispatchDateStart, txtDispatchDateEnd, selBranch, start, length);
+			resultPaging = claimService.searchGroupClaimPaging(txtDispatchDateStart, txtDispatchDateEnd, selBranch, start, length);
 		}
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

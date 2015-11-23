@@ -9,6 +9,8 @@ public class DateToolsUtil {
 	public static final String DATE_PATTERN_VIEW_DDMMYYYY = "dd/MM/yyyy";
 	public static final String DATE_PATTERN_VIEW_YYYYMMDD = "yyyyMMdd";
 	
+	public static final String DATE_PATTERN_VIEW_DDMMYYYY_HHmmss = "dd/MM/yyyy HH:mm:ss";
+	
 	public static final Locale LOCALE_TH = new Locale("th", "TH");
 	
 	/**
@@ -64,6 +66,40 @@ public class DateToolsUtil {
 	public static String convertToString(Date d, String format, Locale locale) {
 		if (d == null) return "";
 		return new SimpleDateFormat(format, locale).format(d);
+	}
+	
+	public static Date convertStringToDateWithStartTime(String date, Locale locale) {
+		DateFormat df = null;
+		Date newDate = null;
+		if (date != null && !date.trim().equals("")) {
+			try {
+				if(date.length() == 10){
+					date += date + "00:00:00";
+				}
+				df = new SimpleDateFormat(DATE_PATTERN_VIEW_DDMMYYYY_HHmmss, locale);
+				newDate = df.parse(date);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return newDate;
+	}
+	
+	public static Date convertStringToDateWithEndTime(String date, Locale locale) {
+		DateFormat df = null;
+		Date newDate = null;
+		if (date != null && !date.trim().equals("")) {
+			try {
+				if(date.length() == 10){
+					date += date + "23:59:59";
+				}
+				df = new SimpleDateFormat(DATE_PATTERN_VIEW_DDMMYYYY_HHmmss, locale);
+				newDate = df.parse(date);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return newDate;
 	}
 
 }
