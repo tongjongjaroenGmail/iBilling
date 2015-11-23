@@ -13,4 +13,6 @@ public interface ClaimDao extends AbstractDao<Claim, Integer> {
 
 	public ClaimPaging searchCheckClaimPaging(Date dispatchDateStart, Date dispatchDateEnd, String claimNo, SurveyEmployee surveyEmployee,
 			ClaimStatus claimStatus, int start, int length);
+	
+	public ClaimPaging searchPaySurveyClaimPaging(Date dispatchDateStart, Date dispatchDateEnd, SurveyEmployee surveyEmployee, int start, int length);
 }

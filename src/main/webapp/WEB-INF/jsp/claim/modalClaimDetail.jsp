@@ -859,7 +859,7 @@ function saveClaim(){
 			if(isSearch){
 				delay(function(){
 					tblClaimDt.fnDraw();
-				}, 1000 );
+				}, 500 );
 			}
 		}
 	});

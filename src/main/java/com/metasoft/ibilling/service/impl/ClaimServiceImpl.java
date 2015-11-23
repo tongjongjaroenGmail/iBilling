@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.PaySurveyClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.vo.CheckClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
+import com.metasoft.ibilling.bean.vo.PaySurveyClaimSearchResultVo;
 import com.metasoft.ibilling.dao.BranchDao;
 import com.metasoft.ibilling.dao.ClaimDao;
 import com.metasoft.ibilling.dao.SurveyEmployeeDao;
@@ -164,6 +166,62 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				vo.setSurveyTip(0f);
 				vo.setSurveyEmp(0f);
 
+				voPaging.getData().add(vo);
+			}
+		}
+
+		return voPaging;
+	}
+
+	@Override
+	public PaySurveyClaimSearchResultVoPaging searchPaySurveyClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd,
+			Integer employeeId, int start, int length) {
+		Date dispatchDateStart = null;
+		Date dispatchDateEnd = null;
+		SurveyEmployee surveyEmployee = null;
+		ClaimStatus claimStatusEnum = null;
+
+		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
+			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (StringUtils.isNotBlank(txtDispatchDateEnd)) {
+			dispatchDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (employeeId != null && employeeId != 0) {
+			surveyEmployee = surveyEmployeeDao.findById(employeeId);
+		}
+		
+		ClaimPaging claimPaging = claimDao.searchPaySurveyClaimPaging(dispatchDateStart, dispatchDateEnd, surveyEmployee, start, length);
+
+		PaySurveyClaimSearchResultVoPaging voPaging = new PaySurveyClaimSearchResultVoPaging();
+		voPaging.setDraw(claimPaging.getDraw());
+		voPaging.setRecordsFiltered(claimPaging.getRecordsFiltered());
+		voPaging.setRecordsTotal(claimPaging.getRecordsTotal());
+		voPaging.setData(new ArrayList<PaySurveyClaimSearchResultVo>());
+		if (claimPaging != null && claimPaging.getData() != null) {
+			for (Claim claim : claimPaging.getData()) {
+				PaySurveyClaimSearchResultVo vo = new PaySurveyClaimSearchResultVo();
+				vo.setClaimId(claim.getId().intValue());
+				vo.setClaimNo(StringUtils.trimToEmpty(claim.getClaimNo()));
+				if (claim.getDispatchDate() != null) {
+					vo.setDispatchDate(DateToolsUtil.convertToString(claim.getDispatchDate(), DateToolsUtil.LOCALE_TH));
+				}
+
+				vo.setSurveyTrans(NumberToolsUtil.nullToFloat(claim.getSurveyTrans()));
+				vo.setSurveyDaily(NumberToolsUtil.nullToFloat(claim.getSurveyDaily()));
+				vo.setSurveyPhoto(NumberToolsUtil.nullToFloat(claim.getSurveyPhoto()));
+				vo.setSurveyClaim(NumberToolsUtil.nullToFloat(claim.getSurveyClaim()));
+				vo.setSurveyTel(NumberToolsUtil.nullToFloat(claim.getSurveyTel()));
+				vo.setSurveyFine(NumberToolsUtil.nullToFloat(claim.getSurveyFine()));
+				vo.setSurveyOther(NumberToolsUtil.nullToFloat(claim.getSurveyOther()));
+				
+				float total = vo.getSurveyTrans() + vo.getSurveyDaily() + vo.getSurveyPhoto() + vo.getSurveyClaim() + vo.getSurveyTel() + 
+						vo.getSurveyFine() + vo.getSurveyOther();
+				
+				vo.setSurveyTotal(total);
+				
 				voPaging.getData().add(vo);
 			}
 		}

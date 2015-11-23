@@ -157,4 +157,62 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		}
 		return resultPaging;
 	}
+
+	@Override
+	public ClaimPaging searchPaySurveyClaimPaging(Date dispatchDateStart, Date dispatchDateEnd, SurveyEmployee surveyEmployee, int start,
+			int length) {
+		ClaimPaging resultPaging = new ClaimPaging();
+
+		Criteria criteriaRecordsTotal = getCurrentSession().createCriteria(entityClass);
+	
+
+		criteriaRecordsTotal.setProjection(Projections.rowCount());
+		resultPaging.setRecordsTotal((Long) criteriaRecordsTotal.uniqueResult());
+
+		Criteria criteriaCount = getCurrentSession().createCriteria(entityClass);
+		if (dispatchDateStart != null && dispatchDateEnd != null) {
+			criteriaCount.add(Restrictions.between("dispatchDate", dispatchDateStart, dispatchDateEnd));
+		} else if (dispatchDateStart != null) {
+			criteriaCount.add(Restrictions.ge("dispatchDate", dispatchDateStart));
+		} else if (dispatchDateEnd != null) {
+			criteriaCount.add(Restrictions.le("dispatchDate", dispatchDateEnd));
+		}
+
+		if (surveyEmployee != null) {
+			criteriaCount.add(Restrictions.eq("surveyEmployee", surveyEmployee));
+		}
+		
+		criteriaCount.add(Restrictions.isNull("paySurvey"));
+
+		criteriaCount.setProjection(Projections.rowCount());
+		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
+
+		if (resultPaging.getRecordsFiltered() != 0) {
+			Criteria criteria = getCurrentSession().createCriteria(entityClass);
+			
+			if (dispatchDateStart != null && dispatchDateEnd != null) {
+				criteria.add(Restrictions.between("dispatchDate", dispatchDateStart, dispatchDateEnd));
+			} else if (dispatchDateStart != null) {
+				criteria.add(Restrictions.ge("dispatchDate", dispatchDateStart));
+			} else if (dispatchDateEnd != null) {
+				criteria.add(Restrictions.le("dispatchDate", dispatchDateEnd));
+			}
+
+			if (surveyEmployee != null) {
+				criteria.add(Restrictions.eq("surveyEmployee", surveyEmployee));
+			}
+			
+			criteria.add(Restrictions.isNull("paySurvey"));
+
+			criteria.addOrder(Order.asc("claimNo"));
+			criteria.setFirstResult(start);
+			criteria.setMaxResults(length);
+			resultPaging.setData(criteria.list());
+		}
+
+		if (resultPaging.getData() == null) {
+			resultPaging.setData(new ArrayList<Claim>());
+		}
+		return resultPaging;
+	}
 }

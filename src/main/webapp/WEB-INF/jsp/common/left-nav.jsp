@@ -70,7 +70,7 @@
 			</ul>
 		</li>
 		
-		<li <c:if test="${fn:startsWith(currentUrl, '/survey')}">class="active open"</c:if>>
+		<li <c:if test="${fn:startsWith(currentUrl, '/paySurvey')}">class="active open"</c:if>>
 			<a href="#" class="dropdown-toggle">
 				<i class="icon-tag"></i>
 				<span class="menu-text">จ่ายค่าสำรวจพนักงาน</span>
@@ -84,8 +84,8 @@
 					</a>
 				</li>
 				
-				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/survey/create'}">class="active"</c:if>>
-					<a href="${pageContext.request.contextPath}/survey/create"> 
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/paySurveyAddPage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/paySurveyAddPage"> 
 						<i class="icon-double-angle-right"></i> 
 						<span class="menu-text">สร้างใบจ่ายค่าสำรวจพนักงาน</span>
 					</a>

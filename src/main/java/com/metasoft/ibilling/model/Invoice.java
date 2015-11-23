@@ -86,8 +86,8 @@ public class Invoice extends BaseModel {
 	private List<Claim> claims;
 	
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "invoice_status")
-	private InvoiceStatus invoiceStatus = InvoiceStatus.active;
+	@Column(name = "status")
+	private InvoiceStatus status = InvoiceStatus.active;
 
 	public String getRemark() {
 		return remark;
@@ -165,11 +165,13 @@ public class Invoice extends BaseModel {
 		this.updateDate = updateDate;
 	}
 
-	public InvoiceStatus getInvoiceStatus() {
-		return invoiceStatus;
+	public InvoiceStatus getStatus() {
+		return status;
 	}
 
-	public void setInvoiceStatus(InvoiceStatus invoiceStatus) {
-		this.invoiceStatus = invoiceStatus;
+	public void setStatus(InvoiceStatus status) {
+		this.status = status;
 	}
+
+	
 }

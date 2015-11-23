@@ -35,4 +35,9 @@
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/jsp/claim/claimSearch.jsp"></put-attribute>
     </definition>
+    
+    <definition name="paySurveyAddPage" extends="base.definition">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/jsp/paysurvey/paySurveyAdd.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>

@@ -78,7 +78,7 @@ public class InvoiceAjaxController extends BaseAjaxController {
 	
 	@RequestMapping(value = "/invoice/save", method = RequestMethod.GET,headers = { "Content-type=application/json;charset=UTF-8" }, produces = { "application/json;charset=UTF-8" })
 	public @ResponseBody
-	String updateLeaveStatus(Model model, @RequestParam(required = true) String claimIds,
+	String save(Model model, @RequestParam(required = true) String claimIds,
 			@RequestParam(required = true) String invoiceNo, HttpSession session) throws ParseException {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		ResultVo resultVo = new ResultVo();

@@ -154,7 +154,7 @@ $(document).ready(function() {
 function searchInvoice(){
 	delay(function(){
 		tblInvoiceDt.fnDraw();
-	}, 1000 );
+	}, 500 );
 	
 	isSearch = true;
 }

@@ -142,8 +142,7 @@
 		</div>
 		<!-- /span -->
 	</div>
-	
-<%-- 	<jsp:include page = "modalClaimSave.jsp" flush="false"/> --%>
+
 </div>
 <!-- /.page-content -->
 
@@ -251,7 +250,7 @@ $(document).ready(function() {
 function searchClaim(){
 	delay(function(){
 		tblClaimDt.fnDraw();
-	}, 1000 );
+	}, 500 );
 	
 	isSearch = true;
 }
