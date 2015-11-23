@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.metasoft.ibilling.bean.paging.PaySurveyClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.PaySurveySearchResultVoPaging;
 import com.metasoft.ibilling.bean.vo.PaySurveyClaimSearchResultVo;
+import com.metasoft.ibilling.bean.vo.PaySurveySearchResultVo;
 import com.metasoft.ibilling.bean.vo.ResultVo;
 import com.metasoft.ibilling.dao.UserDao;
 import com.metasoft.ibilling.model.PaySurvey;
@@ -79,5 +81,32 @@ public class PaySurveyAjaxController extends BaseAjaxController {
 			
 		String json2 = gson.toJson(resultVo);
 		return json2;
+	}
+	
+	@RequestMapping(value = "/paysurvey/search", method = RequestMethod.POST)
+	public @ResponseBody
+	String searchPaySurvey(Model model,
+			@RequestParam(required = false) String txtPaySurveyDateStart,
+			@RequestParam(required = false) String txtPaySurveyDateEnd,
+			@RequestParam(required = false) String txtPaySurveyCode,	
+			@RequestParam(required = false) Integer selEmployee,		
+			@RequestParam(required = false) String firstTime,
+			@RequestParam(required = true) Integer draw,
+			@RequestParam(required = true) Integer start,
+			@RequestParam(required = true) Integer length) throws ParseException {
+		
+		PaySurveySearchResultVoPaging resultPaging = new PaySurveySearchResultVoPaging();
+		resultPaging.setDraw(++draw);
+		if(new Boolean(firstTime)){		
+			resultPaging.setRecordsFiltered(0L);
+			resultPaging.setRecordsTotal(0L);
+			resultPaging.setData(new ArrayList<PaySurveySearchResultVo>());
+		}else{
+			resultPaging = paySurveyService.searchPaging(txtPaySurveyDateStart, txtPaySurveyDateEnd, txtPaySurveyCode,selEmployee, start, length);
+		}
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(resultPaging);
+		return json;
 	}
 }

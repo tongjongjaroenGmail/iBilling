@@ -217,7 +217,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				vo.setSurveyFine(NumberToolsUtil.nullToFloat(claim.getSurveyFine()));
 				vo.setSurveyOther(NumberToolsUtil.nullToFloat(claim.getSurveyOther()));
 				
-				float total = vo.getSurveyTrans() + vo.getSurveyDaily() + vo.getSurveyPhoto() + vo.getSurveyClaim() + vo.getSurveyTel() + 
+				float total = vo.getSurveyTrans() + vo.getSurveyDaily() + vo.getSurveyPhoto() + vo.getSurveyClaim() + vo.getSurveyTel() - 
 						vo.getSurveyFine() + vo.getSurveyOther();
 				
 				vo.setSurveyTotal(total);

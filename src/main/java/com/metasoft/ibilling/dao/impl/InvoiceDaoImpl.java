@@ -51,7 +51,7 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Integer> implements
 			criteriaCount.add(Restrictions.ilike("code", invoiceCode + "%"));
 		}
 		
-		criteriaCount.add(Restrictions.eq("invoiceStatus",InvoiceStatus.active));
+		criteriaCount.add(Restrictions.eq("status",InvoiceStatus.active));
 
 		criteriaCount.setProjection(Projections.rowCount());
 		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
@@ -70,7 +70,7 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Integer> implements
 				criteria.add(Restrictions.ilike("code", invoiceCode + "%"));
 			}
 			
-			criteria.add(Restrictions.eq("invoiceStatus",InvoiceStatus.active));
+			criteria.add(Restrictions.eq("status",InvoiceStatus.active));
 
 			criteria.addOrder(Order.asc("code"));
 			criteria.setFirstResult(start);

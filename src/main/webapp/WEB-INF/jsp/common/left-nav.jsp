@@ -77,8 +77,8 @@
 				<b class="arrow icon-angle-down"></b>
 			</a>
 			<ul class="submenu">
-				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/survey/search'}">class="active"</c:if>>
-					<a href="${pageContext.request.contextPath}/survey/search"> 
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/paySurveySearchPage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/paySurveySearchPage"> 
 						<i class="icon-double-angle-right"></i> 
 						<span class="menu-text">ค้นหาข้อมูลใบสำรวจ</span>
 					</a>
