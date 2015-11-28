@@ -96,8 +96,8 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setCoArea(claim.getCoArea() == null?false:claim.getCoArea());
 		vo.setDisperse(claim.getDisperse() == null?false:claim.getDisperse());
 		vo.setServiceType(claim.getServiceType() != null?claim.getServiceType().getName():"");
-		vo.setServiceAmphur(StringUtils.trimToEmpty(claim.getServiceAmphur()));
-		vo.setServiceProvince(StringUtils.trimToEmpty(claim.getServiceProvince()));
+		vo.setServiceAmphur(StringUtils.trimToEmpty(claim.getSurveyAmphur()));
+		vo.setServiceProvince(StringUtils.trimToEmpty(claim.getSurveyProvince()));
 		vo.setPhotoNum(claim.getPhotoNum() != null?claim.getPhotoNum():0);
 		vo.setPoliceRptNum(claim.getPoliceRptNum() != null?claim.getPoliceRptNum():0);
 		vo.setClaimTp(claim.getClaimTp() != null?claim.getClaimTp().getName():"");

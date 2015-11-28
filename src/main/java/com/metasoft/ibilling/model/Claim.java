@@ -249,9 +249,9 @@ public class Claim extends BaseModel {
 	// วันเวลาที่ตรวจงาน
 	private Date srSendDate;
 
-	@Column(name = "ins_inverst")
+	@Column(name = "ins_invest")
 	// ค่าบริการที่อนุมัติ
-	private Float insInverst;
+	private Float insInvest;
 
 	@Column(name = "ins_trans")
 	// ค่าพาหนะที่อนุมัติ
@@ -277,9 +277,9 @@ public class Claim extends BaseModel {
 	// ค่าประกันตัวที่อนุมัติ
 	private Float insInsure;
 
-	@Column(name = "ins_toecar")
+	@Column(name = "ins_towcar")
 	// ค่ารถยกที่อนุมัติ
-	private Float insToecar;
+	private Float insTowcar;
 
 	@Column(name = "ins_other")
 	// ค่าใช้จ่ายอื่นๆที่อนุมัติ
@@ -779,12 +779,12 @@ public class Claim extends BaseModel {
 		this.srSendDate = srSendDate;
 	}
 
-	public Float getInsInverst() {
-		return insInverst;
+	public Float getInsInvest() {
+		return insInvest;
 	}
 
-	public void setInsInverst(Float insInverst) {
-		this.insInverst = insInverst;
+	public void setInsInvest(Float insInvest) {
+		this.insInvest = insInvest;
 	}
 
 	public Float getInsTrans() {
@@ -835,12 +835,12 @@ public class Claim extends BaseModel {
 		this.insInsure = insInsure;
 	}
 
-	public Float getInsToecar() {
-		return insToecar;
+	public Float getInsTowcar() {
+		return insTowcar;
 	}
 
-	public void setInsToecar(Float insToecar) {
-		this.insToecar = insToecar;
+	public void setInsTowcar(Float insTowcar) {
+		this.insTowcar = insTowcar;
 	}
 
 	public Float getInsOther() {
