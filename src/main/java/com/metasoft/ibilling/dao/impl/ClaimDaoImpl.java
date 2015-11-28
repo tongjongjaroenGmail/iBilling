@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.dao.AbstractDaoImpl;
 import com.metasoft.ibilling.dao.ClaimDao;
+import com.metasoft.ibilling.dao.ClaimLoadLogDao;
 import com.metasoft.ibilling.dao.UserDao;
 import com.metasoft.ibilling.model.Branch;
 import com.metasoft.ibilling.model.Claim;
@@ -26,9 +27,17 @@ import com.metasoft.ibilling.model.SurveyEmployee;
 public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements ClaimDao {
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ClaimLoadLogDao claimLoadLogDao;
 
 	public ClaimDaoImpl() {
 		super(Claim.class);
+	}
+	
+	@Override
+	public Claim findByClaimNo(String claimNo) {
+		return (Claim) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("claimNo", claimNo)).uniqueResult();
 	}
 
 	@Override

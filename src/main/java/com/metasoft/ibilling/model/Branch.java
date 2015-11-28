@@ -31,6 +31,8 @@ public class Branch extends BaseModel {
 
 	@Column(name = "name")
 	private String name;
+	
+	private String code;
 
 	@OneToOne
 	@JoinColumn(name = "amphur_id", nullable = false)
@@ -38,6 +40,16 @@ public class Branch extends BaseModel {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
 	private List<SubBranch> subBranchs;
+	
+	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 	public Integer getId() {
 		return id;

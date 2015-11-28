@@ -39,6 +39,9 @@ public class SubBranch extends BaseModel {
 
 	@Column(name = "sur_tran", nullable = false)
 	private Float surTran;
+	
+	@Column(name = "sur_pay", nullable = false)
+	private Float surPay;
 
 	public Integer getId() {
 		return id;
@@ -83,4 +86,13 @@ public class SubBranch extends BaseModel {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public Float getSurPay() {
+		return surPay;
+	}
+
+	public void setSurPay(Float surPay) {
+		this.surPay = surPay;
+	}
+	
 }

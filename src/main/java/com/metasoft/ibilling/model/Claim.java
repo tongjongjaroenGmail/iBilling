@@ -27,6 +27,10 @@ public class Claim extends BaseModel {
 	// Id อ้างอิง
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
+	@Column(name = "ref_ws_id")
+	// เลข id lobbit
+	private String refWsId;
 
 	@Column(name = "claim_no")
 	// เลขเคลม
@@ -131,13 +135,13 @@ public class Claim extends BaseModel {
 	// ประเภทบริการอื่นๆ (บริการ, ต่อเนื่อง, หน้าร้าน,พื้นที่เดียวกัน)
 	private ServiceType serviceType;
 
-	@Column(name = "service_amphur")
+	@Column(name = "survey_amphur")
 	// อำเภอที่ตรวจสอบ
-	private String serviceAmphur;
+	private String surveyAmphur;
 
-	@Column(name = "service_province")
+	@Column(name = "survey_province")
 	// จังหวัดที่ตรวจสอบ
-	private String serviceProvince;
+	private String surveyProvince;
 
 	@Column(name = "noti_result")
 	// ผลคดี(รับแจ้ง)
@@ -353,7 +357,16 @@ public class Claim extends BaseModel {
 	
 	private String remark;
 	
-	
+	private Boolean w7;
+
+	public Boolean getW7() {
+		return w7;
+	}
+
+	public void setW7(Boolean w7) {
+		this.w7 = w7;
+	}
+
 	public String getRemark() {
 		return remark;
 	}
@@ -556,20 +569,22 @@ public class Claim extends BaseModel {
 		this.serviceType = serviceType;
 	}
 
-	public String getServiceAmphur() {
-		return serviceAmphur;
+
+
+	public String getSurveyAmphur() {
+		return surveyAmphur;
 	}
 
-	public void setServiceAmphur(String serviceAmphur) {
-		this.serviceAmphur = serviceAmphur;
+	public void setSurveyAmphur(String surveyAmphur) {
+		this.surveyAmphur = surveyAmphur;
 	}
 
-	public String getServiceProvince() {
-		return serviceProvince;
+	public String getSurveyProvince() {
+		return surveyProvince;
 	}
 
-	public void setServiceProvince(String serviceProvince) {
-		this.serviceProvince = serviceProvince;
+	public void setSurveyProvince(String surveyProvince) {
+		this.surveyProvince = surveyProvince;
 	}
 
 	public String getNotiResult() {
@@ -959,4 +974,15 @@ public class Claim extends BaseModel {
 	public void setSurveyFine(Float surveyFine) {
 		this.surveyFine = surveyFine;
 	}
+
+	public String getRefWsId() {
+		return refWsId;
+	}
+
+	public void setRefWsId(String refWsId) {
+		this.refWsId = refWsId;
+	}
+
+	
+	
 }
