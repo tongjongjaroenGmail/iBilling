@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +98,8 @@
 </head>
 
 <body>
+	<c:url value="/report/download/token" var="downloadTokenUrl"/>
+	<c:url value="/report/download/progress" var="downloadProgressUrl"/>
 
 	<tiles:insertAttribute name="header"></tiles:insertAttribute>
 
@@ -214,6 +217,53 @@
 			    timer = setTimeout(callback, ms);
 			  };
 			})();
+		
+		function download() {
+			// Retrieve download token
+			// When token is received, proceed with download
+			$.get('${downloadTokenUrl}', function(response) {
+				// Store token
+				var token = response.message[0];
+				
+				// Show progress dialog
+				$('#modalDownload').modal('show');
+				
+				// Start download
+				exportFile(token);
+
+				// Check periodically if download has started
+				var frequency = 1000;
+				var timer = setInterval(function() {
+					$.get('${downloadProgressUrl}', {token: token}, 
+							function(response) {
+								// If token is not returned, download has started
+								// Close progress dialog if started
+								if (response.message[0] != token) {
+									$('#modalDownload').modal('hide');
+									clearInterval(timer);
+								}
+						});
+				}, frequency);
+			});
+		}
 	</script>
+	
+<div class="modal fade" id="modalDownload" tabindex="-1" role="dialog" aria-labelledby="modalDownload"
+	aria-hidden="true" style="overflow-x: hidden; overflow-y: hidden;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				
+			</div>
+			<div class="modal-body">
+				Processing download...
+			</div>
+			<div class="modal-footer">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
 </body>
 </html>
