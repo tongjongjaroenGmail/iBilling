@@ -80,7 +80,7 @@ public class ReportAjaxController {
 		param.put("totalThai", "(" + thaiBaht.getText(surTotal) + ")");
 
 		downloadService.download(ExporterService.EXTENSION_TYPE_EXCEL, "invoice",
-				session.getServletContext().getRealPath("/report/invoice"),
+				session.getServletContext().getRealPath("/jasperreport/invoice"),
 				param, invoice.getClaims(), token, response);
 	}
 }
