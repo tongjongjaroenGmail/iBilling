@@ -186,7 +186,11 @@ $(document).ready(function() {
 					$('#btnPrintInvoice').prop('disabled',false);
 					$('#btnSaveInvoice').prop('disabled', true);
 					$('#hiddenInvoiceId').val(data.data);
-					
+					$('#txtCreateDate').val(
+							moment(new Date()).format("DD/MM/") + 
+							(parseInt(moment(new Date()).format("YYYY"),10) + 543)
+							);
+
 					searchClaim();
 				}
 			}

@@ -94,7 +94,7 @@
 		<table id="tblClaim" class="table table-striped table-bordered table-hover" style="width: 100%;">
 			<thead>
 				<tr>
-					<th><label><input name="chkAll" class="ace" type="checkbox" onclick="checkSelect(this,document.getElementsByName('chk'));countTotalSelect();"><span class="lbl"></span></label></th>
+					<th><label><input name="chkAll" class="ace" type="checkbox" onclick="checkSelect(this,document.getElementsByName('chk'));"><span class="lbl"></span></label></th>
 					<th>เลขเคลม</th>
 					<th>วันที่จ่ายงาน</th>
 					<th>ค่าพาหนะ</th>

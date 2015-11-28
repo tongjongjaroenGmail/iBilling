@@ -78,7 +78,7 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-success" id="btnPrintInvoice" onclick="printInvoice();">พิมพ์ใบวางบิล</button>
+				<button type="button" class="btn btn-success" id="btnPrintInvoice" onclick="download();">พิมพ์ใบวางบิล</button>
 			</div>
 		</div>
 	</div>
@@ -147,4 +147,13 @@ $(document).ready(function() {
 		   ],
 	});
 });
+
+function exportFile(token){
+	var param = "token=" + token;
+	$("#divParamSearch").find('input,textarea,select').each(function() {
+		param += "&invoiceId=" + $("#hiddenInvoiceId").val();
+    });  
+     
+	window.location = '${pageContext.request.contextPath}/report/invoice?' + param;
+}
 </script>
