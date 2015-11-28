@@ -173,8 +173,10 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		ClaimPaging resultPaging = new ClaimPaging();
 
 		Criteria criteriaRecordsTotal = getCurrentSession().createCriteria(entityClass);
+		
+		criteriaRecordsTotal.add(Restrictions.isNull("paySurvey"));
+		criteriaRecordsTotal.add(Restrictions.eq("claimStatus",ClaimStatus.closeCheck));
 	
-
 		criteriaRecordsTotal.setProjection(Projections.rowCount());
 		resultPaging.setRecordsTotal((Long) criteriaRecordsTotal.uniqueResult());
 
@@ -192,6 +194,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		}
 		
 		criteriaCount.add(Restrictions.isNull("paySurvey"));
+		criteriaCount.add(Restrictions.eq("claimStatus",ClaimStatus.closeCheck));
 
 		criteriaCount.setProjection(Projections.rowCount());
 		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
@@ -212,6 +215,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			}
 			
 			criteria.add(Restrictions.isNull("paySurvey"));
+			criteria.add(Restrictions.eq("claimStatus",ClaimStatus.closeCheck));
 
 			criteria.addOrder(Order.asc("claimNo"));
 			criteria.setFirstResult(start);

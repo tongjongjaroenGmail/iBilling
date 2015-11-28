@@ -121,9 +121,6 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					vo.setBranchName(claim.getBranch().getName());
 				}
 
-				// TODO ค่าสำรวจ รอสูตร
-				vo.setSurveyPrice(0f);
-
 				vo.setSurInvest(NumberToolsUtil.nullToFloat(claim.getSurInvest()));
 				vo.setSurTrans(NumberToolsUtil.nullToFloat(claim.getSurTrans()));
 				vo.setSurDaily(NumberToolsUtil.nullToFloat(claim.getSurDaily()));
@@ -134,10 +131,9 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				vo.setSurTowcar(NumberToolsUtil.nullToFloat(claim.getSurTowcar()));
 				vo.setSurOther(NumberToolsUtil.nullToFloat(claim.getSurOther()));
 
-				float surTotal = vo.getSurInvest() + vo.getSurTrans() + vo.getSurDaily() + vo.getSurPhoto() + vo.getSurClaim()
-						+ vo.getSurTel() + vo.getSurInsure() + vo.getSurTowcar() + vo.getSurOther();
-				surTotal = (surTotal * (100 + NumberToolsUtil.nullToFloat(claim.getSurTax()))) / 100;
-				vo.setSurTotal(surTotal);
+				vo.setSurTotal(calcTotalSur(claim));
+				
+				vo.setSurveyPrice(vo.getSurTotal());
 
 				voPaging.getData().add(vo);
 			}
@@ -198,15 +194,31 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					vo.setClaimType(claim.getClaimType().getName());
 				}
 
-				// TODO ค่าสำรวจ รอสูตร
-				vo.setSurveyTip(0f);
-				vo.setSurveyEmp(0f);
+				vo.setSurveyTip(calcTotalSur(claim));
+				
+				vo.setSurveyEmp(calcTotalSurvey(claim));
 
 				voPaging.getData().add(vo);
 			}
 		}
 
 		return voPaging;
+	}
+	
+	private float calcTotalSur(Claim claim){
+		float surTotal = 
+				NumberToolsUtil.nullToFloat(claim.getSurInvest()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurTrans()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurDaily()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurPhoto()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurClaim()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurTel()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurInsure()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurTowcar()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurOther());
+
+			surTotal = (surTotal * (100 + NumberToolsUtil.nullToFloat(claim.getSurTax()))) / 100;
+		return surTotal;
 	}
 
 	@Override
@@ -215,7 +227,6 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		Date dispatchDateStart = null;
 		Date dispatchDateEnd = null;
 		SurveyEmployee surveyEmployee = null;
-		ClaimStatus claimStatusEnum = null;
 
 		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
 			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
@@ -253,16 +264,26 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				vo.setSurveyFine(NumberToolsUtil.nullToFloat(claim.getSurveyFine()));
 				vo.setSurveyOther(NumberToolsUtil.nullToFloat(claim.getSurveyOther()));
 
-				float total = vo.getSurveyTrans() + vo.getSurveyDaily() + vo.getSurveyPhoto() + vo.getSurveyClaim() + vo.getSurveyTel()
-						- vo.getSurveyFine() + vo.getSurveyOther();
-
-				vo.setSurveyTotal(total);
+				vo.setSurveyTotal(calcTotalSurvey(claim));
 
 				voPaging.getData().add(vo);
 			}
 		}
 
 		return voPaging;
+	}
+	
+	private float calcTotalSurvey(Claim claim){
+		return
+				NumberToolsUtil.nullToFloat(claim.getSurveyInvest()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyTrans()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyDaily()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyPhoto()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyClaim()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyTel()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyConditionRight()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyOther()) - 
+				NumberToolsUtil.nullToFloat(claim.getSurveyFine());
 	}
 
 	@Override
@@ -421,6 +442,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		} else if (accZone == 2) {
 			claim.setSurveyInvest(0f);
 		}
+		claim.setSurveyInvest(NumberToolsUtil.nullToFloat(claim.getSurveyInvest()));
 
 		// 2. ค่าพาหนะ Survey_trans
 		float surveyTrans = 0f;
@@ -492,6 +514,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				claim.setSurveyDaily(150f);
 			}
 		}
+		claim.setSurveyDaily(NumberToolsUtil.nullToFloat(claim.getSurveyDaily()));
 
 		// 4. ค่ารูป survey_photo
 		if (accZone == 0 || accZone == 1) {
@@ -505,6 +528,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				claim.setSurveyPhoto(15f);
 			}
 		}
+		claim.setSurveyPhoto(NumberToolsUtil.nullToFloat(claim.getSurveyPhoto()));
 
 		// 5. ค่าเรียกร้อง survey_claim
 		claim.setSurveyClaim((float) (surClaim * 0.15)); // ค่าเรียกร้อง15%
@@ -519,6 +543,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				claim.setSurveyTel(30f);
 			}
 		}
+		claim.setSurveyTel(NumberToolsUtil.nullToFloat(claim.getSurveyTel()));
 
 		// 7. ค่าเงื่อนไขฝายถูก survey_condition_right
 		if (accZone == 0 || accZone == 1) {
@@ -529,6 +554,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 			} else if (claimTp == 2) {
 				claim.setSurveyConditionRight(0f);
 			}
+			claim.setSurveyConditionRight(NumberToolsUtil.nullToFloat(claim.getSurveyConditionRight()));
 		}
 	}
 }

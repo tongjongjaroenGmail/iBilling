@@ -32,45 +32,4 @@ public class UserServiceImpl extends ModelBasedServiceImpl<UserDao, User, Intege
 		return userDao.findByUserName(userName);
 	}
 
-	@Override
-	public User findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<User> findByIds(Integer[] ids) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer save(User e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer saveOrUpdate(User e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(User e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
