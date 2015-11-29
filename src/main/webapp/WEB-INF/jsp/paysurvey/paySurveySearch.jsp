@@ -115,6 +115,7 @@
 					<th>ค่าเรียกร้อง</th>
 					<th>ค่าประจำวัน</th>
 					<th>ยอดรวม</th>
+					<th>รายละเอียด</th>
 				</tr>
 			</thead>
 
@@ -130,7 +131,7 @@
 		<div class="col-sm-offset-1 col-sm-10" style="text-align: right;">
 			<div class="table-responsive">
 				<div class="col-sm-12">
-					<button class="btn btn-info" type="button" id="btnPaysurveyPrint">
+					<button class="btn btn-info" type="button" id="btnPaysurveyPrint" onclick="printPaySurvey();">
 						<i class="icon-file"></i> พิมพ์ใบจ่ายค่าสำรวจ
 					</button>
 				</div>
@@ -170,7 +171,13 @@ $(document).ready(function() {
 			{ "mData" : "surveyTel"},
 			{ "mData" : "surveyClaim"},
 			{ "mData" : "surveyDaily"},
-			{ "mData" : "surveyTotal"}
+			{ "mData" : "surveyTotal"},
+			{ "mData" : "paySurveyId",
+				"bSortable": false,
+				"mRender" : function (data, type, full) {
+					return '<button id="btnPaySurveyDetail" class="btn-info" type="button" onclick="openPaySurveyDetailModal(' + data + ');">รายละเอียด</button>';
+				}	
+			}
 		   ],
 			columnDefs: [
 			    { type: 'date-dd/mm/yyyy', targets:  [2]}
@@ -207,6 +214,35 @@ function searchPaySurvey(){
 	
 	isSearch = true;
 }
+
+function openPaySurveyDetailModal(paySurveyId){
+	setPageForDetailPaySurvey(paySurveyId);
+	$('#modalPaySurveyDetail').modal(
+		{
+			backdrop:'static'
+		}
+	);
+}
+
+function printPaySurvey(){
+	if($("[name='chk']:checked").size() == 0){
+		alert("กรุณาเลือกรายการใบจ่ายค่าสำรวจ");
+		return false;
+	}
+	download();
+}
+
+function exportFile(token){	
+	var paySurveyIds = "";
+	$("[name='chk']:checked").each(function() {
+		paySurveyIds += "," + $(this).val();
+	});
+	
+	var param = "token=" + token + "&paySurveyIds=" + paySurveyIds.substring(1);
+	window.location = '${pageContext.request.contextPath}/report/paySurvey?' + param;
+}
 </script>
 
 <div id='msgbox' title='' style='display:none'></div>
+
+<jsp:include page = "modalPaySurveyDetail.jsp" flush="false"/>

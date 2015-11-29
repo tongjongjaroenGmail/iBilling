@@ -273,7 +273,8 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		return voPaging;
 	}
 	
-	private float calcTotalSurvey(Claim claim){
+	@Override
+	public float calcTotalSurvey(Claim claim){
 		return
 				NumberToolsUtil.nullToFloat(claim.getSurveyInvest()) + 
 				NumberToolsUtil.nullToFloat(claim.getSurveyTrans()) + 

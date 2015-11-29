@@ -200,9 +200,7 @@ $(document).ready(function() {
 
 function exportFile(token){
 	var param = "token=" + token;
-	$("#divParamSearch").find('input,textarea,select').each(function() {
-		param += "&invoiceId=" + $("#hiddenInvoiceId").val();
-    });  
+	param += "&invoiceId=" + $("#hiddenInvoiceId").val(); 
      
 	window.location = '${pageContext.request.contextPath}/report/invoice?' + param;
 }

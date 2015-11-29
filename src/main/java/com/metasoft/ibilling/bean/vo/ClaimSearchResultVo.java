@@ -19,6 +19,78 @@ public class ClaimSearchResultVo {
 	private float surTowcar;
 	private float surOther;
 	private float surTotal;
+	
+	private float surveyInvest;
+	private float surveyTrans;
+	private float surveyDaily;
+	private float surveyPhoto;
+	private float surveyClaim;
+	private float surveyTel;
+	private float surveyConditionRight;
+	private float surveyOther;
+	private float surveyFine;
+	private float surveyTotal;
+	
+	public float getSurveyInvest() {
+		return surveyInvest;
+	}
+	public void setSurveyInvest(float surveyInvest) {
+		this.surveyInvest = surveyInvest;
+	}
+	public float getSurveyTrans() {
+		return surveyTrans;
+	}
+	public void setSurveyTrans(float surveyTrans) {
+		this.surveyTrans = surveyTrans;
+	}
+	public float getSurveyDaily() {
+		return surveyDaily;
+	}
+	public void setSurveyDaily(float surveyDaily) {
+		this.surveyDaily = surveyDaily;
+	}
+	public float getSurveyPhoto() {
+		return surveyPhoto;
+	}
+	public void setSurveyPhoto(float surveyPhoto) {
+		this.surveyPhoto = surveyPhoto;
+	}
+	public float getSurveyClaim() {
+		return surveyClaim;
+	}
+	public void setSurveyClaim(float surveyClaim) {
+		this.surveyClaim = surveyClaim;
+	}
+	public float getSurveyTel() {
+		return surveyTel;
+	}
+	public void setSurveyTel(float surveyTel) {
+		this.surveyTel = surveyTel;
+	}
+	public float getSurveyConditionRight() {
+		return surveyConditionRight;
+	}
+	public void setSurveyConditionRight(float surveyConditionRight) {
+		this.surveyConditionRight = surveyConditionRight;
+	}
+	public float getSurveyOther() {
+		return surveyOther;
+	}
+	public void setSurveyOther(float surveyOther) {
+		this.surveyOther = surveyOther;
+	}
+	public float getSurveyFine() {
+		return surveyFine;
+	}
+	public void setSurveyFine(float surveyFine) {
+		this.surveyFine = surveyFine;
+	}
+	public float getSurveyTotal() {
+		return surveyTotal;
+	}
+	public void setSurveyTotal(float surveyTotal) {
+		this.surveyTotal = surveyTotal;
+	}
 	public int getClaimId() {
 		return claimId;
 	}
