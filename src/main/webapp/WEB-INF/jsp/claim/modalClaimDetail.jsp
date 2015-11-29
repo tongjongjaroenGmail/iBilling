@@ -169,6 +169,12 @@
 											<label><input class="ace" id="disperse" type="checkbox" disabled="disabled"><span class="lbl"><b> แยกย้าย</b></span></label>
 										</div>
 									</div>
+									
+									<div class="col-sm-2 no-padding-left">		
+										<div class="input-group col-sm-12 no-padding-left no-padding-right">
+											<label><input class="ace" id="w7" type="checkbox" disabled="disabled"><span class="lbl"><b> ว.7</b></span></label>
+										</div>
+									</div>
 	
 								</div>
 							</div>					
@@ -262,19 +268,19 @@
 										</div>
 									</div>
 									
-<!-- 									<div class="col-sm-1 no-padding-left">		 -->
-<!-- 										<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;"> -->
-<!-- 											<b>ค่าเรียกร้อง : </b>  -->
-<!-- 										</div> -->
-<!-- 									</div> -->
+									<div class="col-sm-1 no-padding-left">		
+										<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+											<b>ค่าเรียกร้อง : </b> 
+										</div>
+									</div>
 									
-<!-- 									<div class="col-sm-2 no-padding-left">	 -->
-<!-- 										<div class="input-group col-sm-12 no-padding-left no-padding-right"> -->
-<!-- 											<div class="input-group col-sm-12 no-padding-left no-padding-right"> -->
-<!-- 												<input class="form-control" id="surClaim" type="text" readonly="readonly"/> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
+									<div class="col-sm-2 no-padding-left">	
+										<div class="input-group col-sm-12 no-padding-left no-padding-right">
+											<div class="input-group col-sm-12 no-padding-left no-padding-right">
+												<input class="form-control" id="surClaimMain" type="text" readonly="readonly"/>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>		
 						</div>	
@@ -324,7 +330,7 @@
 					<div class="space-4"></div>
 					
 					<div class="row">
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							
 							<div class="row">
 								<div class="col-sm-12">
@@ -335,13 +341,13 @@
 											</div>
 										</div>
 										
-										<div class="col-sm-3" >		
+										<div class="col-sm-4" >		
 											<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 												<b>เลขที่วางบิล : </b>
 											</div>
 										</div>
 										
-										<div class="col-sm-3">		
+										<div class="col-sm-4">		
 											<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: left;">
 												<input class="form-control" id="invoiceCode" type="text" readonly="readonly"/> 
 											</div>
@@ -356,12 +362,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่าบริการที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surInvest" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -373,12 +379,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่าพาหนะที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surTrans" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -390,12 +396,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่าประจำวันที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surDaily" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -407,12 +413,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่ารูปที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surPhoto" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -424,12 +430,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่าเรียกร้องที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surClaim" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -441,12 +447,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่าโทรศัพท์ที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surTel" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -458,12 +464,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่าประกันตัวที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surInsure" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -475,12 +481,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่ารถยกที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surTowcar" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -492,12 +498,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ค่าใช้จ่ายอื่นๆที่นำเสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surOther" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -509,12 +515,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ยอดรวมก่อนภาษีที่เสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surTotalNoTax" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -526,12 +532,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ภาษีที่เสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surTax" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -543,12 +549,12 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 													<b>ยอดรวมหลังภาษีที่เสนอ : </b> 
 												</div>
 											</div>
-											<div class="col-sm-4 no-padding-left">		
+											<div class="col-sm-6 no-padding-left">		
 												<div class="input-group col-sm-12 no-padding-left no-padding-right">
 													<input class="form-control" id="surTotalWithTax" type="text" readonly="readonly" style="text-align: right;"/> 
 												</div>
@@ -559,8 +565,267 @@
 							</div>
 						</div>	
 						
+						<div class="col-sm-4">
+							
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="table-responsive">
+										<div class="col-sm-12">		
+											<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: left;">
+												<b>ยอดทิพยฯอนุมัติวางบิล</b> 
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="space-4" style="margin-bottom: 15px;"></div>
+							
+							<div class="well" style="padding: 5px;margin-bottom: 4px;">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่าบริการ : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insInvest" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่าพาหนะ : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insTrans" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่าประจำวัน : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insDaily" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่ารูป : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insPhoto" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่าเรียกร้อง : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insClaim" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่าโทรศัพท์ : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insTel" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>		
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่าประกันตัว : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insInsure" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่ารถยก : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insTowcar" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ค่าใช้จ่ายอื่นๆ : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insOther" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ยอดรวมก่อนภาษี : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insTotalNoTax" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ภาษี : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insTax" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ยอดรวมหลังภาษี : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="insTotalWithTax" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>ผู้อนุมัติ : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="approveBy" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+								
+								<div class="space-4"></div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="table-responsive">
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
+													<b>วันที่อนุมัติ : </b> 
+												</div>
+											</div>
+											<div class="col-sm-6 no-padding-left">		
+												<div class="input-group col-sm-12 no-padding-left no-padding-right">
+													<input class="form-control" id="srApproveDate" type="text" readonly="readonly" style="text-align: right;"/> 
+												</div>
+											</div>
+										</div>
+									</div>		
+								</div>	
+							</div>
+						</div>	
+						
 						<input type="hidden" id="paySurveyId">
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="table-responsive">
@@ -576,7 +841,7 @@
 											</div>
 										</div>
 										
-										<div class="col-sm-3">		
+										<div class="col-sm-4">		
 											<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: left;">
 												<input class="form-control" id="paySurveyCode" type="text" readonly="readonly"/> 
 											</div>
@@ -591,12 +856,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าบริการ : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyInvest" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -608,12 +873,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าพาหนะ : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyTrans" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -625,12 +890,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าประจำวัน : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyDaily" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -642,12 +907,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่ารูป : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyPhoto" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -659,12 +924,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าเรียกร้อง : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyClaim" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -676,12 +941,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าโทรศัพท์ : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyTel" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -693,12 +958,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าเงื่อนไขฝ่ายถูก : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyConditionRight" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -710,12 +975,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าใช้จ่ายอื่นๆ : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyOther" type="text"  style="text-align: right;"/> 
 													</div>
@@ -727,12 +992,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ค่าปรับ (-) : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyFine" type="text" style="text-align: right;"/> 
 													</div>
@@ -744,12 +1009,12 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 														<b>ยอดรวม : </b> 
 													</div>
 												</div>
-												<div class="col-sm-4 no-padding-left">		
+												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
 														<input class="form-control" id="surveyTotal" type="text" readonly="readonly" style="text-align: right;"/> 
 													</div>
@@ -827,6 +1092,7 @@ function setPageForClaimDetail(claimId){
 			
 			$("#modalClaimDetail").find("#coArea").prop( "checked", result.coArea );
 			$("#modalClaimDetail").find("#disperse").prop( "checked", result.disperse );
+			$("#modalClaimDetail").find("#w7").prop( "checked", result.w7 );
 			
 			if($("#modalClaimDetail").find("#paySurveyCode").val() != ""){
 				$("#modalClaimDetail").find("#surveyOther").prop( "disabled", true);

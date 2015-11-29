@@ -24,6 +24,9 @@ public class ClaimDetailVo {
 	private String claimTp = "";
 	private String reviewBy = "";
 	private String srSendDate = "";
+	private Float surClaimMain;
+	private String approveBy = "";
+	private String srApproveDate = "";
 	
 	private int invoiceId;
 	private String invoiceCode = "";
@@ -39,6 +42,19 @@ public class ClaimDetailVo {
 	private Float surTotalNoTax;
 	private Float surTax;
 	private Float surTotalWithTax;
+	
+	private Float insInvest;
+	private Float insTrans;
+	private Float insDaily;
+	private Float insPhoto;
+	private Float insClaim;
+	private Float insTel;
+	private Float insInsure;
+	private Float insTowcar;
+	private Float insOther;
+	private Float insTotalNoTax;
+	private Float insTax;
+	private Float insTotalWithTax;
 	
 	private int paySurveyId;
 	private String paySurveyCode = "";
@@ -56,6 +72,25 @@ public class ClaimDetailVo {
 	private String remark = "";
 	private String createBy = "";
 	private String createDate = "";
+
+	public String getApproveBy() {
+		return approveBy;
+	}
+	public void setApproveBy(String approveBy) {
+		this.approveBy = approveBy;
+	}
+	public String getSrApproveDate() {
+		return srApproveDate;
+	}
+	public void setSrApproveDate(String srApproveDate) {
+		this.srApproveDate = srApproveDate;
+	}
+	public Float getSurClaimMain() {
+		return surClaimMain;
+	}
+	public void setSurClaimMain(Float surClaimMain) {
+		this.surClaimMain = surClaimMain;
+	}
 	public int getClaimId() {
 		return claimId;
 	}
@@ -122,14 +157,12 @@ public class ClaimDetailVo {
 	public void setWorkTime(String workTime) {
 		this.workTime = workTime;
 	}
-
 	public boolean isCoArea() {
 		return coArea;
 	}
 	public void setCoArea(boolean coArea) {
 		this.coArea = coArea;
 	}
-
 	public boolean isDisperse() {
 		return disperse;
 	}
@@ -154,16 +187,16 @@ public class ClaimDetailVo {
 	public void setServiceProvince(String serviceProvince) {
 		this.serviceProvince = serviceProvince;
 	}
-	public int getPhotoNum() {
+	public Integer getPhotoNum() {
 		return photoNum;
 	}
-	public void setPhotoNum(int photoNum) {
+	public void setPhotoNum(Integer photoNum) {
 		this.photoNum = photoNum;
 	}
-	public int getPoliceRptNum() {
+	public Integer getPoliceRptNum() {
 		return policeRptNum;
 	}
-	public void setPoliceRptNum(int policeRptNum) {
+	public void setPoliceRptNum(Integer policeRptNum) {
 		this.policeRptNum = policeRptNum;
 	}
 	public String getClaimTp() {
@@ -184,17 +217,17 @@ public class ClaimDetailVo {
 	public void setSrSendDate(String srSendDate) {
 		this.srSendDate = srSendDate;
 	}
+	public int getInvoiceId() {
+		return invoiceId;
+	}
+	public void setInvoiceId(int invoiceId) {
+		this.invoiceId = invoiceId;
+	}
 	public String getInvoiceCode() {
 		return invoiceCode;
 	}
 	public void setInvoiceCode(String invoiceCode) {
 		this.invoiceCode = invoiceCode;
-	}
-	public int getPaySurveyId() {
-		return paySurveyId;
-	}
-	public void setPaySurveyId(int paySurveyId) {
-		this.paySurveyId = paySurveyId;
 	}
 	public Float getSurInvest() {
 		return surInvest;
@@ -267,6 +300,84 @@ public class ClaimDetailVo {
 	}
 	public void setSurTotalWithTax(Float surTotalWithTax) {
 		this.surTotalWithTax = surTotalWithTax;
+	}
+	public Float getInsInvest() {
+		return insInvest;
+	}
+	public void setInsInvest(Float insInvest) {
+		this.insInvest = insInvest;
+	}
+	public Float getInsTrans() {
+		return insTrans;
+	}
+	public void setInsTrans(Float insTrans) {
+		this.insTrans = insTrans;
+	}
+	public Float getInsDaily() {
+		return insDaily;
+	}
+	public void setInsDaily(Float insDaily) {
+		this.insDaily = insDaily;
+	}
+	public Float getInsPhoto() {
+		return insPhoto;
+	}
+	public void setInsPhoto(Float insPhoto) {
+		this.insPhoto = insPhoto;
+	}
+	public Float getInsClaim() {
+		return insClaim;
+	}
+	public void setInsClaim(Float insClaim) {
+		this.insClaim = insClaim;
+	}
+	public Float getInsTel() {
+		return insTel;
+	}
+	public void setInsTel(Float insTel) {
+		this.insTel = insTel;
+	}
+	public Float getInsInsure() {
+		return insInsure;
+	}
+	public void setInsInsure(Float insInsure) {
+		this.insInsure = insInsure;
+	}
+	public Float getInsTowcar() {
+		return insTowcar;
+	}
+	public void setInsTowcar(Float insTowcar) {
+		this.insTowcar = insTowcar;
+	}
+	public Float getInsOther() {
+		return insOther;
+	}
+	public void setInsOther(Float insOther) {
+		this.insOther = insOther;
+	}
+	public Float getInsTotalNoTax() {
+		return insTotalNoTax;
+	}
+	public void setInsTotalNoTax(Float insTotalNoTax) {
+		this.insTotalNoTax = insTotalNoTax;
+	}
+	public Float getInsTax() {
+		return insTax;
+	}
+	public void setInsTax(Float insTax) {
+		this.insTax = insTax;
+	}
+	public Float getInsTotalWithTax() {
+		return insTotalWithTax;
+	}
+	public void setInsTotalWithTax(Float insTotalWithTax) {
+		this.insTotalWithTax = insTotalWithTax;
+	}
+	public int getPaySurveyId() {
+		return paySurveyId;
+	}
+	public void setPaySurveyId(int paySurveyId) {
+		this.paySurveyId = paySurveyId;
 	}
 	public String getPaySurveyCode() {
 		return paySurveyCode;
@@ -352,12 +463,4 @@ public class ClaimDetailVo {
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	public int getInvoiceId() {
-		return invoiceId;
-	}
-	public void setInvoiceId(int invoiceId) {
-		this.invoiceId = invoiceId;
-	}
-	
-	
 }

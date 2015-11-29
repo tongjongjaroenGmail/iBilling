@@ -80,7 +80,7 @@ pageContext.setAttribute("claimStatuses", ClaimStatus.values());
 				</div>
 				<div class="col-sm-3">		
 					<div class="input-group col-sm-12 no-padding-left">
-						<select class="col-sm-12 require" id="selEmployee" title="พนักงาน">
+						<select class="col-sm-12" id="selEmployee" title="พนักงาน">
 							<option value=""></option>
 							<c:forEach var="surveyEmployee" items="${surveyEmployees}" varStatus="index">		
 								<option value="${surveyEmployee.id}">${surveyEmployee.code}</option>					

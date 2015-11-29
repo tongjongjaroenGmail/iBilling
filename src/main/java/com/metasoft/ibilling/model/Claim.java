@@ -284,6 +284,9 @@ public class Claim extends BaseModel {
 	@Column(name = "ins_other")
 	// ค่าใช้จ่ายอื่นๆที่อนุมัติ
 	private Float insOther;
+	
+	@Column(name = "ins_tax") // ภาษีที่อนุมัติ
+	private Float insTax;
 
 	// @Column(name = "") // ยอดรวมก่อนภาษีที่อนุมัติ
 	// @Column(name = "") // ภาษีที่อนุมัติ
@@ -981,6 +984,14 @@ public class Claim extends BaseModel {
 
 	public void setRefWsId(String refWsId) {
 		this.refWsId = refWsId;
+	}
+
+	public Float getInsTax() {
+		return insTax;
+	}
+
+	public void setInsTax(Float insTax) {
+		this.insTax = insTax;
 	}
 
 	

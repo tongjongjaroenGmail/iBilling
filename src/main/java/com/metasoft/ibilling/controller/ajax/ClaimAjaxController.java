@@ -103,6 +103,9 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setClaimTp(claim.getClaimTp() != null?claim.getClaimTp().getName():"");
 		vo.setReviewBy(StringUtils.trimToEmpty(claim.getReviewBy()));
 		vo.setSrSendDate(DateToolsUtil.convertToString(claim.getSrSendDate(), DateToolsUtil.LOCALE_TH));
+		vo.setSurClaimMain(claim.getSurClaim());
+		vo.setApproveBy(StringUtils.trimToEmpty(claim.getApproveBy()));
+		vo.setSrApproveDate(DateToolsUtil.convertToString(claim.getSrApproveDate(), DateToolsUtil.LOCALE_TH));
 		
 		if(claim.getInvoice() != null){
 			Invoice invoice = claim.getInvoice();
@@ -135,6 +138,32 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setSurTax(surTax);
 		
 		vo.setSurTotalWithTax(surTax + surTotal);
+		
+		vo.setInsInvest(claim.getInsInvest());
+		vo.setInsTrans(claim.getInsTrans());
+		vo.setInsDaily(claim.getInsDaily());
+		vo.setInsPhoto(claim.getInsPhoto());
+		vo.setInsClaim(claim.getInsClaim());
+		vo.setInsTel(claim.getInsTel());
+		vo.setInsInsure(claim.getInsInsure());
+		vo.setInsTowcar(claim.getInsTowcar());
+		vo.setInsOther(claim.getInsOther());
+			
+		float insTotal = NumberToolsUtil.nullToFloat(vo.getInsInvest())  + 
+				NumberToolsUtil.nullToFloat(vo.getInsTrans()) + 
+				NumberToolsUtil.nullToFloat(vo.getInsDaily()) + 
+				NumberToolsUtil.nullToFloat(vo.getInsPhoto()) + 
+				NumberToolsUtil.nullToFloat(vo.getInsClaim()) + 
+				NumberToolsUtil.nullToFloat(vo.getInsTel()) + 
+				NumberToolsUtil.nullToFloat(vo.getInsInsure()) + 
+				NumberToolsUtil.nullToFloat(vo.getInsTowcar()) + 
+				NumberToolsUtil.nullToFloat(vo.getInsOther());
+		vo.setInsTotalNoTax(insTotal);
+		
+		float insTax = insTotal * NumberToolsUtil.nullToFloat(claim.getInsTax())/100;
+		vo.setInsTax(insTax);
+		
+		vo.setInsTotalWithTax(insTax + insTotal);
 
 		if(claim.getPaySurvey() != null){
 			PaySurvey paySurvey = claim.getPaySurvey();

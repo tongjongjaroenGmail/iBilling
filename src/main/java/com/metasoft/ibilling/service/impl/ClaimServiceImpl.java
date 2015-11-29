@@ -394,7 +394,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					}
 				}
 
-				if (claim.getClaimStatus() != null && claim.getClaimStatus().getId() == 2) {
+				if (claim.getClaimStatus() != null && (claim.getClaimStatus().getId() == 2 || claim.getClaimStatus().getId() == 3)) {
 					calcEmployeeSurveyPrice(claim);
 				}
 
@@ -446,54 +446,59 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		claim.setSurveyInvest(NumberToolsUtil.nullToFloat(claim.getSurveyInvest()));
 
 		// 2. ค่าพาหนะ Survey_trans
-		float surveyTrans = 0f;
-		if (accZone == 0 || accZone == 1) {
-			if (empCode.startsWith("L")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "L"
-			{
-				if (workTime == 1)
-					surveyTrans = 400f;
-				else
+		if(claim.getSurveyInvest() == 0){
+		
+			float surveyTrans = 0f;
+			if (accZone == 0 || accZone == 1) {
+				if (empCode.startsWith("L")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "L"
+				{
+					if (workTime == 1)
+						surveyTrans = 400f;
+					else
+						surveyTrans = 300f;
+				} else if (empCode.startsWith("D")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "D"
+				{
+					if (workTime == 1)
+						surveyTrans = 300f;
+					else
+						surveyTrans = 200f;
+				}
+				// ******************************************
+				if (claim.getCoArea()) {
+					surveyTrans = surveyTrans + 100;
+				}
+	
+				if (claim.getW7() != null && claim.getW7()) {
+					surveyTrans = surveyTrans + 50;
+				}
+			} else if (accZone == 2) {
+				if (serviceType == 3) {
 					surveyTrans = 300f;
-			} else if (empCode.startsWith("D")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "D"
-			{
-				if (workTime == 1)
-					surveyTrans = 200f;
-				else
-					surveyTrans = 300f;
-			}
-			// ******************************************
-			if (claim.getCoArea()) {
-				surveyTrans = surveyTrans + 100;
-			}
-
-			if (claim.getW7() != null && claim.getW7()) {
-				surveyTrans = surveyTrans + 50;
-			}
-		} else if (accZone == 2) {
-			if (serviceType == 3) {
-				surveyTrans = 300f;
-			} else {
-				// คำนวนหาค่าพาหนะ จากrate ที่พนักงานศูนย์ที่พนักงานสังกัด ไปยัง
-				// อำเภอที่ตรวจสอบ ***select sur_pay from sub_branch***
-				if (StringUtils.isNotBlank(claim.getSurveyAmphur())) {
-					Amphur surveyAmphur = amphurDao.findById(Integer.parseInt(claim.getSurveyAmphur()));
-					if(surveyAmphur != null && claim.getBranch() != null){
-						SubBranch subBranch = subBranchDao.findByAmphurAndBranch(surveyAmphur,claim.getBranch());
-						if(subBranch != null){
-							surveyTrans = subBranch.getSurPay();
+				} else {
+					// คำนวนหาค่าพาหนะ จากrate ที่พนักงานศูนย์ที่พนักงานสังกัด ไปยัง
+					// อำเภอที่ตรวจสอบ ***select sur_pay from sub_branch***
+					if (StringUtils.isNotBlank(claim.getSurveyAmphur())) {
+						Amphur surveyAmphur = amphurDao.findById(Integer.parseInt(claim.getSurveyAmphur()));
+						if(surveyAmphur != null && claim.getBranch() != null){
+							SubBranch subBranch = subBranchDao.findByAmphurAndBranch(surveyAmphur,claim.getBranch());
+							if(subBranch != null){
+								surveyTrans = subBranch.getSurPay();
+							}
 						}
 					}
 				}
+				if (claim.getDisperse() != null && claim.getDisperse()) {
+					surveyTrans = surveyTrans / 2;
+				} else if (workTime == 1) {
+					surveyTrans = surveyTrans + 100;
+				} else if (claimType == 0) {
+					surveyTrans = surveyTrans - 100;
+				}
 			}
-			if (claim.getDisperse() != null && claim.getDisperse()) {
-				surveyTrans = surveyTrans / 2;
-			} else if (workTime == 1) {
-				surveyTrans = surveyTrans + 100;
-			} else if (claimType == 0) {
-				surveyTrans = surveyTrans - 100;
-			}
+			claim.setSurveyTrans(surveyTrans);
+		}else{
+			claim.setSurveyTrans(0f);
 		}
-		claim.setSurveyTrans(surveyTrans);
 
 		// 3. ค่าประจำวัน survey_daily
 		if (accZone == 0 || accZone == 1) {
