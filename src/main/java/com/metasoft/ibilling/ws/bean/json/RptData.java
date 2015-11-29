@@ -51,6 +51,9 @@ public class RptData {
 
 	@JsonProperty("empcode")
 	private String empcode;
+	
+	@JsonProperty("center")
+	private String center;
 
 	@JsonProperty("branch")
 	private String branchCode;
@@ -74,6 +77,10 @@ public class RptData {
 	@JsonProperty("disperse")
 	@JsonDeserialize(using = BooleanDeserializer.class)
 	private Boolean disperse;
+	
+	@JsonProperty("w7")
+	@JsonDeserialize(using = BooleanDeserializer.class)
+	private Boolean w7;
 
 	@JsonProperty("wrkTime")
 	private String wrkTimeCode;
@@ -660,6 +667,22 @@ public class RptData {
 
 	public void setSrApproveDate(Date srApproveDate) {
 		this.srApproveDate = srApproveDate;
+	}
+
+	public String getCenter() {
+		return center;
+	}
+
+	public void setCenter(String center) {
+		this.center = center;
+	}
+
+	public Boolean getW7() {
+		return w7;
+	}
+
+	public void setW7(Boolean w7) {
+		this.w7 = w7;
 	}
 
 }

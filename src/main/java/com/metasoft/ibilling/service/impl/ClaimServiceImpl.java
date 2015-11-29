@@ -24,6 +24,7 @@ import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.PaySurveyClaimSearchResultVo;
 import com.metasoft.ibilling.dao.AmphurDao;
 import com.metasoft.ibilling.dao.BranchDao;
+import com.metasoft.ibilling.dao.BranchDhipDao;
 import com.metasoft.ibilling.dao.ClaimDao;
 import com.metasoft.ibilling.dao.ClaimLoadLogDao;
 import com.metasoft.ibilling.dao.SubBranchDao;
@@ -32,6 +33,7 @@ import com.metasoft.ibilling.dao.UserDao;
 import com.metasoft.ibilling.model.Amphur;
 import com.metasoft.ibilling.model.AreaType;
 import com.metasoft.ibilling.model.Branch;
+import com.metasoft.ibilling.model.BranchDhip;
 import com.metasoft.ibilling.model.Claim;
 import com.metasoft.ibilling.model.ClaimLoadLog;
 import com.metasoft.ibilling.model.ClaimLoadLogErrorDetail;
@@ -72,6 +74,9 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 
 	@Autowired
 	private AmphurDao amphurDao;
+	
+	@Autowired
+	private BranchDhipDao branchDhipDao;
 
 	/**
 	 * 
@@ -88,7 +93,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 			int start, int length) {
 		Date dispatchDateStart = null;
 		Date dispatchDateEnd = null;
-		Branch branch = null;
+		BranchDhip branchDhip = null;
 
 		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
 			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
@@ -99,10 +104,10 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		}
 
 		if (selBranch != null && selBranch != 0) {
-			branch = branchDao.findById(selBranch);
+			branchDhip = branchDhipDao.findById(selBranch);
 		}
 
-		ClaimPaging claimPaging = claimDao.searchPaging(dispatchDateStart, dispatchDateEnd, branch, start, length);
+		ClaimPaging claimPaging = claimDao.searchPaging(dispatchDateStart, dispatchDateEnd, branchDhip, start, length);
 
 		ClaimSearchResultVoPaging voPaging = new ClaimSearchResultVoPaging();
 		voPaging.setDraw(claimPaging.getDraw());
@@ -117,8 +122,8 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				if (claim.getDispatchDate() != null) {
 					vo.setDispatchDate(DateToolsUtil.convertToString(claim.getDispatchDate(), DateToolsUtil.LOCALE_TH));
 				}
-				if (claim.getBranch() != null) {
-					vo.setBranchName(claim.getBranch().getName());
+				if (claim.getBranchDhip() != null) {
+					vo.setBranchName(claim.getBranchDhip().getName());
 				}
 
 				vo.setSurInvest(NumberToolsUtil.nullToFloat(claim.getSurInvest()));
@@ -184,7 +189,9 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					vo.setEmployeeCode(StringUtils.trimToEmpty(claim.getSurveyEmployee().getCode()));
 				}
 
-				vo.setCenter(StringUtils.trimToEmpty(claim.getCenter()));
+				if(claim.getBranch() != null){
+					vo.setCenter(StringUtils.trimToEmpty(claim.getBranch().getName()));
+				}
 
 				if (claim.getDispatchDate() != null) {
 					vo.setDispatchDate(DateToolsUtil.convertToString(claim.getDispatchDate(), DateToolsUtil.LOCALE_TH));
@@ -333,9 +340,13 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 
 					claim.setSurveyEmployee(surveyEmployee);
 				}
+				
+				if (StringUtils.isNotBlank(rptData.getCenter())) {
+					claim.setBranch(branchDao.findById(Integer.parseInt(rptData.getCenter())));
+				}
 
 				if (StringUtils.isNotBlank(rptData.getBranchCode())) {
-					claim.setBranch(branchDao.findById(Integer.parseInt(rptData.getBranchCode())));
+					claim.setBranchDhip(branchDhipDao.findByCode(rptData.getBranchCode()));
 				}
 
 				if (StringUtils.isNotBlank(rptData.getWrkTimeCode())) {

@@ -59,7 +59,7 @@
 					<div class="input-group col-sm-12 no-padding-left">
 						<select class="col-sm-12" id="selBranch">
 							<option value="">ทั้งหมด</option>
-							<c:forEach var="branch" items="${branchs}" varStatus="index">		
+							<c:forEach var="branch" items="${branchDhips}" varStatus="index">		
 								<option value="${branch.id}">${branch.name}</option>					
 							</c:forEach>
 						</select>

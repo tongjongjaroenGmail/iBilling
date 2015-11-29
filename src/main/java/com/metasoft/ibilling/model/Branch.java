@@ -38,6 +38,9 @@ public class Branch extends BaseModel {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
 	private List<SubBranch> subBranchs;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
+	private List<BranchDhip> branchDhips;
 
 	public Integer getId() {
 		return id;
@@ -75,4 +78,11 @@ public class Branch extends BaseModel {
 		return serialVersionUID;
 	}
 
+	public List<BranchDhip> getBranchDhips() {
+		return branchDhips;
+	}
+
+	public void setBranchDhips(List<BranchDhip> branchDhips) {
+		this.branchDhips = branchDhips;
+	}
 }

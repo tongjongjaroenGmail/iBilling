@@ -18,6 +18,7 @@ import com.metasoft.ibilling.dao.ClaimDao;
 import com.metasoft.ibilling.dao.ClaimLoadLogDao;
 import com.metasoft.ibilling.dao.UserDao;
 import com.metasoft.ibilling.model.Branch;
+import com.metasoft.ibilling.model.BranchDhip;
 import com.metasoft.ibilling.model.Claim;
 import com.metasoft.ibilling.model.ClaimStatus;
 import com.metasoft.ibilling.model.SurveyEmployee;
@@ -41,7 +42,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 	}
 
 	@Override
-	public ClaimPaging searchPaging(Date dispatchDateStart,Date dispatchDateEnd,Branch branch,
+	public ClaimPaging searchPaging(Date dispatchDateStart,Date dispatchDateEnd,BranchDhip branchDhip,
 			int start,int length) {
 		ClaimPaging resultPaging = new ClaimPaging();
 
@@ -60,8 +61,8 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			criteriaCount.add(Restrictions.le("dispatchDate", dispatchDateEnd));
 		}
 
-		if (branch != null) {
-			criteriaCount.add(Restrictions.eq("branch", branch));
+		if (branchDhip != null) {
+			criteriaCount.add(Restrictions.eq("branchDhip", branchDhip));
 		}
 		
 		criteriaCount.add(Restrictions.isNull("invoice"));
@@ -79,8 +80,8 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 				criteria.add(Restrictions.le("dispatchDate", dispatchDateEnd));
 			}
 
-			if (branch != null) {
-				criteria.add(Restrictions.eq("branch", branch));
+			if (branchDhip != null) {
+				criteria.add(Restrictions.eq("branchDhip", branchDhip));
 			}
 			
 			criteria.add(Restrictions.isNull("invoice"));

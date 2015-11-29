@@ -88,7 +88,11 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setClaimStatus(claim.getClaimStatus() != null?claim.getClaimStatus().getName():"");
 		
 		vo.setEmployeeCode(claim.getSurveyEmployee() != null?claim.getSurveyEmployee().getCode():"");
-		vo.setCenter(StringUtils.trimToEmpty(claim.getCenter()));
+		
+		if(claim.getBranch() != null){
+			vo.setCenter(StringUtils.trimToEmpty(claim.getBranch().getName()));
+		}
+		
 		vo.setClaimType(claim.getClaimType() != null?claim.getClaimType().getName():"");
 		vo.setDispatchType(claim.getDispatchType() != null?claim.getDispatchType().getName():"");
 		vo.setAreaType(claim.getAreaType() != null?claim.getAreaType().getName():"");

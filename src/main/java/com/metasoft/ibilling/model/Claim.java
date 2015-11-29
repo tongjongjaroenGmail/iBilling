@@ -89,12 +89,14 @@ public class Claim extends BaseModel {
 	private SurveyEmployee surveyEmployee;
 
 	// ศูนย์
-	private String center;
-
 	@ManyToOne
 	@JoinColumn(name = "branch_id")
-	// สาขา
 	private Branch branch;
+
+	@ManyToOne
+	@JoinColumn(name = "branch_dhip_id")
+	// สาขา
+	private BranchDhip branchDhip;
 
 	@Column(name = "policy_type")
 	// ประเภทกธ.
@@ -490,20 +492,20 @@ public class Claim extends BaseModel {
 		this.surveyEmployee = surveyEmployee;
 	}
 
-	public String getCenter() {
-		return center;
-	}
-
-	public void setCenter(String center) {
-		this.center = center;
-	}
-
 	public Branch getBranch() {
 		return branch;
 	}
 
 	public void setBranch(Branch branch) {
 		this.branch = branch;
+	}
+
+	public BranchDhip getBranchDhip() {
+		return branchDhip;
+	}
+
+	public void setBranchDhip(BranchDhip branchDhip) {
+		this.branchDhip = branchDhip;
 	}
 
 	public String getPolicyType() {
