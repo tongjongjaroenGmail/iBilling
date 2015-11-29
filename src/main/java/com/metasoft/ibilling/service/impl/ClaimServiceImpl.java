@@ -433,17 +433,18 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		String empCode = claim.getSurveyEmployee() != null ? claim.getSurveyEmployee().getCode() : "";
 		
 		// 1. ค่าบริการ Survey_invest
+		float surveyInvest = 0;
 		if (accZone == 0 || accZone == 1) {
 			if (serviceType == 0) {
-				claim.setSurveyInvest(100f);
+				surveyInvest = 100f;
 			} else if (serviceType == 2 || serviceType == 1) {
-				claim.setSurveyInvest(50f);
+				surveyInvest =50f;
 			} else
-				claim.setSurveyInvest(0f);
+				surveyInvest =0f;
 		} else if (accZone == 2) {
-			claim.setSurveyInvest(0f);
+			surveyInvest =0f;
 		}
-		claim.setSurveyInvest(NumberToolsUtil.nullToFloat(claim.getSurveyInvest()));
+		claim.setSurveyInvest(surveyInvest);
 
 		// 2. ค่าพาหนะ Survey_trans
 		if(claim.getSurveyInvest() == 0){
@@ -501,66 +502,70 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		}
 
 		// 3. ค่าประจำวัน survey_daily
+		float surveyDaily = 0f;
 		if (accZone == 0 || accZone == 1) {
 			if (policeRptNum == 1) {
-				claim.setSurveyDaily(80f);
+				surveyDaily =80f;
 			} else if (policeRptNum == 2) {
-				claim.setSurveyDaily(150f);
+				surveyDaily =150f;
 			} else if (policeRptNum == 3) {
-				claim.setSurveyDaily(200f);
+				surveyDaily =200f;
 			} else if (policeRptNum == 4) {
-				claim.setSurveyDaily(250f);
+				surveyDaily =250f;
 			} else if (policeRptNum > 4) {
-				claim.setSurveyDaily(300f);
+				surveyDaily =300f;
 			}
 		} else if (accZone == 2) {
 			if (policeRptNum == 1) {
-				claim.setSurveyDaily(80f);
+				surveyDaily =80f;
 			} else if (policeRptNum > 1) {
-				claim.setSurveyDaily(150f);
+				surveyDaily =150f;
 			}
 		}
-		claim.setSurveyDaily(NumberToolsUtil.nullToFloat(claim.getSurveyDaily()));
+		claim.setSurveyDaily(surveyDaily);
 
 		// 4. ค่ารูป survey_photo
+		float surveyPhoto = 0f;
 		if (accZone == 0 || accZone == 1) {
 			if (photoNum > 0) {
-				claim.setSurveyPhoto(15f);
+				surveyPhoto = 15f;
 			}
 		} else if (accZone == 2) {
 			if (photoNum == 1) {
-				claim.setSurveyPhoto(8f);
+				surveyPhoto = 8f;
 			} else if (photoNum > 1) {
-				claim.setSurveyPhoto(15f);
+				surveyPhoto = 15f;
 			}
 		}
-		claim.setSurveyPhoto(NumberToolsUtil.nullToFloat(claim.getSurveyPhoto()));
+		claim.setSurveyPhoto(surveyPhoto);
 
 		// 5. ค่าเรียกร้อง survey_claim
 		claim.setSurveyClaim((float) (surClaim * 0.15)); // ค่าเรียกร้อง15%
 
 		// 6. ค่าโทรศัพท์ survey_tel
+		float surveyTel = 0f;
 		if (accZone == 0 || accZone == 1) {
-			claim.setSurveyTel(0f);
+			surveyTel = 0f;
 		} else if (accZone == 2) {
 			if (claimType == 0) {
-				claim.setSurveyTel(0f);
+				surveyTel = 0f;
 			} else {
-				claim.setSurveyTel(30f);
+				surveyTel = 30f;
 			}
 		}
-		claim.setSurveyTel(NumberToolsUtil.nullToFloat(claim.getSurveyTel()));
+		claim.setSurveyTel(surveyTel);
 
 		// 7. ค่าเงื่อนไขฝายถูก survey_condition_right
+		float surveyConditionRight = 0f;
 		if (accZone == 0 || accZone == 1) {
 			if (claimTp == 1) {
-				claim.setSurveyConditionRight(100f);
+				surveyConditionRight = 100f;
 			} else if (claimTp == 0) {
-				claim.setSurveyConditionRight(30f);
+				surveyConditionRight = 30f;
 			} else if (claimTp == 2) {
-				claim.setSurveyConditionRight(0f);
+				surveyConditionRight = 0f;
 			}
-			claim.setSurveyConditionRight(NumberToolsUtil.nullToFloat(claim.getSurveyConditionRight()));
+			claim.setSurveyConditionRight(surveyConditionRight);
 		}
 	}
 }
