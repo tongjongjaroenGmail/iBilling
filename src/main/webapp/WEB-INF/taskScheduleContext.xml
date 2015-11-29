@@ -21,8 +21,8 @@
 	<!-- Cron Trigger, run every 5 seconds -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="runAllJob" />
-<!-- 		<property name="cronExpression" value="0 0 0 * * ?" /> -->
-		<property name="cronExpression" value="20 52 21 ? * *" />
+		<property name="cronExpression" value="0 0 0 * * ?" />
+<!-- 		<property name="cronExpression" value="20 52 21 ? * *" /> -->
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
