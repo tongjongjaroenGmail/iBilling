@@ -1,13 +1,17 @@
 package com.metasoft.ibilling.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,9 +34,8 @@ public class BranchDhip extends BaseModel {
 	
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name = "branch_id", nullable = false)
-	private Branch branch;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branchDhip")
+	private List<Branch> branchs;
 
 	public Integer getId() {
 		return id;
@@ -53,13 +56,13 @@ public class BranchDhip extends BaseModel {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	public Branch getBranch() {
-		return branch;
+	
+	public List<Branch> getBranchs() {
+		return branchs;
 	}
 
-	public void setBranch(Branch branch) {
-		this.branch = branch;
+	public void setBranchs(List<Branch> branchs) {
+		this.branchs = branchs;
 	}
 
 	public String getCode() {

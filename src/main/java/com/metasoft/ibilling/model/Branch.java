@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -39,8 +40,9 @@ public class Branch extends BaseModel {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
 	private List<SubBranch> subBranchs;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "branch")
-	private List<BranchDhip> branchDhips;
+	@ManyToOne
+	@JoinColumn(name = "branch_dhip_id", nullable = false)
+	private BranchDhip branchDhip;
 
 	public Integer getId() {
 		return id;
@@ -78,11 +80,11 @@ public class Branch extends BaseModel {
 		return serialVersionUID;
 	}
 
-	public List<BranchDhip> getBranchDhips() {
-		return branchDhips;
+	public BranchDhip getBranchDhip() {
+		return branchDhip;
 	}
 
-	public void setBranchDhips(List<BranchDhip> branchDhips) {
-		this.branchDhips = branchDhips;
+	public void setBranchDhip(BranchDhip branchDhip) {
+		this.branchDhip = branchDhip;
 	}
 }
