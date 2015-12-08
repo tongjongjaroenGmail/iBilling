@@ -8,7 +8,6 @@ import com.metasoft.ibilling.dao.AmphurDao;
 import com.metasoft.ibilling.model.Amphur;
 
 @Repository("amphurDao")
-@Transactional
 public class AmphurDaoImpl extends AbstractDaoImpl<Amphur, Integer> implements AmphurDao {
 	public AmphurDaoImpl() {
 		super(Amphur.class);

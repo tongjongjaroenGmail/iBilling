@@ -20,7 +20,6 @@ import com.metasoft.ibilling.model.Invoice;
 import com.metasoft.ibilling.model.InvoiceStatus;
 
 @Repository("invoiceDao")
-@Transactional
 public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Integer> implements InvoiceDao {
 	
 	public InvoiceDaoImpl() {

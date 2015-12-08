@@ -19,7 +19,6 @@ import com.metasoft.ibilling.model.PaySurveyStatus;
 import com.metasoft.ibilling.model.SurveyEmployee;
 
 @Repository("paySurveyDao")
-@Transactional
 public class PaySurveyDaoImpl extends AbstractDaoImpl<PaySurvey, Integer> implements PaySurveyDao {
 	
 	public PaySurveyDaoImpl() {

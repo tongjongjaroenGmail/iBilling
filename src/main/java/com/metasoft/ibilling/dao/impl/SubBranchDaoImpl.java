@@ -11,7 +11,6 @@ import com.metasoft.ibilling.model.Branch;
 import com.metasoft.ibilling.model.SubBranch;
 
 @Repository("subBranchDao")
-@Transactional
 public class SubBranchDaoImpl extends AbstractDaoImpl<SubBranch, Integer> implements SubBranchDao {
 	public SubBranchDaoImpl() {
 		super(SubBranch.class);

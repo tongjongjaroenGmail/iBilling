@@ -8,7 +8,6 @@ import com.metasoft.ibilling.dao.ClaimLoadLogDao;
 import com.metasoft.ibilling.model.ClaimLoadLog;
 
 @Repository("claimLoadLogDao")
-@Transactional
 public class ClaimLoadLogDaoImpl extends AbstractDaoImpl<ClaimLoadLog, Integer> implements ClaimLoadLogDao {
 	
 	public ClaimLoadLogDaoImpl() {

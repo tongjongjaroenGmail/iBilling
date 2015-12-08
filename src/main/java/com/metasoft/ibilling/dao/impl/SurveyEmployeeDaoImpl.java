@@ -17,7 +17,6 @@ import com.metasoft.ibilling.model.User;
  * 
  */
 @Repository("surveyEmployeeDao")
-@Transactional
 public class SurveyEmployeeDaoImpl extends AbstractDaoImpl<SurveyEmployee, Integer> implements SurveyEmployeeDao {
 
 	public SurveyEmployeeDaoImpl() {

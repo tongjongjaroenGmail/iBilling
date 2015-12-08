@@ -24,7 +24,6 @@ import com.metasoft.ibilling.model.ClaimStatus;
 import com.metasoft.ibilling.model.SurveyEmployee;
 
 @Repository("claimDao")
-@Transactional
 public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements ClaimDao {
 	@Autowired
 	private UserDao userDao;

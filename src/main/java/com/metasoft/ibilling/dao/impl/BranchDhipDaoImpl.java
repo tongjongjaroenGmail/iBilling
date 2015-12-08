@@ -17,7 +17,6 @@ import com.metasoft.ibilling.model.BranchDhip;
  * 
  */
 @Repository("branchDhipDao")
-@Transactional
 public class BranchDhipDaoImpl extends AbstractDaoImpl<BranchDhip, Integer> implements BranchDhipDao {
 	
 	public BranchDhipDaoImpl() {

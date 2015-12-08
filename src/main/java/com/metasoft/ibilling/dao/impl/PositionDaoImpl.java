@@ -8,7 +8,6 @@ import com.metasoft.ibilling.dao.PositionDao;
 import com.metasoft.ibilling.model.Position;
 
 @Repository("positionDao")
-@Transactional
 public class PositionDaoImpl extends AbstractDaoImpl<Position, Integer> implements PositionDao {
 	public PositionDaoImpl() {
 		super(Position.class);
