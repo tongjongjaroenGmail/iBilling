@@ -10,11 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.rpc.ServiceException;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
@@ -49,6 +54,8 @@ import com.metasoft.ibilling.model.WorkTime;
 import com.metasoft.ibilling.service.ClaimService;
 import com.metasoft.ibilling.util.DateToolsUtil;
 import com.metasoft.ibilling.util.NumberToolsUtil;
+import com.metasoft.ibilling.ws.bean.dprptdata.DpRptDataLocator;
+import com.metasoft.ibilling.ws.bean.dprptdata.DpRptDataPortType;
 import com.metasoft.ibilling.ws.bean.json.ClaimRs;
 import com.metasoft.ibilling.ws.bean.json.RptData;
 
@@ -300,124 +307,142 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		int totalError = 0;
 		List<ClaimLoadLogErrorDetail> claimLoadLogErrorDetails = new ArrayList<ClaimLoadLogErrorDetail>();
 		ClaimLoadLog claimLoadLog = new ClaimLoadLog();
-		for (RptData rptData : claimRs.getRptDatas()) {
-			try {
-				Claim claim = claimDao.findByClaimNo(rptData.getClaimNo());
-				User admin = userDao.findById(1);
-				if (claim != null) {
-					claim.setUpdateDate(new Date());
-					claim.setUpdateBy(admin);
-				} else {
-					claim = new Claim();
-					claim.setCreateDate(new Date());
-					claim.setCreateBy(admin);
-				}
+		
+		DpRptDataLocator dpRptData = new DpRptDataLocator();
+		DpRptDataPortType dpRptDataPortType = null;
+		try {
+			dpRptDataPortType = dpRptData.getdpRptDataPort();
+		} catch (Exception e1) {
+			ClaimLoadLogErrorDetail claimLoadLogErrorDetail = new ClaimLoadLogErrorDetail();
+			claimLoadLogErrorDetail.setClaimLoadLog(claimLoadLog);
+			claimLoadLogErrorDetail.setRemark("Can't connect webservice for confirmReceiveRpt : " + e1.toString());
 
-				PropertyDescriptor[] rptDataPD = BeanUtils.getPropertyDescriptors(RptData.class);
-				Map<String, String> rptDataMap = new HashMap<String, String>();
-				for (PropertyDescriptor propertyDescriptor : rptDataPD) {
-					rptDataMap.put(propertyDescriptor.getName(), propertyDescriptor.getName());
-				}
-
-				PropertyDescriptor[] claimPD = BeanUtils.getPropertyDescriptors(Claim.class);
-				List<String> claimPDs = new ArrayList<String>();
-				for (PropertyDescriptor propertyDescriptor : claimPD) {
-					if (rptDataMap.get(propertyDescriptor.getName()) == null) {
-						claimPDs.add(propertyDescriptor.getName());
+			claimLoadLogErrorDetails.add(claimLoadLogErrorDetail);
+			totalError = claimRs.getRptDatas().size();
+		}
+		
+		if(totalError == 0){
+			for (RptData rptData : claimRs.getRptDatas()) {
+				try {
+					Claim claim = claimDao.findByClaimNo(rptData.getClaimNo());
+					User admin = userDao.findById(1);
+					if (claim != null) {
+						claim.setUpdateDate(new Date());
+						claim.setUpdateBy(admin);
+					} else {
+						claim = new Claim();
+						claim.setCreateDate(new Date());
+						claim.setCreateBy(admin);
 					}
-				}
-
-				BeanUtils.copyProperties(rptData, claim, claimPDs.toArray(new String[claimPDs.size()]));
-
-				if (StringUtils.isNotBlank(rptData.getEmpcode())) {
-					SurveyEmployee surveyEmployee = surveyEmployeeDao.findByCode(rptData.getEmpcode().trim());
-					if (surveyEmployee == null) {
-						surveyEmployee = new SurveyEmployee();
-						surveyEmployee.setCode(rptData.getEmpcode());
-						surveyEmployee.setFullname(rptData.getSurveyor());
-						surveyEmployeeDao.save(surveyEmployee);
+	
+					PropertyDescriptor[] rptDataPD = BeanUtils.getPropertyDescriptors(RptData.class);
+					Map<String, String> rptDataMap = new HashMap<String, String>();
+					for (PropertyDescriptor propertyDescriptor : rptDataPD) {
+						rptDataMap.put(propertyDescriptor.getName(), propertyDescriptor.getName());
 					}
-
-					claim.setSurveyEmployee(surveyEmployee);
-				}
-				
-				if (StringUtils.isNotBlank(rptData.getCenter())) {
-					claim.setBranch(branchDao.findById(Integer.parseInt(rptData.getCenter())));
-				}
-
-				if (StringUtils.isNotBlank(rptData.getBranchCode())) {
-					claim.setBranchDhip(branchDhipDao.findByCode(rptData.getBranchCode()));
-				}
-
-				if (StringUtils.isNotBlank(rptData.getWrkTimeCode())) {
-					for (WorkTime workTime : WorkTime.values()) {
-						if (rptData.getWrkTimeCode().equalsIgnoreCase(workTime.getName())) {
-							claim.setWrkTime(workTime);
+	
+					PropertyDescriptor[] claimPD = BeanUtils.getPropertyDescriptors(Claim.class);
+					List<String> claimPDs = new ArrayList<String>();
+					for (PropertyDescriptor propertyDescriptor : claimPD) {
+						if (rptDataMap.get(propertyDescriptor.getName()) == null) {
+							claimPDs.add(propertyDescriptor.getName());
 						}
 					}
-				}
-
-				if (StringUtils.isNotBlank(rptData.getServiceTypeCode())) {
-					for (ServiceType serviceType : ServiceType.values()) {
-						if (rptData.getServiceTypeCode().equalsIgnoreCase(serviceType.getName())) {
-							claim.setServiceType(serviceType);
+	
+					BeanUtils.copyProperties(rptData, claim, claimPDs.toArray(new String[claimPDs.size()]));
+	
+					if (StringUtils.isNotBlank(rptData.getEmpcode())) {
+						SurveyEmployee surveyEmployee = surveyEmployeeDao.findByCode(rptData.getEmpcode().trim());
+						if (surveyEmployee == null) {
+							surveyEmployee = new SurveyEmployee();
+							surveyEmployee.setCode(rptData.getEmpcode());
+							surveyEmployee.setFullname(rptData.getSurveyor());
+							surveyEmployeeDao.save(surveyEmployee);
+						}
+	
+						claim.setSurveyEmployee(surveyEmployee);
+					}
+					
+					if (StringUtils.isNotBlank(rptData.getCenter())) {
+						claim.setBranch(branchDao.findById(Integer.parseInt(rptData.getCenter())));
+					}
+	
+					if (StringUtils.isNotBlank(rptData.getBranchCode())) {
+						claim.setBranchDhip(branchDhipDao.findByCode(rptData.getBranchCode()));
+					}
+	
+					if (StringUtils.isNotBlank(rptData.getWrkTimeCode())) {
+						for (WorkTime workTime : WorkTime.values()) {
+							if (rptData.getWrkTimeCode().equalsIgnoreCase(workTime.getName())) {
+								claim.setWrkTime(workTime);
+							}
 						}
 					}
-				}
-
-				if (StringUtils.isNotBlank(rptData.getClaimTpCode())) {
-					for (ClaimTp bean : ClaimTp.values()) {
-						if (rptData.getClaimTpCode().equalsIgnoreCase(bean.getName())) {
-							claim.setClaimTp(bean);
+	
+					if (StringUtils.isNotBlank(rptData.getServiceTypeCode())) {
+						for (ServiceType serviceType : ServiceType.values()) {
+							if (rptData.getServiceTypeCode().equalsIgnoreCase(serviceType.getName())) {
+								claim.setServiceType(serviceType);
+							}
 						}
 					}
-				}
-
-				if (StringUtils.isNotBlank(rptData.getcStatusCode())) {
-					for (ClaimStatus bean : ClaimStatus.values()) {
-						if (rptData.getcStatusCode().equalsIgnoreCase(bean.getName())) {
-							claim.setClaimStatus(bean);
+	
+					if (StringUtils.isNotBlank(rptData.getClaimTpCode())) {
+						for (ClaimTp bean : ClaimTp.values()) {
+							if (rptData.getClaimTpCode().equalsIgnoreCase(bean.getName())) {
+								claim.setClaimTp(bean);
+							}
 						}
 					}
-				}
-
-				if (StringUtils.isNotBlank(rptData.getClaimTypeCode())) {
-					for (ClaimType bean : ClaimType.values()) {
-						if (rptData.getClaimTypeCode().equalsIgnoreCase(bean.getName())) {
-							claim.setClaimType(bean);
+	
+					if (StringUtils.isNotBlank(rptData.getcStatusCode())) {
+						for (ClaimStatus bean : ClaimStatus.values()) {
+							if (rptData.getcStatusCode().equalsIgnoreCase(bean.getName())) {
+								claim.setClaimStatus(bean);
+							}
 						}
 					}
-				}
-
-				if (StringUtils.isNotBlank(rptData.getDispatchTypeCode())) {
-					for (DispatchType bean : DispatchType.values()) {
-						if (rptData.getDispatchTypeCode().equalsIgnoreCase(bean.getName())) {
-							claim.setDispatchType(bean);
+	
+					if (StringUtils.isNotBlank(rptData.getClaimTypeCode())) {
+						for (ClaimType bean : ClaimType.values()) {
+							if (rptData.getClaimTypeCode().equalsIgnoreCase(bean.getName())) {
+								claim.setClaimType(bean);
+							}
 						}
 					}
-				}
-
-				if (StringUtils.isNotBlank(rptData.getAccZoneCode())) {
-					for (AreaType bean : AreaType.values()) {
-						if (rptData.getAccZoneCode().equalsIgnoreCase(bean.getName())) {
-							claim.setAreaType(bean);
+	
+					if (StringUtils.isNotBlank(rptData.getDispatchTypeCode())) {
+						for (DispatchType bean : DispatchType.values()) {
+							if (rptData.getDispatchTypeCode().equalsIgnoreCase(bean.getName())) {
+								claim.setDispatchType(bean);
+							}
 						}
 					}
+	
+					if (StringUtils.isNotBlank(rptData.getAccZoneCode())) {
+						for (AreaType bean : AreaType.values()) {
+							if (rptData.getAccZoneCode().equalsIgnoreCase(bean.getName())) {
+								claim.setAreaType(bean);
+							}
+						}
+					}
+	
+					if (claim.getClaimStatus() != null && (claim.getClaimStatus().getId() == 2 || claim.getClaimStatus().getId() == 3)) {
+						calcEmployeeSurveyPrice(claim);
+					}
+	
+					claimDao.saveOrUpdate(claim);
+					totalSuccess++;
+					
+					dpRptDataPortType.confirmReceiveRpt("", "", claim.getRefWsId(), claim.getClaimNo());
+				} catch (Exception e) {	
+					ClaimLoadLogErrorDetail claimLoadLogErrorDetail = new ClaimLoadLogErrorDetail();
+					claimLoadLogErrorDetail.setClaimLoadLog(claimLoadLog);
+					claimLoadLogErrorDetail.setRemark("Error ClaimNo = " + rptData.getClaimNo() + " : " + e.toString());
+	
+					claimLoadLogErrorDetails.add(claimLoadLogErrorDetail);
+					totalError++;
 				}
-
-				if (claim.getClaimStatus() != null && (claim.getClaimStatus().getId() == 2 || claim.getClaimStatus().getId() == 3)) {
-					calcEmployeeSurveyPrice(claim);
-				}
-
-				claimDao.saveOrUpdate(claim);
-				totalSuccess++;
-			} catch (Exception e) {	
-				ClaimLoadLogErrorDetail claimLoadLogErrorDetail = new ClaimLoadLogErrorDetail();
-				claimLoadLogErrorDetail.setClaimLoadLog(claimLoadLog);
-				claimLoadLogErrorDetail.setRemark("Error ClaimNo = " + rptData.getClaimNo() + " : " + e.toString());
-
-				claimLoadLogErrorDetails.add(claimLoadLogErrorDetail);
-				totalError++;
 			}
 		}
 

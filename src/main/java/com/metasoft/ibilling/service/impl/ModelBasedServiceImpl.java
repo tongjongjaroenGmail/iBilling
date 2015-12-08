@@ -16,7 +16,6 @@ import com.metasoft.ibilling.service.ModelBasedService;
  * @author 
  * 
  */
-@Transactional
 public abstract class ModelBasedServiceImpl<T, E extends BaseModel, I extends Serializable> extends BaseServiceImpl implements ModelBasedService<T, E, I>
 {
     protected AbstractDao<E, I> abstractDao;
