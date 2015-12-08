@@ -10,16 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.rpc.ServiceException;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
@@ -37,7 +32,6 @@ import com.metasoft.ibilling.dao.SurveyEmployeeDao;
 import com.metasoft.ibilling.dao.UserDao;
 import com.metasoft.ibilling.model.Amphur;
 import com.metasoft.ibilling.model.AreaType;
-import com.metasoft.ibilling.model.Branch;
 import com.metasoft.ibilling.model.BranchDhip;
 import com.metasoft.ibilling.model.Claim;
 import com.metasoft.ibilling.model.ClaimLoadLog;
