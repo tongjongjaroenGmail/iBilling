@@ -23,13 +23,14 @@ public class LoadClaimTask {
 		ClaimRsClient client = (ClaimRsClient) appContext.getBean("loadClaimClient");
 		ClaimRs claimRs = null;
 		ClaimLoadLog claimLoadLog = new ClaimLoadLog();
+		claimLoadLog.setWsSuccess(true);
 		try {
 			claimRs = client.loadClaims();
 		} catch (Exception e) {
 			claimLoadLog.setRemark(e.toString());
-			claimLoadLogDao.save(claimLoadLog);
+			claimLoadLog.setWsSuccess(false);
+			claimLoadLogDao.save(claimLoadLog);	
 		}
-		claimLoadLog.setWsSuccess(true);
 		if (claimLoadLog.isWsSuccess()) {
 			if (claimRs == null) {
 				claimLoadLog.setRemark("ไม่พบข้อมูลใน web service");
