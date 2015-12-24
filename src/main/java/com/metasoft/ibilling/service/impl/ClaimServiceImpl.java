@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
@@ -296,26 +297,30 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	}
 
 	@Override
-	public void loadClaimsFromWs(ClaimRs claimRs) {
+	public void loadClaimsFromWs() {
 		int totalSuccess = 0;
 		int totalError = 0;
 		List<ClaimLoadLogErrorDetail> claimLoadLogErrorDetails = new ArrayList<ClaimLoadLogErrorDetail>();
 		ClaimLoadLog claimLoadLog = new ClaimLoadLog();
+		claimLoadLog.setWsSuccess(true);
 		
 		DpRptDataLocator dpRptData = new DpRptDataLocator();
 		DpRptDataPortType dpRptDataPortType = null;
+		ClaimRs claimRs = null;
+		String rptDatastr = "";
 		try {
 			dpRptDataPortType = dpRptData.getdpRptDataPort();
+			rptDatastr = dpRptDataPortType.getRptData("", "", "");
+			claimRs = new ObjectMapper().readValue(rptDatastr, ClaimRs.class);
 		} catch (Exception e1) {
 			ClaimLoadLogErrorDetail claimLoadLogErrorDetail = new ClaimLoadLogErrorDetail();
 			claimLoadLogErrorDetail.setClaimLoadLog(claimLoadLog);
-			claimLoadLogErrorDetail.setRemark("Can't connect webservice for confirmReceiveRpt : " + e1.toString());
+			claimLoadLogErrorDetail.setRemark("web service error getRptData method : " + e1.toString());
 
 			claimLoadLogErrorDetails.add(claimLoadLogErrorDetail);
-			totalError = claimRs.getRptDatas().size();
+			claimLoadLog.setWsSuccess(false);
 		}
-		
-		if(totalError == 0){
+		if(claimLoadLog.isWsSuccess()){
 			for (RptData rptData : claimRs.getRptDatas()) {
 				try {
 					Claim claim = claimDao.findByClaimNo(rptData.getClaimNo());
@@ -358,11 +363,11 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					}
 					
 					if (StringUtils.isNotBlank(rptData.getCenter())) {
-						claim.setBranch(branchDao.findById(Integer.parseInt(rptData.getCenter())));
+						claim.setBranch(branchDao.findByName(rptData.getCenter().trim()));
 					}
 	
 					if (StringUtils.isNotBlank(rptData.getBranchCode())) {
-						claim.setBranchDhip(branchDhipDao.findByCode(rptData.getBranchCode()));
+						claim.setBranchDhip(branchDhipDao.findByCode(rptData.getBranchCode().trim()));
 					}
 	
 					if (StringUtils.isNotBlank(rptData.getWrkTimeCode())) {
@@ -444,7 +449,6 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		claimLoadLog.setTotalErrorData(totalError);
 		claimLoadLog.setTotalInsertData(totalSuccess);
 		claimLoadLog.setCreateDate(new Date());
-		claimLoadLog.setWsSuccess(true);
 
 		claimLoadLogDao.save(claimLoadLog);
 		

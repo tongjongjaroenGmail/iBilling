@@ -78,7 +78,7 @@ public class RptData {
 	@JsonDeserialize(using = BooleanDeserializer.class)
 	private Boolean disperse;
 	
-	@JsonProperty("w7")
+	@JsonProperty("W7")
 	@JsonDeserialize(using = BooleanDeserializer.class)
 	private Boolean w7;
 

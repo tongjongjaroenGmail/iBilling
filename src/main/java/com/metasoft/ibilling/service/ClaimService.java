@@ -20,7 +20,7 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 	public PaySurveyClaimSearchResultVoPaging searchPaySurveyClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer employeeId,
 			int start, int length);
 	
-	public void loadClaimsFromWs(ClaimRs claimRs);
+	public void loadClaimsFromWs();
 	
 	public float calcTotalSurvey(Claim claim);
 }
