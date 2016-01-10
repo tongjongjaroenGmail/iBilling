@@ -115,4 +115,10 @@ public class SiteController extends BaseController
     {	
 		return "paySurveySearchPage";
     }
+    
+    @RequestMapping(value = "/reportStatisticsSurveyPage", method = RequestMethod.GET)
+    public String reportStatisticsSurveyPage()
+    {	
+		return "reportStatisticsSurveyPage";
+    }
 }

@@ -103,6 +103,9 @@ public class RptData {
 	@JsonProperty("HAS_TP")
 	@JsonDeserialize(using = BooleanDeserializer.class)
 	private Boolean hasTp;
+	
+	@JsonProperty("TP_TYPE")
+	private String tpType;
 
 	@JsonProperty("TP_VEH")
 	@JsonDeserialize(using = BooleanDeserializer.class)
@@ -685,4 +688,13 @@ public class RptData {
 		this.w7 = w7;
 	}
 
+	public String getTpType() {
+		return tpType;
+	}
+
+	public void setTpType(String tpType) {
+		this.tpType = tpType;
+	}
+
+	
 }

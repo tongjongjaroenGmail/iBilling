@@ -20,9 +20,11 @@ import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.PaySurveyClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.ReportStatisticsSurveyVoPaging;
 import com.metasoft.ibilling.bean.vo.CheckClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.PaySurveyClaimSearchResultVo;
+import com.metasoft.ibilling.controller.vo.ReportStatisticsSurveyVo;
 import com.metasoft.ibilling.dao.AmphurDao;
 import com.metasoft.ibilling.dao.BranchDao;
 import com.metasoft.ibilling.dao.BranchDhipDao;
@@ -33,6 +35,7 @@ import com.metasoft.ibilling.dao.SurveyEmployeeDao;
 import com.metasoft.ibilling.dao.UserDao;
 import com.metasoft.ibilling.model.Amphur;
 import com.metasoft.ibilling.model.AreaType;
+import com.metasoft.ibilling.model.Branch;
 import com.metasoft.ibilling.model.BranchDhip;
 import com.metasoft.ibilling.model.Claim;
 import com.metasoft.ibilling.model.ClaimLoadLog;
@@ -601,5 +604,121 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 			}
 			claim.setSurveyConditionRight(surveyConditionRight);
 		}
+	}
+
+	private ReportStatisticsSurveyVo setReportStatisticsSurveyVo(Claim claim){
+		ReportStatisticsSurveyVo vo = new ReportStatisticsSurveyVo();
+		vo.setClaimId(claim.getId());
+		vo.setClaimNo(StringUtils.trimToEmpty(claim.getClaimNo()));
+		if (claim.getDispatchDate() != null) {
+			vo.setDispatchDate(DateToolsUtil.convertToString(claim.getDispatchDate(), DateToolsUtil.LOCALE_TH));
+		}
+		
+		if(claim.getSurveyEmployee() != null){
+			vo.setEmployeeName(StringUtils.trimToEmpty(claim.getSurveyEmployee().getFullname()));
+			vo.setEmployeeCode(StringUtils.trimToEmpty(claim.getSurveyEmployee().getCode()));
+		}
+
+		if (claim.getBranch() != null) {
+			vo.setBranchName(claim.getBranch().getName());
+		}
+		
+		vo.setPolicyType(StringUtils.trimToEmpty(claim.getPolicyType()));
+		
+		if (claim.getHasTp() != null && claim.getHasTp()) {
+			vo.setHasTp("มี");
+		}else{
+			vo.setHasTp("ไม่มี");
+		}
+
+		vo.setNotiResult(StringUtils.trimToEmpty(claim.getNotiResult()));
+		vo.setAccResult(StringUtils.trimToEmpty(claim.getAccResult()));
+		
+		if (claim.getTpVeh() != null && claim.getTpVeh()) {
+			vo.setTpVeh("มี");
+		}else{
+			vo.setTpVeh("ไม่มี");
+		}
+		
+		vo.setTpType(StringUtils.trimToEmpty(claim.getTpType()));
+		
+		if (claim.getDisperse() != null && claim.getDisperse()) {
+			vo.setDisperse("Y");
+		}else{
+			vo.setDisperse("N");
+		}
+
+		if (claim.getWrkTime() != null) {
+			vo.setWrkTime(claim.getWrkTime().getName());
+		}
+		
+		vo.setSurClaim(NumberToolsUtil.nullToFloat(claim.getSurClaim()));
+		
+		if (claim.getClaimType() != null) {
+			vo.setClaimType(claim.getClaimType().getName());
+		}
+		
+		if (claim.getAreaType() != null) {
+			vo.setAccZone(claim.getAreaType().getName());
+		}
+		return vo;
+	}
+	
+	@Override
+	public ReportStatisticsSurveyVoPaging searchReportStatisticsSurveyPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selAreaType,
+			Integer selBranch, int start, int length) {
+		Date dispatchDateStart = null;
+		Date dispatchDateEnd = null;
+		Branch branch = null;
+		AreaType areaType = null;
+
+		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
+			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (StringUtils.isNotBlank(txtDispatchDateEnd)) {
+			dispatchDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (selBranch != null && selBranch != 0) {
+			branch = branchDao.findById(selBranch);
+		}
+		
+		if(selAreaType != null && selAreaType != 0) {
+			areaType = AreaType.getById(selAreaType);
+		}
+
+		ClaimPaging claimPaging = claimDao.searchReportStatisticsSurveyPaging(dispatchDateStart, dispatchDateEnd, areaType, branch, start, length);
+
+		ReportStatisticsSurveyVoPaging voPaging = new ReportStatisticsSurveyVoPaging();
+		voPaging.setDraw(claimPaging.getDraw());
+		voPaging.setRecordsFiltered(claimPaging.getRecordsFiltered());
+		voPaging.setRecordsTotal(claimPaging.getRecordsTotal());
+		voPaging.setData(new ArrayList<ReportStatisticsSurveyVo>());
+		if (claimPaging != null && claimPaging.getData() != null) {
+			for (Claim claim : claimPaging.getData()) {
+				ReportStatisticsSurveyVo vo = setReportStatisticsSurveyVo(claim);
+				voPaging.getData().add(vo);
+			}
+		}
+
+		return voPaging;
+	}
+
+	@Override
+	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurveyExport(Integer[] ids) {
+		List<Claim> results = claimDao.findByIds(ids);
+
+		List<ReportStatisticsSurveyVo> vos = new ArrayList<ReportStatisticsSurveyVo>();
+		
+		if(results != null ){
+			int i = 1;
+			for (Claim claim : results) {
+				ReportStatisticsSurveyVo vo = setReportStatisticsSurveyVo(claim);
+				vos.add(vo);
+			}
+		}
+
+		return vos;
 	}
 }

@@ -157,8 +157,9 @@ public class Claim extends BaseModel {
 	// คู่กรณี (Y/N)
 	private Boolean hasTp;
 
-	// @Column(name = "") // ประเภทรถคู่กรณี กะบะ, จยย,
+	@Column(name = "tp_type") // ประเภทรถคู่กรณี กะบะ, จยย,
 	// รถตู้,รถเก๋ง,รถบรรทุก,อื่นๆ
+	private String tpType;
 
 	@Column(name = "tp_veh", nullable = true, columnDefinition = "boolean DEFAULT null")
 	// คู่กรณีรถ (Y/N)
@@ -363,6 +364,14 @@ public class Claim extends BaseModel {
 	private String remark;
 	
 	private Boolean w7;
+
+	public String getTpType() {
+		return tpType;
+	}
+
+	public void setTpType(String tpType) {
+		this.tpType = tpType;
+	}
 
 	public Boolean getW7() {
 		return w7;

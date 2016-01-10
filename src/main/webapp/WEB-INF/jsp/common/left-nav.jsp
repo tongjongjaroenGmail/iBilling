@@ -112,8 +112,8 @@
 					</a>
 				</li>
 				
-				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/report/statisticsSurvey'}">class="active"</c:if>>
-					<a href="${pageContext.request.contextPath}/report/statisticsSurvey"> 
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/reportStatisticsSurveyPage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/reportStatisticsSurveyPage"> 
 						<i class="icon-double-angle-right"></i> 
 						<span class="menu-text">รายงานสถิติงานสำรวจ</span>
 					</a>

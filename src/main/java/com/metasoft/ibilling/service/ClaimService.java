@@ -3,12 +3,15 @@
  */
 package com.metasoft.ibilling.service;
 
+import java.util.List;
+
 import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.PaySurveyClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.ReportStatisticsSurveyVoPaging;
+import com.metasoft.ibilling.controller.vo.ReportStatisticsSurveyVo;
 import com.metasoft.ibilling.dao.ClaimDao;
 import com.metasoft.ibilling.model.Claim;
-import com.metasoft.ibilling.ws.bean.json.ClaimRs;
 
 public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer> {
 	public ClaimSearchResultVoPaging searchGroupClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selBranch,
@@ -23,4 +26,9 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 	public void loadClaimsFromWs();
 	
 	public float calcTotalSurvey(Claim claim);
+	
+	public ReportStatisticsSurveyVoPaging searchReportStatisticsSurveyPaging(String dispatchDateStart, String dispatchDateEnd, Integer areaType,
+			Integer branch,int start, int length);
+	
+	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurveyExport(Integer[] ids);
 }
