@@ -14,7 +14,7 @@
 				<div class="modal-body" style="padding: 5px;">
 					<input type="hidden" id="claimId">
 					
-					<div class="well" style="padding: 5px;margin-bottom: 4px;">
+					<div class="well" style="padding: 5px;margin-bottom: 4px;background-color: #94B9E0;">
 					
 						<div class="row">
 							<div class="col-sm-12">
@@ -358,7 +358,7 @@
 							
 							<div class="space-4"></div>
 							
-							<div class="well" style="padding: 5px;margin-bottom: 4px;">
+							<div class="well" style="padding: 5px;margin-bottom: 4px;background-color: #94B9E0;">
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
@@ -581,7 +581,7 @@
 							
 							<div class="space-4" style="margin-bottom: 15px;"></div>
 							
-							<div class="well" style="padding: 5px;margin-bottom: 4px;">
+							<div class="well" style="padding: 5px;margin-bottom: 4px;background-color: #94B9E0;">
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="table-responsive">
@@ -852,7 +852,7 @@
 								
 							<div class="space-4"></div>
 							
-								<div class="well" style="padding: 5px;margin-bottom: 4px;">
+								<div class="well" style="padding: 5px;margin-bottom: 4px;background-color: #94B9E0;">
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="table-responsive">
@@ -982,7 +982,7 @@
 												</div>
 												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
-														<input class="form-control" id="surveyOther" type="text"  style="text-align: right;"/> 
+														<input class="form-control" id="surveyOther" type="text"  style="text-align: right;" onkeypress="return inputNum(event);" onkeyup="calcSurveyTotal();"/> 
 													</div>
 												</div>
 											</div>
@@ -999,7 +999,7 @@
 												</div>
 												<div class="col-sm-6 no-padding-left">		
 													<div class="input-group col-sm-12 no-padding-left no-padding-right">
-														<input class="form-control" id="surveyFine" type="text" style="text-align: right;"/> 
+														<input class="form-control" id="surveyFine" type="text" style="text-align: right;" onkeypress="return inputNum(event);" onkeyup="calcSurveyTotal();"/> 
 													</div>
 												</div>
 											</div>
@@ -1129,5 +1129,28 @@ function saveClaim(){
 			}
 		}
 	});
+}
+
+function calcSurveyTotal(){
+	var surveyTotal = 
+		parseFloat($("#modalClaimDetail").find("#surveyInvest").val()) + 
+		parseFloat($("#modalClaimDetail").find("#surveyTrans").val()) + 
+		parseFloat($("#modalClaimDetail").find("#surveyDaily").val()) + 
+		parseFloat($("#modalClaimDetail").find("#surveyPhoto").val()) + 
+		parseFloat($("#modalClaimDetail").find("#surveyClaim").val()) + 
+		parseFloat($("#modalClaimDetail").find("#surveyTel").val()) + 
+		parseFloat($("#modalClaimDetail").find("#surveyConditionRight").val());
+	
+	var surveyOther = $("#modalClaimDetail").find("#surveyOther").val();
+	if(surveyOther != ""){
+		surveyTotal += parseFloat(surveyOther);
+	}
+	
+	var surveyFine = $("#modalClaimDetail").find("#surveyFine").val();
+	if(surveyFine != ""){
+		surveyTotal -= parseFloat(surveyFine);
+	}
+	
+	$("#modalClaimDetail").find("#surveyTotal").val(surveyTotal);
 }
 </script>

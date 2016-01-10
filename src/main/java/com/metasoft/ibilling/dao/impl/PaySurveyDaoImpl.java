@@ -9,7 +9,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.metasoft.ibilling.bean.paging.PaySurveyPaging;
 import com.metasoft.ibilling.dao.AbstractDaoImpl;
@@ -23,6 +22,15 @@ public class PaySurveyDaoImpl extends AbstractDaoImpl<PaySurvey, Integer> implem
 	
 	public PaySurveyDaoImpl() {
 		super(PaySurvey.class);
+	}
+	
+	@Override
+	public String genCode(String startCode){
+		Criteria criteriaCount = getCurrentSession().createCriteria(entityClass);
+		criteriaCount.add(Restrictions.ilike("code", startCode + "%"));
+		criteriaCount.setProjection(Projections.rowCount());
+		
+		return startCode + String.format("%03d", (Long) criteriaCount.uniqueResult());
 	}
 	
 	@Override

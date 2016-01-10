@@ -20,7 +20,7 @@ pageContext.setAttribute("claimStatuses", ClaimStatus.values());
 			<div class="table-responsive">
 				<div class="col-sm-2">		
 					<div class="input-group col-sm-12 no-padding-left" style="text-align: right;">
-						<b>วันที่จ่ายเงิน : </b> 
+						<b>วันที่จ่ายงาน : </b> 
 					</div>
 				</div>
 				<div class="col-sm-3">		

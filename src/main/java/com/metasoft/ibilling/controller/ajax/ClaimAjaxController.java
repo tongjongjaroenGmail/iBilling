@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -192,7 +191,7 @@ public class ClaimAjaxController extends BaseAjaxController {
 				NumberToolsUtil.nullToFloat(vo.getSurveyClaim()) + 
 				NumberToolsUtil.nullToFloat(vo.getSurveyTel()) + 
 				NumberToolsUtil.nullToFloat(vo.getSurveyConditionRight()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyOther()) + 
+				NumberToolsUtil.nullToFloat(vo.getSurveyOther()) - 
 				NumberToolsUtil.nullToFloat(vo.getSurveyFine());
 		vo.setSurveyTotal(surTotal);
 		

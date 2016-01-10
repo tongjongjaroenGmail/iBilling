@@ -6,7 +6,6 @@ package com.metasoft.ibilling.controller.ajax;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import javax.persistence.QueryHint;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;

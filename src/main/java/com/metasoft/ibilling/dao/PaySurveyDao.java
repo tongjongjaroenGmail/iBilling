@@ -9,4 +9,6 @@ import com.metasoft.ibilling.model.SurveyEmployee;
 public interface PaySurveyDao extends AbstractDao<PaySurvey, Integer>{
 	public PaySurveyPaging searchPaging(Date createDateStart,Date createDateEnd,String paySurveyCode,SurveyEmployee surveyEmployee
 			,int start,int length);
+	
+	public String genCode(String startCode);
 }

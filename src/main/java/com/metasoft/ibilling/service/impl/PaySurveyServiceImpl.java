@@ -3,6 +3,7 @@
  */
 package com.metasoft.ibilling.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -54,15 +55,15 @@ public class PaySurveyServiceImpl extends ModelBasedServiceImpl<PaySurveyDao, Pa
 	@Override
 	@Transactional
 	public PaySurvey save(String claimIds, int createBy) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMM",DateToolsUtil.LOCALE_TH);
+		
 		User user = userDao.findById(createBy);
 		
 		PaySurvey paySurvey = new PaySurvey();
 		paySurvey.setCreateBy(user);
 		paySurvey.setCreateDate(new Date());
+		paySurvey.setCode(paySurveyDao.genCode(sdf.format(new Date())));
 		paySurveyDao.save(paySurvey);
-		
-		paySurvey.setCode(String.format("%08d", paySurvey.getId()));
-		paySurveyDao.saveOrUpdate(paySurvey);
 		
 		String[] arrClaimIds = claimIds.split(",");
 		for (String claimId : arrClaimIds) {

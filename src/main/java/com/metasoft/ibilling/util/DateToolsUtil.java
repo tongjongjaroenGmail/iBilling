@@ -74,7 +74,7 @@ public class DateToolsUtil {
 		if (date != null && !date.trim().equals("")) {
 			try {
 				if(date.length() == 10){
-					date += date + "00:00:00";
+					date += " 00:00:00";
 				}
 				df = new SimpleDateFormat(DATE_PATTERN_VIEW_DDMMYYYY_HHmmss, locale);
 				newDate = df.parse(date);
@@ -91,7 +91,7 @@ public class DateToolsUtil {
 		if (date != null && !date.trim().equals("")) {
 			try {
 				if(date.length() == 10){
-					date += date + "23:59:59";
+					date += " 23:59:59";
 				}
 				df = new SimpleDateFormat(DATE_PATTERN_VIEW_DDMMYYYY_HHmmss, locale);
 				newDate = df.parse(date);
