@@ -1081,6 +1081,9 @@
 	</div>
 <script type="text/javascript">   
 function setPageForClaimDetail(claimId){
+	$("#modalClaimDetail textarea,input").each( function( index, element ){
+		$( this ).val("");
+	});
 	$.ajax({
 		url : '${pageContext.request.contextPath}/claim/find?id=' + claimId,
 		contentType : 'application/json',
@@ -1132,14 +1135,42 @@ function saveClaim(){
 }
 
 function calcSurveyTotal(){
-	var surveyTotal = 
-		parseFloat($("#modalClaimDetail").find("#surveyInvest").val()) + 
-		parseFloat($("#modalClaimDetail").find("#surveyTrans").val()) + 
-		parseFloat($("#modalClaimDetail").find("#surveyDaily").val()) + 
-		parseFloat($("#modalClaimDetail").find("#surveyPhoto").val()) + 
-		parseFloat($("#modalClaimDetail").find("#surveyClaim").val()) + 
-		parseFloat($("#modalClaimDetail").find("#surveyTel").val()) + 
-		parseFloat($("#modalClaimDetail").find("#surveyConditionRight").val());
+	var surveyTotal = 0;
+	
+	var surveyInvest = $("#modalClaimDetail").find("#surveyInvest").val();
+	if(surveyInvest != ""){
+		surveyTotal += parseFloat(surveyInvest);
+	}
+	
+	var surveyTrans = $("#modalClaimDetail").find("#surveyTrans").val();
+	if(surveyTrans != ""){
+		surveyTotal += parseFloat(surveyTrans);
+	}
+	
+	var surveyDaily = $("#modalClaimDetail").find("#surveyDaily").val();
+	if(surveyDaily != ""){
+		surveyTotal += parseFloat(surveyDaily);
+	}
+	
+	var surveyPhoto = $("#modalClaimDetail").find("#surveyPhoto").val();
+	if(surveyPhoto != ""){
+		surveyTotal += parseFloat(surveyPhoto);
+	}
+	
+	var surveyClaim = $("#modalClaimDetail").find("#surveyClaim").val();
+	if(surveyClaim != ""){
+		surveyTotal += parseFloat(surveyClaim);
+	}
+	
+	var surveyTel = $("#modalClaimDetail").find("#surveyTel").val();
+	if(surveyTel != ""){
+		surveyTotal += parseFloat(surveyTel);
+	}
+	
+	var surveyConditionRight = $("#modalClaimDetail").find("#surveyConditionRight").val();
+	if(surveyConditionRight != ""){
+		surveyTotal += parseFloat(surveyConditionRight);
+	}
 	
 	var surveyOther = $("#modalClaimDetail").find("#surveyOther").val();
 	if(surveyOther != ""){
