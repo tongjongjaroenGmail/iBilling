@@ -352,22 +352,27 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					}
 	
 					BeanUtils.copyProperties(rptData, claim, claimPDs.toArray(new String[claimPDs.size()]));
-	
+						
+					Branch branch = null;
+					if (StringUtils.isNotBlank(rptData.getCenter())) {
+						branch = branchDao.findByName(rptData.getCenter().trim());
+					}
+					claim.setBranch(branch);
+					
 					if (StringUtils.isNotBlank(rptData.getEmpcode())) {
 						SurveyEmployee surveyEmployee = surveyEmployeeDao.findByCode(rptData.getEmpcode().trim());
 						if (surveyEmployee == null) {
 							surveyEmployee = new SurveyEmployee();
 							surveyEmployee.setCode(rptData.getEmpcode());
 							surveyEmployee.setFullname(rptData.getSurveyor());
+							surveyEmployee.setBranch(branch);
 							surveyEmployeeDao.save(surveyEmployee);
 						}
 	
 						claim.setSurveyEmployee(surveyEmployee);
 					}
 					
-					if (StringUtils.isNotBlank(rptData.getCenter())) {
-						claim.setBranch(branchDao.findByName(rptData.getCenter().trim()));
-					}
+					
 	
 					if (StringUtils.isNotBlank(rptData.getBranchCode())) {
 						claim.setBranchDhip(branchDhipDao.findByCode(rptData.getBranchCode().trim()));

@@ -83,7 +83,12 @@ pageContext.setAttribute("claimStatuses", ClaimStatus.values());
 						<select class="col-sm-12" id="selEmployee" title="พนักงาน">
 							<option value=""></option>
 							<c:forEach var="surveyEmployee" items="${surveyEmployees}" varStatus="index">		
-								<option value="${surveyEmployee.id}">${surveyEmployee.code}</option>					
+								<c:if test="${empty surveyEmployee.branch}">
+									<option value="${surveyEmployee.id}">${surveyEmployee.code}</option>	
+								</c:if>
+								<c:if test="${not empty surveyEmployee.branch}">
+									<option value="${surveyEmployee.id}">${surveyEmployee.branch.name} : ${surveyEmployee.code}</option>	
+								</c:if>				
 							</c:forEach>
 						</select>
 					</div>

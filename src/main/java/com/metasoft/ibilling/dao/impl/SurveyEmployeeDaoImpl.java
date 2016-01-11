@@ -3,7 +3,13 @@
  */
 package com.metasoft.ibilling.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +32,14 @@ public class SurveyEmployeeDaoImpl extends AbstractDaoImpl<SurveyEmployee, Integ
 	@Override
 	public SurveyEmployee findByCode(String code) {
 		return (SurveyEmployee) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("code", code)).uniqueResult();
+	}
+
+	@Override
+	public List<SurveyEmployee> findAllOrderByBranch() {
+		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		criteria.createAlias("branch", "branch", JoinType.LEFT_OUTER_JOIN);
+		criteria.addOrder(Order.asc("branch.name"));
+		return criteria.list();
 	}
 
 }

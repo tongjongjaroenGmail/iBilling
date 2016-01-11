@@ -79,7 +79,7 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
         session.setAttribute("positions", positionDao.findAll());
         session.setAttribute("departments", departmentDao.findAll());
         session.setAttribute("branchs", branchDao.findAll());
-        session.setAttribute("surveyEmployees", surveyEmployeeDao.findAll());
+        session.setAttribute("surveyEmployees", surveyEmployeeDao.findAllOrderByBranch());
         session.setAttribute("branchDhips", branchDhipDao.findAll());
         session.setAttribute("areaTypes", AreaType.values());
          
