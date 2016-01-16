@@ -73,18 +73,18 @@ public class ReportStatisticsSurveyAjaxController extends BaseAjaxController {
 	}
 
 	@RequestMapping(value = "/export", method = RequestMethod.POST)
-	public void export(@RequestParam(required = true) Integer[] chk,
+	public void export(@RequestParam(required = false) String txtDispatchDateStart,
+			@RequestParam(required = false) String txtDispatchDateEnd, 
+			@RequestParam(required = false) Integer selAreaType,
+			@RequestParam(required = false) Integer selBranch, 
 			@RequestParam(required = false) String token, HttpSession session, HttpServletResponse response) throws ServletException,
 			IOException, JRException, Exception {
 
-		List<ReportStatisticsSurveyVo> results = claimService.searchReportStatisticsSurveyExport(chk);
-
-		if (!results.isEmpty()) {
-			HashMap param =new HashMap();
-			downloadService.download(ExporterService.EXTENSION_TYPE_EXCEL, "statisticsSurvey",
-					session.getServletContext().getRealPath("/report/statisticsSurvey"),
-					param, results, token, response);
-		}
+		List<ReportStatisticsSurveyVo> results = claimService.searchReportStatisticsSurvey(txtDispatchDateStart, txtDispatchDateEnd, selAreaType, selBranch);
 		
+		HashMap param =new HashMap();
+		downloadService.download(ExporterService.EXTENSION_TYPE_EXCEL, "statisticsSurvey",
+				session.getServletContext().getRealPath("/report/statisticsSurvey"),
+				param, results, token, response);		
 	}
 }

@@ -29,4 +29,7 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 			Integer branch,int start, int length);
 	
 	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurveyExport(Integer[] ids);
+	
+	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurvey(String dispatchDateStart, String dispatchDateEnd, Integer areaType,
+			Integer branch);
 }

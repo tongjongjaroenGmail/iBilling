@@ -725,6 +725,44 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 
 		return voPaging;
 	}
+	
+	@Override
+	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurvey(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selAreaType,
+			Integer selBranch) {
+		Date dispatchDateStart = null;
+		Date dispatchDateEnd = null;
+		Branch branch = null;
+		AreaType areaType = null;
+
+		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
+			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (StringUtils.isNotBlank(txtDispatchDateEnd)) {
+			dispatchDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (selBranch != null && selBranch != 0) {
+			branch = branchDao.findById(selBranch);
+		}
+		
+		if(selAreaType != null && selAreaType != 0) {
+			areaType = AreaType.getById(selAreaType);
+		}
+
+		List<Claim> claims = claimDao.searchReportStatisticsSurvey(dispatchDateStart, dispatchDateEnd, areaType, branch);
+
+		List<ReportStatisticsSurveyVo> reportStatisticsSurveyVos = new ArrayList<ReportStatisticsSurveyVo>();
+		
+		if (claims != null) {
+			for (Claim claim : claims) {
+				ReportStatisticsSurveyVo vo = setReportStatisticsSurveyVo(claim);
+				reportStatisticsSurveyVos.add(vo);
+			}
+		}
+
+		return reportStatisticsSurveyVos;
+	}
 
 	@Override
 	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurveyExport(Integer[] ids) {

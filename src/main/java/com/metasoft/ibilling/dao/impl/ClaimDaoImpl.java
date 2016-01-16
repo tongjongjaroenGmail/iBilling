@@ -2,6 +2,7 @@ package com.metasoft.ibilling.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -287,5 +288,28 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			resultPaging.setData(new ArrayList<Claim>());
 		}
 		return resultPaging;
+	}
+	
+	@Override
+	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch) {
+	
+		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		if (dispatchDateStart != null && dispatchDateEnd != null) {
+			criteria.add(Restrictions.between("dispatchDate", dispatchDateStart, dispatchDateEnd));
+		} else if (dispatchDateStart != null) {
+			criteria.add(Restrictions.ge("dispatchDate", dispatchDateStart));
+		} else if (dispatchDateEnd != null) {
+			criteria.add(Restrictions.le("dispatchDate", dispatchDateEnd));
+		}
+
+		if (branch != null) {
+			criteria.add(Restrictions.eq("branch", branch));
+		}
+		
+		if (areaType != null) {
+			criteria.add(Restrictions.eq("areaType", areaType));
+		}
+
+		return criteria.list();
 	}
 }

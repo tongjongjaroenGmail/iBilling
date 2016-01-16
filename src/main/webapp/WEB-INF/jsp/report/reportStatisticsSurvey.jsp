@@ -26,7 +26,7 @@
 				</div>
 				<div class="col-sm-3">		
 					<div class="input-group col-sm-12 no-padding-left">
-						<input class="form-control date-picker" id="txtDispatchDateStart" type="text" data-date-format="dd/mm/yyyy" data-date-language="th-th"/> 
+						<input class="form-control date-picker" name="txtDispatchDateStart" id="txtDispatchDateStart" type="text" data-date-format="dd/mm/yyyy" data-date-language="th-th"/> 
 						<span class="input-group-addon"> 
 							<i class="icon-calendar bigger-110"></i>
 						</span>
@@ -40,7 +40,7 @@
 				
 				<div class="col-sm-3">	
 					<div class="input-group col-sm-12 no-padding-left">
-						<input class="form-control date-picker" id="txtDispatchDateEnd" type="text" data-date-format="dd/mm/yyyy" data-date-language="th-th"/> 
+						<input class="form-control date-picker" name="txtDispatchDateEnd" id="txtDispatchDateEnd" type="text" data-date-format="dd/mm/yyyy" data-date-language="th-th"/> 
 						<span class="input-group-addon"> 
 							<i class="icon-calendar bigger-110"></i>
 						</span>
@@ -62,7 +62,7 @@
 				</div>
 				<div class="col-sm-3">		
 					<div class="input-group col-sm-12 no-padding-left">
-						<select class="col-sm-12" id="selAreaType">
+						<select class="col-sm-12" id="selAreaType" name="selAreaType">
 							<option value="">ทั้งหมด</option>
 							<c:forEach var="areaType" items="${areaTypes}" varStatus="index">		
 								<option value="${areaType.id}">${areaType.name}</option>					
@@ -87,7 +87,7 @@
 				</div>
 				<div class="col-sm-3">		
 					<div class="input-group col-sm-12 no-padding-left">
-						<select class="col-sm-12" id="selBranch">
+						<select class="col-sm-12" id="selBranch" name="selBranch">
 							<option value="">ทั้งหมด</option>
 							<c:forEach var="branch" items="${branchs}" varStatus="index">		
 								<option value="${branch.id}">${branch.name}</option>					
@@ -110,6 +110,10 @@
 					<button class="btn btn-info" type="button" id="btnSearch" onclick="search();">
 						<i class="icon-search"></i> ค้นหา
 					</button>
+					
+					<button class="btn btn-success" type="button" id="btnExport" onclick="download();">
+						<i class="icon-file"></i> พิมพ์
+					</button>
 				</div>
 			</div>
 			<!-- /.table-responsive -->
@@ -126,7 +130,6 @@
 			<thead>
 
 				<tr>
-					<th><label><input name="chkAll" class="ace" type="checkbox" onclick="checkSelect(this,document.getElementsByName('chk'));countTotalSelect();"><span class="lbl"></span></label></th>				
 					<th>เลขเคลม</th>	
 					<th>วันที่จ่ายงาน</th>
 					<th>ชื่อพนักงานสำรวจ</th>	
@@ -154,34 +157,7 @@
 	</div>
 	
 	<div class="space-4"></div>
-	
-	<div class="row">
-		<div class="col-sm-offset-1 col-sm-10" style="text-align: right;">
-			<div class="table-responsive">
-				<div class="col-sm-12">
-					<b>จำนวนที่เลือก <label id="lblTotalSelect" style="font-size: 20px">0</label> รายการ</b>
-				</div>
-			</div>
-			<!-- /.table-responsive -->
-		</div>
-		<!-- /span -->
-	</div>
-	
-	<div class="space-4"></div>
-	
-	<div class="row">
-		<div class="col-sm-offset-1 col-sm-10" style="text-align: right;">
-			<div class="table-responsive">
-				<div class="col-sm-12">
-					<button class="btn btn-success" type="button" id="btnExport" onclick="download();">
-						<i class="icon-file"></i> พิมพ์
-					</button>
-				</div>
-			</div>
-			<!-- /.table-responsive -->
-		</div>
-		<!-- /span -->
-	</div>
+
 </div>
 <!-- /.page-content -->
 
@@ -217,13 +193,6 @@ $(document).ready(function() {
 					"lengthMenu": [[10,15,20, 25, 50, 100,200,300,400,500,600,700,800,900,1000], [10,15,20, 25, 50, 100,200,300,400,500,600,700,800,900,1000]],
 					'bAutoWidth': false , 
 					"aoColumns" : [
-								{ "mData" : "claimId",
-									"bSortable": false,
-									'sWidth': '30px',
-									"mRender" : function (data, type, full) {
-										return '<input name="chk" class="ace" type="checkbox" onclick="countTotalSelect();" value="' + data + '"><span class="lbl"></span></label>';
-									}	
-								},		
 
 								{ "mData" : "claimNo" },	
 								{ "mData" : "dispatchDate" },	
@@ -246,7 +215,7 @@ $(document).ready(function() {
 								{ "mData" : "claimType" },
 								{ "mData" : "accZone" }
 							   ],
-				columnDefs: [{ type: 'date-dd/mm/yyyy', targets: 2 }],
+				columnDefs: [{ type: 'date-dd/mm/yyyy', targets: 1 }],
 				"processing": true,
                 "serverSide": true,
                 "bSort" : false,
@@ -283,11 +252,6 @@ function search(){
 
 
 function download() {
-	if($("[name='chk']:checked").size() == 0){
-		alert("กรุณาเลือกข้อมูลอย่างน้อย 1 ค่า");
-		return;
-	}
-	
 	// Retrieve download token
 	// When token is received, proceed with download
 	$.get('${downloadTokenUrl}', function(response) {

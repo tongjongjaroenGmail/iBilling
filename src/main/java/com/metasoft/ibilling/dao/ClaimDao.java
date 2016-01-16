@@ -1,6 +1,7 @@
 package com.metasoft.ibilling.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.model.AreaType;
@@ -21,4 +22,6 @@ public interface ClaimDao extends AbstractDao<Claim, Integer> {
 	public Claim findByClaimNo(String claimNo);
 	
 	public ClaimPaging searchReportStatisticsSurveyPaging(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch, int start, int length);
+	
+	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch);
 }
