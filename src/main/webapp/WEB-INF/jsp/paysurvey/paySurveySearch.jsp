@@ -53,20 +53,40 @@
 			<div class="table-responsive">
 				<div class="col-sm-2">		
 					<div class="input-group col-sm-12 no-padding-left" style="text-align: right;">
-						<b>พนักงาน : </b> 
+						<b>ศูนย์ : </b> 
 					</div>
 				</div>
 				<div class="col-sm-3">		
 					<div class="input-group col-sm-12 no-padding-left">
-						<select class="col-sm-12" id="selEmployee" title="พนักงาน">
+						<select class="col-sm-12" id="selBranch" onchange="getEmployeeFromBranch($(this).val(),'selEmployee');">
 							<option value=""></option>
-							<c:forEach var="surveyEmployee" items="${surveyEmployees}" varStatus="index">		
-								<option value="${surveyEmployee.id}">${surveyEmployee.code}</option>					
+							<c:forEach var="branchData" items="${branchs}" varStatus="index">		
+								<option value="${branchData.id}">${branchData.name}</option>						
 							</c:forEach>
 						</select>
 					</div>
 				</div>
 				
+				<div class="col-sm-2">		
+					<div class="input-group col-sm-12 no-padding-left" style="text-align: right;">
+						<b>พนักงาน : </b> 
+					</div>
+				</div>
+				<div class="col-sm-3">		
+					<div class="input-group col-sm-12 no-padding-left">
+						<select class="col-sm-12" id="selEmployee" title="พนักงาน">						
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	
+	<div class="space-4"></div>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
 				<div class="col-sm-2">		
 					<div class="input-group col-sm-12 no-padding-left" style="text-align: right;">
 						<b>เลขที่จ่าย : </b> 
