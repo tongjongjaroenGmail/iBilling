@@ -37,8 +37,7 @@ public class SurveyEmployeeDaoImpl extends AbstractDaoImpl<SurveyEmployee, Integ
 	@Override
 	public List<SurveyEmployee> findAllOrderByBranch() {
 		Criteria criteria = getCurrentSession().createCriteria(entityClass);
-		criteria.createAlias("branch", "branch", JoinType.LEFT_OUTER_JOIN);
-		criteria.addOrder(Order.asc("branch.name"));
+		criteria.addOrder(Order.asc("code"));
 		return criteria.list();
 	}
 
