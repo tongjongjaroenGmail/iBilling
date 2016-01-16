@@ -3,7 +3,7 @@
 
 	<div class="modal fade" id="modalClaimDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
 		style="overflow-x: auto; overflow-y: auto;">
-		<div class="modal-dialog" style="width: 1200px">
+		<div class="modal-dialog" style="width: 1300px">
 			<div class="modal-content" >
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
@@ -68,7 +68,7 @@
 									
 									<div class="col-sm-1 no-padding-left">	
 										<div class="input-group col-sm-12 no-padding-left no-padding-right">
-											<input class="form-control" id="claimStatus" type="text" readonly="readonly"/> 
+											<input class="form-control" id="claimStatus" type="text" readonly="readonly" style="width: 150px;"/> 
 										</div>
 									</div>
 								</div>
@@ -123,7 +123,7 @@
 									
 									<div class="col-sm-1 no-padding-left">	
 										<div class="input-group col-sm-12 no-padding-left no-padding-right">
-											<input class="form-control" id="dispatchType" type="text" readonly="readonly"/>
+											<input class="form-control" id="dispatchType" type="text" readonly="readonly" style="width: 150px;"/>
 										</div>
 									</div>
 								</div>
@@ -185,7 +185,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="table-responsive">
-									<div class="col-sm-2 no-padding-left">		
+									<div class="col-sm-1 no-padding-left">		
 										<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
 											<b>ประเภทบริการ: </b> 
 										</div>
@@ -1038,7 +1038,7 @@
 								</div>
 								<div class="col-sm-4 no-padding-left">		
 									<div class="input-group col-sm-12 no-padding-left no-padding-right">
-										<textarea rows="3" cols="50" id="remark"></textarea>
+										<textarea rows="3" cols="40" id="remark"></textarea>
 									</div>
 								</div>
 								

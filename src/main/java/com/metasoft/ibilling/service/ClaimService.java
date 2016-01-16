@@ -25,8 +25,6 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 	
 	public void loadClaimsFromWs();
 	
-	public float calcTotalSurvey(Claim claim);
-	
 	public ReportStatisticsSurveyVoPaging searchReportStatisticsSurveyPaging(String dispatchDateStart, String dispatchDateEnd, Integer areaType,
 			Integer branch,int start, int length);
 	

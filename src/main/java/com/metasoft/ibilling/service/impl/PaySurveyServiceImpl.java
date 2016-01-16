@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -117,23 +116,19 @@ public class PaySurveyServiceImpl extends ModelBasedServiceImpl<PaySurveyDao, Pa
 				if (bean[i] != null) {
 					vo.setEmployeeCode(StringUtils.trimToEmpty(((SurveyEmployee)bean[i++]).getCode()));
 				}
-				if (bean[i] != null) {
-					vo.setSurveyTrans(NumberToolsUtil.nullToFloat(bean[i++]));
-				}
-				if (bean[i] != null) {
-					vo.setSurveyPhoto(NumberToolsUtil.nullToFloat(bean[i++]));
-				}
-				if (bean[i] != null) {
-					vo.setSurveyTel(NumberToolsUtil.nullToFloat(bean[i++]));
-				}
-				if (bean[i] != null) {
-					vo.setSurveyClaim(NumberToolsUtil.nullToFloat(bean[i++]));
-				}
-				if (bean[i] != null) {
-					vo.setSurveyDaily(NumberToolsUtil.nullToFloat(bean[i++]));
-				}
 				
-				float surTotal = vo.getSurveyTrans() + vo.getSurveyPhoto() + vo.getSurveyTel() + vo.getSurveyClaim() + vo.getSurveyDaily();
+				PaySurvey paySurvey = paySurveyDao.findById(vo.getPaySurveyId());
+				float surTotal = 0;
+				for (Claim claim : paySurvey.getClaims()) {
+					vo.setSurveyTrans(NumberToolsUtil.nullToFloat(claim.getSurveyTrans()) + vo.getSurveyTrans());
+					vo.setSurveyPhoto(NumberToolsUtil.nullToFloat(claim.getSurveyPhoto()) + vo.getSurveyPhoto());
+					vo.setSurveyTel(NumberToolsUtil.nullToFloat(claim.getSurveyTel()) + vo.getSurveyTel());
+					vo.setSurveyClaim(NumberToolsUtil.nullToFloat(claim.getSurveyClaim()) + vo.getSurveyClaim());
+					vo.setSurveyDaily(NumberToolsUtil.nullToFloat(claim.getSurveyDaily()) + vo.getSurveyDaily());
+					
+					surTotal += ClaimServiceImpl.calcTotalSurvey(claim);
+				}
+
 				vo.setSurveyTotal(surTotal);
 				
 				voPaging.getData().add(vo);

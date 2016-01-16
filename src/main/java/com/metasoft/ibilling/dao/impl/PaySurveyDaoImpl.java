@@ -98,11 +98,6 @@ public class PaySurveyDaoImpl extends AbstractDaoImpl<PaySurvey, Integer> implem
                     .add(Projections.groupProperty("code"))
                     .add(Projections.groupProperty("createDate"))
                     .add(Projections.groupProperty("claim.surveyEmployee"))
-                    .add(Projections.sum("claim.surveyTrans"))
-                    .add(Projections.sum("claim.surveyPhoto"))
-                    .add(Projections.sum("claim.surveyTel"))
-                    .add(Projections.sum("claim.surveyClaim"))
-                    .add(Projections.sum("claim.surveyDaily"))
                     		);   
 
 			criteria.addOrder(Order.asc("code"));

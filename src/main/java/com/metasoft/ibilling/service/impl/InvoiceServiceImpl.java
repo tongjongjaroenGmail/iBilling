@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.InvoicePaging;
 import com.metasoft.ibilling.bean.paging.InvoiceSearchResultVoPaging;
-import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.InvoiceSearchResultVo;
 import com.metasoft.ibilling.dao.ClaimDao;
 import com.metasoft.ibilling.dao.InvoiceDao;
@@ -24,7 +22,6 @@ import com.metasoft.ibilling.model.Invoice;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.InvoiceService;
 import com.metasoft.ibilling.util.DateToolsUtil;
-import com.metasoft.ibilling.util.NumberToolsUtil;
 
 @Service("invoiceService")
 public class InvoiceServiceImpl extends ModelBasedServiceImpl<InvoiceDao, Invoice, Integer> implements InvoiceService {
@@ -98,6 +95,12 @@ public class InvoiceServiceImpl extends ModelBasedServiceImpl<InvoiceDao, Invoic
 				if (invoice.getCreateDate() != null) {
 					vo.setCreateDate(DateToolsUtil.convertToString(invoice.getCreateDate(), DateToolsUtil.LOCALE_TH));
 				}
+				float total = 0f;
+				for (Claim claim : invoice.getClaims()) {
+					float totalNoVat = ClaimServiceImpl.calcTotalSur(claim);
+					total += totalNoVat + ClaimServiceImpl.calcVat(totalNoVat);
+				}
+				vo.setTotal(total);
 				voPaging.getData().add(vo);
 			}
 		}

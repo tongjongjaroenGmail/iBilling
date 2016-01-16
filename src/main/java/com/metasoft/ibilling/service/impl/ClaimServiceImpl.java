@@ -24,6 +24,7 @@ import com.metasoft.ibilling.bean.paging.ReportStatisticsSurveyVoPaging;
 import com.metasoft.ibilling.bean.vo.CheckClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.PaySurveyClaimSearchResultVo;
+import com.metasoft.ibilling.constant.SystemConstant;
 import com.metasoft.ibilling.controller.vo.ReportStatisticsSurveyVo;
 import com.metasoft.ibilling.dao.AmphurDao;
 import com.metasoft.ibilling.dao.BranchDao;
@@ -142,8 +143,9 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				vo.setSurOther(NumberToolsUtil.nullToFloat(claim.getSurOther()));
 
 				vo.setSurTotal(calcTotalSur(claim));
+				vo.setSurTax(calcVat(vo.getSurTotal()));
 				
-				vo.setSurveyPrice(vo.getSurTotal());
+				vo.setSurveyPrice(vo.getSurTotal() + vo.getSurTax());
 
 				voPaging.getData().add(vo);
 			}
@@ -217,7 +219,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		return voPaging;
 	}
 	
-	private float calcTotalSur(Claim claim){
+	public static float calcTotalSur(Claim claim){
 		float surTotal = 
 				NumberToolsUtil.nullToFloat(claim.getSurInvest()) + 
 				NumberToolsUtil.nullToFloat(claim.getSurTrans()) + 
@@ -228,9 +230,37 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				NumberToolsUtil.nullToFloat(claim.getSurInsure()) + 
 				NumberToolsUtil.nullToFloat(claim.getSurTowcar()) + 
 				NumberToolsUtil.nullToFloat(claim.getSurOther());
-
-			surTotal = (surTotal * (100 + NumberToolsUtil.nullToFloat(claim.getSurTax()))) / 100;
 		return surTotal;
+	}
+	
+	public static float calcTotalIns(Claim claim){
+		float insTotal = NumberToolsUtil.nullToFloat(claim.getInsInvest())  + 
+				NumberToolsUtil.nullToFloat(claim.getInsTrans()) + 
+				NumberToolsUtil.nullToFloat(claim.getInsDaily()) + 
+				NumberToolsUtil.nullToFloat(claim.getInsPhoto()) + 
+				NumberToolsUtil.nullToFloat(claim.getInsClaim()) + 
+				NumberToolsUtil.nullToFloat(claim.getInsTel()) + 
+				NumberToolsUtil.nullToFloat(claim.getInsInsure()) + 
+				NumberToolsUtil.nullToFloat(claim.getInsTowcar()) + 
+				NumberToolsUtil.nullToFloat(claim.getInsOther());
+		return insTotal;
+	}
+	
+	public static float calcTotalSurvey(Claim claim){
+		float surTotal = NumberToolsUtil.nullToFloat(claim.getSurveyInvest()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyTrans()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyDaily()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyPhoto()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyClaim()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyTel()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyConditionRight()) + 
+				NumberToolsUtil.nullToFloat(claim.getSurveyOther()) - 
+				NumberToolsUtil.nullToFloat(claim.getSurveyFine());
+		return surTotal;
+	}
+	
+	public static float calcVat(float total){
+		return total * SystemConstant.VAT;
 	}
 
 	@Override
@@ -285,20 +315,6 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		return voPaging;
 	}
 	
-	@Override
-	public float calcTotalSurvey(Claim claim){
-		return
-				NumberToolsUtil.nullToFloat(claim.getSurveyInvest()) + 
-				NumberToolsUtil.nullToFloat(claim.getSurveyTrans()) + 
-				NumberToolsUtil.nullToFloat(claim.getSurveyDaily()) + 
-				NumberToolsUtil.nullToFloat(claim.getSurveyPhoto()) + 
-				NumberToolsUtil.nullToFloat(claim.getSurveyClaim()) + 
-				NumberToolsUtil.nullToFloat(claim.getSurveyTel()) + 
-				NumberToolsUtil.nullToFloat(claim.getSurveyConditionRight()) + 
-				NumberToolsUtil.nullToFloat(claim.getSurveyOther()) - 
-				NumberToolsUtil.nullToFloat(claim.getSurveyFine());
-	}
-
 	@Override
 	public void loadClaimsFromWs() {
 		int totalSuccess = 0;
@@ -520,8 +536,8 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				} else {
 					// คำนวนหาค่าพาหนะ จากrate ที่พนักงานศูนย์ที่พนักงานสังกัด ไปยัง
 					// อำเภอที่ตรวจสอบ ***select sur_pay from sub_branch***
-					if (StringUtils.isNotBlank(claim.getSurveyAmphur())) {
-						Amphur surveyAmphur = amphurDao.findById(Integer.parseInt(claim.getSurveyAmphur()));
+					if (claim.getSurveyAmphur() != null) {
+						Amphur surveyAmphur = claim.getSurveyAmphur();
 						if(surveyAmphur != null && claim.getBranch() != null){
 							SubBranch subBranch = subBranchDao.findByAmphurAndBranch(surveyAmphur,claim.getBranch());
 							if(subBranch != null){
@@ -717,7 +733,6 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		List<ReportStatisticsSurveyVo> vos = new ArrayList<ReportStatisticsSurveyVo>();
 		
 		if(results != null ){
-			int i = 1;
 			for (Claim claim : results) {
 				ReportStatisticsSurveyVo vo = setReportStatisticsSurveyVo(claim);
 				vos.add(vo);

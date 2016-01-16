@@ -143,7 +143,11 @@ $(document).ready(function() {
 			{ "mData" : "surInsure"},
 			{ "mData" : "surTowcar"},
 			{ "mData" : "surOther"},
-			{ "mData" : "surTotal"}
+			{ "mData" : "surTotal",
+			  "mRender" : function (data, type, full) {
+					return addCommas(data.toFixed(2));
+				}					
+			}
 		   ],
 	});
 });

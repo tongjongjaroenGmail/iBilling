@@ -4,6 +4,14 @@ public class InvoiceSearchResultVo {
 	private int invoiceId;
 	private String invoiceCode = "";
 	private String createDate = "";
+	private float total = 0f;
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
 
 	public int getInvoiceId() {
 		return invoiceId;

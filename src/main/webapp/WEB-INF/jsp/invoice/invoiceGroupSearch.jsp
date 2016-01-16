@@ -98,6 +98,7 @@
 					<th>สาขา</th>
 					<th>วันที่จ่ายงาน</th>
 					<th>ค่าสำรวจ</th>
+					<th>ค่าสำรวจรวม Vat</th>
 				</tr>
 			</thead>
 
@@ -158,7 +159,6 @@ var isSearch = false;
 function countTotalSelect()
 {
 	$("#lblTotalSelect").html($("[name='chk']:checked").size());
-	
 	var totalSurvey = 0;
 	
 	$("#tblClaim tbody").find('tr').each(function() {
@@ -181,19 +181,25 @@ function countTotalSelect()
 $(document).ready(function() {
 	tblClaimDt = $("#tblClaim").dataTable({
 			"lengthMenu": [[10,15,20, 25, 50, 100,200,300,400,500,600,700,800,900,1000], [10,15,20, 25, 50, 100,200,300,400,500,600,700,800,900,1000]],
-			"aoColumns" : [ { "mData" : "claimId",
-				"bSortable": false,
-				'sWidth': '30px',
-				"mRender" : function (data, type, full) {
-					return '<input name="chk" class="ace" type="checkbox" onclick="countTotalSelect();" value="' + data + '"><span class="lbl"></span></label>';
-				}	
+			"aoColumns" : [ 
+			    {   "mData" : "claimId",
+					"bSortable": false,
+					'sWidth': '30px',
+					"mRender" : function (data, type, full) {
+						return '<input name="chk" class="ace" type="checkbox" onclick="countTotalSelect();" value="' + data + '"><span class="lbl"></span></label>';
+					}	
 				},
-				{ "mData" : "claimNo"  },
-				{ "mData" : "branchName" },
+				{ 	"mData" : "claimNo"  ,
+					'sWidth': '10%'
+				},
+				{ 	"mData" : "branchName"  ,
+					'sWidth': '20%'
+				},
 				{ "mData" : "dispatchDate" },
+				{ "mData" : "surTotal"},
 				{ "mData" : "surveyPrice",
 				  "mRender" : function (data, type, full) {
-						return addCommas(data) + "<input type='hidden' name='hdnSurveyPrice' value='" + data + "'/>";
+						return addCommas(data.toFixed(2)) + "<input type='hidden' name='hdnSurveyPrice' value='" + data + "'/>";
 					}					
 				},
 				
@@ -205,13 +211,12 @@ $(document).ready(function() {
 				{ "mData" : "surTel"},
 				{ "mData" : "surInsure"},
 				{ "mData" : "surTowcar"},
-				{ "mData" : "surOther"},
-				{ "mData" : "surTotal"}
+				{ "mData" : "surOther"}
 			   ],
 				columnDefs: [
 				    { type: 'date-dd/mm/yyyy', targets:  [5]},
 		            {
-		                "targets": [ 5,6,7,8,9,10,11,12,13,14 ],
+		                "targets": [ 6,7,8,9,10,11,12,13,14 ],
 		                "visible": false
 		            }
 				],
@@ -231,6 +236,8 @@ $(document).ready(function() {
                 },
                 "fnDrawCallback" : function() {
                 	firstTime = false;
+
+            		countTotalSelect();
                 }
 	});
 	

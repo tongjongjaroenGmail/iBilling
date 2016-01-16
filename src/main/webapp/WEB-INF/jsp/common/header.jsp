@@ -20,7 +20,7 @@
 			<ul class="nav ace-nav">
 				<li class="light-orange"><a data-toggle="dropdown" href="#" class="dropdown-toggle"> 
 					<%-- <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" /> --%>
-					<span class="user-info"> 
+					<span class="user-info" style="width: 200px;max-width: 200px;"> 
 					<small>Welcome,</small>
 							${sessionScope.loginUser.name}&nbsp;&nbsp;${sessionScope.loginUser.lastName}
 					</span> 

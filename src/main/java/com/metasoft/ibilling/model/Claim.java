@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -137,13 +138,15 @@ public class Claim extends BaseModel {
 	// ประเภทบริการอื่นๆ (บริการ, ต่อเนื่อง, หน้าร้าน,พื้นที่เดียวกัน)
 	private ServiceType serviceType;
 
-	@Column(name = "survey_amphur")
 	// อำเภอที่ตรวจสอบ
-	private String surveyAmphur;
+	@OneToOne
+	@JoinColumn(name = "survey_amphur_id", nullable = true)
+	private Amphur surveyAmphur;
 
-	@Column(name = "survey_province")
 	// จังหวัดที่ตรวจสอบ
-	private String surveyProvince;
+	@OneToOne
+	@JoinColumn(name = "survey_province_id", nullable = true)
+	private Province surveyProvince;
 
 	@Column(name = "noti_result")
 	// ผลคดี(รับแจ้ง)
@@ -243,8 +246,8 @@ public class Claim extends BaseModel {
 //	// ยอดรวมก่อนภาษีที่เสนอ
 //	private Float totalSum;
 
-	@Column(name = "sur_tax") // ภาษีที่เสนอ
-	private Float surTax;
+//	@Column(name = "sur_tax") // ภาษีที่เสนอ
+//	private Float surTax;
 	// @Column(name = "") // ยอดรวมหลังภาษีที่เสนอ
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -583,21 +586,19 @@ public class Claim extends BaseModel {
 		this.serviceType = serviceType;
 	}
 
-
-
-	public String getSurveyAmphur() {
+	public Amphur getSurveyAmphur() {
 		return surveyAmphur;
 	}
 
-	public void setSurveyAmphur(String surveyAmphur) {
+	public void setSurveyAmphur(Amphur surveyAmphur) {
 		this.surveyAmphur = surveyAmphur;
 	}
 
-	public String getSurveyProvince() {
+	public Province getSurveyProvince() {
 		return surveyProvince;
 	}
 
-	public void setSurveyProvince(String surveyProvince) {
+	public void setSurveyProvince(Province surveyProvince) {
 		this.surveyProvince = surveyProvince;
 	}
 
@@ -875,14 +876,6 @@ public class Claim extends BaseModel {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public Float getSurTax() {
-		return surTax;
-	}
-
-	public void setSurTax(Float surTax) {
-		this.surTax = surTax;
 	}
 
 	public User getCreateBy() {

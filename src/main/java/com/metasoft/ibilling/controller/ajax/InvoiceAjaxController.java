@@ -32,6 +32,7 @@ import com.metasoft.ibilling.model.Invoice;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.ClaimService;
 import com.metasoft.ibilling.service.InvoiceService;
+import com.metasoft.ibilling.service.impl.ClaimServiceImpl;
 import com.metasoft.ibilling.util.DateToolsUtil;
 import com.metasoft.ibilling.util.NumberToolsUtil;
 
@@ -142,11 +143,10 @@ public class InvoiceAjaxController extends BaseAjaxController {
 			vo.setSurInsure(NumberToolsUtil.nullToFloat(claim.getSurInsure()));
 			vo.setSurTowcar(NumberToolsUtil.nullToFloat(claim.getSurTowcar()));
 			vo.setSurOther(NumberToolsUtil.nullToFloat(claim.getSurOther()));
-			
-			float surTotal = vo.getSurInvest() + vo.getSurTrans() + vo.getSurDaily() + vo.getSurPhoto() + vo.getSurClaim() + 
-					vo.getSurTel() + vo.getSurInsure() + vo.getSurTowcar() + vo.getSurOther();
-			surTotal = (surTotal * (100 + NumberToolsUtil.nullToFloat(claim.getSurTax())))/100;
-			vo.setSurTotal(surTotal);
+
+			vo.setSurTotal(ClaimServiceImpl.calcTotalSur(claim));
+			vo.setSurTax(ClaimServiceImpl.calcVat(vo.getSurTotal()));
+			vo.setSurTotal(vo.getSurTotal() + vo.getSurTax());
 			
 			invoiceDetailVo.getClaims().add(vo);
 		}

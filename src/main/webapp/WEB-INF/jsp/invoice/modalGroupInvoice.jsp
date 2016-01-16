@@ -122,7 +122,7 @@ function setPageForGroupInvoice(){
 				 "surInsure" : aData[aPos].surInsure,
 				 "surTowcar" : aData[aPos].surTowcar,
 				 "surOther" : aData[aPos].surOther,
-				 "surTotal" : aData[aPos].surTotal
+				 "surTotal" : aData[aPos].surveyPrice
 			    } ).draw();
 		 }
 	});          

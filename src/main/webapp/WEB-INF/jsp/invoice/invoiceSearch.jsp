@@ -90,6 +90,7 @@
 				<tr>
 					<th>เลขที่วางบิล</th>
 					<th>วันที่สร้างเลขวางบิล</th>
+					<th>ยอดใบวางบิล</th>
 					<th>รายละเอียด</th>
 				</tr>
 			</thead>
@@ -121,6 +122,11 @@ $(document).ready(function() {
 		"aoColumns" : [ 
 			{ "mData" : "invoiceCode"  },
 			{ "mData" : "createDate" },
+			{ "mData" : "total" ,
+			  "mRender" : function (data, type, full) {
+				return addCommas(data.toFixed(2));					
+			  }
+			},
 			{ "mData" : "invoiceId",
 				"bSortable": false,
 				"mRender" : function (data, type, full) {

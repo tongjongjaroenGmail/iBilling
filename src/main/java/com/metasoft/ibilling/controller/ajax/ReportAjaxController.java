@@ -31,6 +31,7 @@ import com.metasoft.ibilling.model.SurveyEmployee;
 import com.metasoft.ibilling.service.ClaimService;
 import com.metasoft.ibilling.service.InvoiceService;
 import com.metasoft.ibilling.service.PaySurveyService;
+import com.metasoft.ibilling.service.impl.ClaimServiceImpl;
 import com.metasoft.ibilling.service.impl.report.DownloadService;
 import com.metasoft.ibilling.service.impl.report.ExporterService;
 import com.metasoft.ibilling.service.impl.report.TokenService;
@@ -81,21 +82,19 @@ public class ReportAjaxController {
 		ThaiBaht thaiBaht = new ThaiBaht();
 		
 		float surTotal = 0;
+		float surTax = 0;
 		for (Claim claim : invoice.getClaims()) {
-			surTotal += 
-					NumberToolsUtil.nullToFloat(claim.getSurInvest()) + 
-					NumberToolsUtil.nullToFloat(claim.getSurTrans()) + 
-					NumberToolsUtil.nullToFloat(claim.getSurDaily()) + 
-					NumberToolsUtil.nullToFloat(claim.getSurPhoto()) + 
-					NumberToolsUtil.nullToFloat(claim.getSurClaim()) + 
-					NumberToolsUtil.nullToFloat(claim.getSurTel()) + 
-					NumberToolsUtil.nullToFloat(claim.getSurOther());
+			float surTotalTemp = ClaimServiceImpl.calcTotalSur(claim);
+			surTotal += surTotalTemp;
+			float surTaxTemp = ClaimServiceImpl.calcVat(surTotalTemp);
+			surTax += surTaxTemp;
 		}
-
 		
 		param.put("invoiceNo", invoice.getCode());
 		param.put("total", surTotal);
-		param.put("totalThai", "(" + thaiBaht.getText(surTotal) + ")");
+		param.put("tax", surTax);
+		param.put("totalAll", surTotal + surTax);
+		param.put("totalThai", "(" + thaiBaht.getText(surTotal + surTax) + ")");
 
 		downloadService.download(ExporterService.EXTENSION_TYPE_EXCEL, invoice.getCode(),
 				session.getServletContext().getRealPath("/jasperreport/invoice"),
@@ -139,7 +138,7 @@ public class ReportAjaxController {
 				sumSurveyConditionRight += NumberToolsUtil.nullToFloat(claim.getSurveyConditionRight());
 				sumSurveyOther += NumberToolsUtil.nullToFloat(claim.getSurveyOther());
 				sumSurveyFine += NumberToolsUtil.nullToFloat(claim.getSurveyFine());		
-				sumSurveyTotal += claimService.calcTotalSurvey(claim); 
+				sumSurveyTotal += ClaimServiceImpl.calcTotalSurvey(claim); 
 			}
 			
 			param.put("sumSurveyTrans", sumSurveyTrans);
@@ -169,7 +168,7 @@ public class ReportAjaxController {
 			if (reportOut != null) {
 				InputStream in = new ByteArrayInputStream(reportOut.toByteArray());
 				inputStreams.add(in);
-				fileList.add("ใบสำคัญจ่าย_" + paySurvey.getCode() + ".xls");
+				fileList.add("payment_" + paySurvey.getCode() + ".xls");
 			}
 			
 			//-----------------------------------------------------
@@ -191,7 +190,7 @@ public class ReportAjaxController {
 			if (reportOut != null) {
 				InputStream in = new ByteArrayInputStream(reportOut.toByteArray());
 				inputStreams.add(in);
-				fileList.add("แบบขออนุมัติ_" + paySurvey.getCode() + ".xls");
+				fileList.add("approveForm_" + paySurvey.getCode() + ".xls");
 			}
 		}
 		

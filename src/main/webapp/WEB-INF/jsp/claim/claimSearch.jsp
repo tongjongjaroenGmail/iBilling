@@ -183,13 +183,14 @@ $(document).ready(function() {
 		"aoColumns" : [ 
 			{ "mData" : "claimNo"  },
 			{ "mData" : "employeeCode" },
-			{ "mData" : "center" },
-			{ "mData" : "dispatchDate" },
+			{ "mData" : "center" ,"sWidth": '250px'},
+			{ "mData" : "dispatchDate" ,"sWidth": '100px'},
 			{ "mData" : "claimType" },
-			{ "mData" : "surveyTip"},
-			{ "mData" : "surveyEmp"},
+			{ "mData" : "surveyTip","sWidth": '150px'},
+			{ "mData" : "surveyEmp","sWidth": '150px'},
 			{ "mData" : "claimId",
 				"bSortable": false,
+				"sWidth": '150px',
 				"mRender" : function (data, type, full) {
 					return '<button id="btnClaimDetail" class="btn-info" type="button" onclick="openclaimDetailModal(' + data + ');">รายละเอียด</button>';
 				}	

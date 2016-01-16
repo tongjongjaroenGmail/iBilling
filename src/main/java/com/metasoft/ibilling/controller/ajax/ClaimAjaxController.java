@@ -31,8 +31,8 @@ import com.metasoft.ibilling.model.Invoice;
 import com.metasoft.ibilling.model.PaySurvey;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.ClaimService;
+import com.metasoft.ibilling.service.impl.ClaimServiceImpl;
 import com.metasoft.ibilling.util.DateToolsUtil;
-import com.metasoft.ibilling.util.NumberToolsUtil;
 
 @Controller
 public class ClaimAjaxController extends BaseAjaxController {
@@ -99,8 +99,12 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setCoArea(claim.getCoArea() == null?false:claim.getCoArea());
 		vo.setDisperse(claim.getDisperse() == null?false:claim.getDisperse());
 		vo.setServiceType(claim.getServiceType() != null?claim.getServiceType().getName():"");
-		vo.setServiceAmphur(StringUtils.trimToEmpty(claim.getSurveyAmphur()));
-		vo.setServiceProvince(StringUtils.trimToEmpty(claim.getSurveyProvince()));
+		if(claim.getSurveyAmphur() != null){
+			vo.setServiceAmphur(StringUtils.trimToEmpty(claim.getSurveyAmphur().getName()));
+		}
+		if(claim.getSurveyProvince() != null){
+			vo.setServiceProvince(StringUtils.trimToEmpty(claim.getSurveyProvince().getName()));
+		}
 		vo.setPhotoNum(claim.getPhotoNum() != null?claim.getPhotoNum():0);
 		vo.setPoliceRptNum(claim.getPoliceRptNum() != null?claim.getPoliceRptNum():0);
 		vo.setClaimTp(claim.getClaimTp() != null?claim.getClaimTp().getName():"");
@@ -126,21 +130,10 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setSurTowcar(claim.getSurTowcar());
 		vo.setSurOther(claim.getSurOther());
 			
-		float surTotal = NumberToolsUtil.nullToFloat(vo.getSurInvest())  + 
-				NumberToolsUtil.nullToFloat(vo.getSurTrans()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurDaily()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurPhoto()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurClaim()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurTel()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurInsure()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurTowcar()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurOther());
-		vo.setSurTotalNoTax(surTotal);
+		vo.setSurTotalNoTax(ClaimServiceImpl.calcTotalSur(claim));
+		vo.setSurTax(ClaimServiceImpl.calcVat(vo.getSurTotalNoTax()));
 		
-		float surTax = surTotal * NumberToolsUtil.nullToFloat(claim.getSurTax())/100;
-		vo.setSurTax(surTax);
-		
-		vo.setSurTotalWithTax(surTax + surTotal);
+		vo.setSurTotalWithTax(vo.getSurTotalNoTax() + vo.getSurTax());
 		
 		vo.setInsInvest(claim.getInsInvest());
 		vo.setInsTrans(claim.getInsTrans());
@@ -152,21 +145,10 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setInsTowcar(claim.getInsTowcar());
 		vo.setInsOther(claim.getInsOther());
 			
-		float insTotal = NumberToolsUtil.nullToFloat(vo.getInsInvest())  + 
-				NumberToolsUtil.nullToFloat(vo.getInsTrans()) + 
-				NumberToolsUtil.nullToFloat(vo.getInsDaily()) + 
-				NumberToolsUtil.nullToFloat(vo.getInsPhoto()) + 
-				NumberToolsUtil.nullToFloat(vo.getInsClaim()) + 
-				NumberToolsUtil.nullToFloat(vo.getInsTel()) + 
-				NumberToolsUtil.nullToFloat(vo.getInsInsure()) + 
-				NumberToolsUtil.nullToFloat(vo.getInsTowcar()) + 
-				NumberToolsUtil.nullToFloat(vo.getInsOther());
-		vo.setInsTotalNoTax(insTotal);
+		vo.setInsTotalNoTax(ClaimServiceImpl.calcTotalIns(claim));	
+		vo.setInsTax(ClaimServiceImpl.calcVat(vo.getInsTotalNoTax()));
 		
-		float insTax = insTotal * NumberToolsUtil.nullToFloat(claim.getInsTax())/100;
-		vo.setInsTax(insTax);
-		
-		vo.setInsTotalWithTax(insTax + insTotal);
+		vo.setInsTotalWithTax(vo.getInsTotalNoTax() + vo.getInsTax());
 
 		if(claim.getPaySurvey() != null){
 			PaySurvey paySurvey = claim.getPaySurvey();
@@ -184,16 +166,7 @@ public class ClaimAjaxController extends BaseAjaxController {
 		vo.setSurveyOther(claim.getSurveyOther());
 		vo.setSurveyFine(claim.getSurveyFine());
 		
-		surTotal = NumberToolsUtil.nullToFloat(vo.getSurveyInvest()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyTrans()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyDaily()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyPhoto()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyClaim()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyTel()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyConditionRight()) + 
-				NumberToolsUtil.nullToFloat(vo.getSurveyOther()) - 
-				NumberToolsUtil.nullToFloat(vo.getSurveyFine());
-		vo.setSurveyTotal(surTotal);
+		vo.setSurveyTotal(ClaimServiceImpl.calcTotalSurvey(claim));
 		
 		vo.setRemark(StringUtils.trimToEmpty(claim.getRemark()));
 		if(claim.getUpdateBy() != null){

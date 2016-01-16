@@ -267,47 +267,6 @@
 				</textElement>
 				<text><![CDATA[2]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="282" y="160" width="117" height="20" isPrintWhenDetailOverflows="true" uuid="125dba1e-8a09-4a4e-b3ec-552ebdd934f9"/>
-				<box leftPadding="3" rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font fontName="AngsanaUPC" size="14" isBold="false"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{sumSurveyPhoto}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="45" y="140" width="237" height="20" uuid="0464aac4-1d39-4c2b-b8f8-a8b9bc9fdd66"/>
-				<box leftPadding="3" rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14" isBold="false"/>
-				</textElement>
-				<text><![CDATA[ค่าประจำวัน]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="282" y="140" width="117" height="20" isPrintWhenDetailOverflows="true" uuid="11b346a0-0e6f-498c-b3b8-1d2230508872"/>
-				<box leftPadding="3" rightPadding="3">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top">
-					<font fontName="AngsanaUPC" size="14" isBold="false"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{sumSurveyDaily}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="160" width="45" height="20" uuid="270f15e6-73d9-4f26-a270-2cc133ed4622"/>
 				<box leftPadding="3" rightPadding="3">
@@ -335,7 +294,7 @@
 				<text><![CDATA[3]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="45" y="160" width="237" height="20" uuid="d35ee7c5-6b91-4893-80d1-9003a1c5e769"/>
+				<reportElement x="45" y="220" width="237" height="20" uuid="d35ee7c5-6b91-4893-80d1-9003a1c5e769"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -415,7 +374,7 @@
 				<text><![CDATA[7]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="282" y="220" width="117" height="20" isPrintWhenDetailOverflows="true" uuid="522f35f6-c3bd-40e2-86d0-0681d6a590a9"/>
+				<reportElement stretchType="RelativeToTallestObject" x="282" y="160" width="117" height="20" isPrintWhenDetailOverflows="true" uuid="522f35f6-c3bd-40e2-86d0-0681d6a590a9"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -429,7 +388,7 @@
 				<textFieldExpression><![CDATA[$P{sumSurveyConditionRight}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="45" y="220" width="237" height="20" uuid="42d3ff68-84f5-42e8-bd36-b6e1867e518a"/>
+				<reportElement x="45" y="160" width="237" height="20" uuid="42d3ff68-84f5-42e8-bd36-b6e1867e518a"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -1674,6 +1633,47 @@
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="282" y="220" width="117" height="20" isPrintWhenDetailOverflows="true" uuid="125dba1e-8a09-4a4e-b3ec-552ebdd934f9"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumSurveyPhoto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="140" width="237" height="20" uuid="0464aac4-1d39-4c2b-b8f8-a8b9bc9fdd66"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ค่าประจำวัน]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="282" y="140" width="117" height="20" isPrintWhenDetailOverflows="true" uuid="11b346a0-0e6f-498c-b3b8-1d2230508872"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14" isBold="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumSurveyDaily}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

@@ -19,6 +19,7 @@ public class ClaimSearchResultVo {
 	private float surTowcar;
 	private float surOther;
 	private float surTotal;
+	private float surTax;
 	
 	private float surveyInvest;
 	private float surveyTrans;
@@ -31,6 +32,12 @@ public class ClaimSearchResultVo {
 	private float surveyFine;
 	private float surveyTotal;
 	
+	public float getSurTax() {
+		return surTax;
+	}
+	public void setSurTax(float surTax) {
+		this.surTax = surTax;
+	}
 	public float getSurveyInvest() {
 		return surveyInvest;
 	}

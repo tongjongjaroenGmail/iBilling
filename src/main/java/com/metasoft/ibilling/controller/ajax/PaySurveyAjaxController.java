@@ -33,6 +33,7 @@ import com.metasoft.ibilling.model.PaySurvey;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.ClaimService;
 import com.metasoft.ibilling.service.PaySurveyService;
+import com.metasoft.ibilling.service.impl.ClaimServiceImpl;
 import com.metasoft.ibilling.util.DateToolsUtil;
 import com.metasoft.ibilling.util.NumberToolsUtil;
 
@@ -145,7 +146,7 @@ public class PaySurveyAjaxController extends BaseAjaxController {
 			vo.setSurveyOther(NumberToolsUtil.nullToFloat(claim.getSurveyOther()));
 			vo.setSurveyFine(NumberToolsUtil.nullToFloat(claim.getSurveyFine()));
 
-			vo.setSurveyTotal(claimService.calcTotalSurvey(claim));
+			vo.setSurveyTotal(ClaimServiceImpl.calcTotalSurvey(claim));
 			
 			paySurveyDetailVo.getClaims().add(vo);
 		}

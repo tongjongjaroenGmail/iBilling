@@ -19,17 +19,6 @@
 	<field name="surClaim" class="java.lang.Float"/>
 	<field name="claimType" class="java.lang.String"/>
 	<field name="accZone" class="java.lang.String"/>
-	<title>
-		<band height="20" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="1220" height="20" uuid="ae3525ee-729b-43de-95cb-db2eb905ce56"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14"/>
-				</textElement>
-				<text><![CDATA[รายงานสถิติงานสำรวจ]]></text>
-			</staticText>
-		</band>
-	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
@@ -476,15 +465,4 @@
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
-	<pageFooter>
-		<band height="20" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="1220" height="20" uuid="0cd8be9b-a9ae-4640-9f9a-823b124caf72"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="AngsanaUPC" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy", new java.util.Locale("th","TH")).format(new java.util.Date())]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
 </jasperReport>
