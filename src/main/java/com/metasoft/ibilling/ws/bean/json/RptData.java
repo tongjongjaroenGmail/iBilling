@@ -89,10 +89,10 @@ public class RptData {
 	private String serviceTypeCode;
 
 	@JsonProperty("survey_amphur")
-	private String surveyAmphur;
+	private String surveyAmphurId;
 
 	@JsonProperty("survey_province")
-	private String surveyProvince;
+	private String surveyProvinceId;
 
 	@JsonProperty("noti_result")
 	private String notiResult;
@@ -205,14 +205,6 @@ public class RptData {
 	@JsonProperty("SR_APPROVE_DATE")
 	@JsonDeserialize(using = DateDeserializer.class)
 	private Date srApproveDate;
-
-	public String getSurveyProvince() {
-		return surveyProvince;
-	}
-
-	public void setSurveyProvince(String surveyProvince) {
-		this.surveyProvince = surveyProvince;
-	}
 
 	public String getNotiResult() {
 		return notiResult;
@@ -648,12 +640,20 @@ public class RptData {
 		this.disperse = disperse;
 	}
 
-	public String getSurveyAmphur() {
-		return surveyAmphur;
+	public String getSurveyAmphurId() {
+		return surveyAmphurId;
 	}
 
-	public void setSurveyAmphur(String surveyAmphur) {
-		this.surveyAmphur = surveyAmphur;
+	public void setSurveyAmphurId(String surveyAmphurId) {
+		this.surveyAmphurId = surveyAmphurId;
+	}
+
+	public String getSurveyProvinceId() {
+		return surveyProvinceId;
+	}
+
+	public void setSurveyProvinceId(String surveyProvinceId) {
+		this.surveyProvinceId = surveyProvinceId;
 	}
 
 	public Float getInsOther() {

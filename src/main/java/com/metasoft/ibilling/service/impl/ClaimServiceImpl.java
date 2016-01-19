@@ -31,6 +31,7 @@ import com.metasoft.ibilling.dao.BranchDao;
 import com.metasoft.ibilling.dao.BranchDhipDao;
 import com.metasoft.ibilling.dao.ClaimDao;
 import com.metasoft.ibilling.dao.ClaimLoadLogDao;
+import com.metasoft.ibilling.dao.ProvinceDao;
 import com.metasoft.ibilling.dao.SubBranchDao;
 import com.metasoft.ibilling.dao.SurveyEmployeeDao;
 import com.metasoft.ibilling.dao.UserDao;
@@ -45,6 +46,7 @@ import com.metasoft.ibilling.model.ClaimStatus;
 import com.metasoft.ibilling.model.ClaimTp;
 import com.metasoft.ibilling.model.ClaimType;
 import com.metasoft.ibilling.model.DispatchType;
+import com.metasoft.ibilling.model.Province;
 import com.metasoft.ibilling.model.ServiceType;
 import com.metasoft.ibilling.model.SubBranch;
 import com.metasoft.ibilling.model.SurveyEmployee;
@@ -80,6 +82,9 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 
 	@Autowired
 	private AmphurDao amphurDao;
+	
+	@Autowired
+	private ProvinceDao provinceDao;
 	
 	@Autowired
 	private BranchDhipDao branchDhipDao;
@@ -374,6 +379,16 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 						branch = branchDao.findByName(rptData.getCenter().trim());
 					}
 					claim.setBranch(branch);
+					
+					if (StringUtils.isNotBlank(rptData.getSurveyAmphurId())) {
+						Amphur surveyAmphur = amphurDao.findById(Integer.parseInt(rptData.getSurveyAmphurId()));
+						claim.setSurveyAmphur(surveyAmphur);
+					}
+					
+					if (StringUtils.isNotBlank(rptData.getSurveyProvinceId())) {
+						Province surveyProvince = provinceDao.findById(Integer.parseInt(rptData.getSurveyProvinceId()));
+						claim.setSurveyProvince(surveyProvince);
+					}
 					
 					if (StringUtils.isNotBlank(rptData.getEmpcode())) {
 						SurveyEmployee surveyEmployee = surveyEmployeeDao.findByCode(rptData.getEmpcode().trim());
