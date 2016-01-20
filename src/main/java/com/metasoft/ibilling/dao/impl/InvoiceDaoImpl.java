@@ -9,15 +9,13 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.metasoft.ibilling.bean.paging.InvoicePaging;
 import com.metasoft.ibilling.dao.AbstractDaoImpl;
 import com.metasoft.ibilling.dao.InvoiceDao;
-import com.metasoft.ibilling.model.Branch;
-import com.metasoft.ibilling.model.Invoice;
 import com.metasoft.ibilling.model.Invoice;
 import com.metasoft.ibilling.model.InvoiceStatus;
+import com.metasoft.ibilling.model.SurveyEmployee;
 
 @Repository("invoiceDao")
 public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Integer> implements InvoiceDao {
@@ -81,5 +79,10 @@ public class InvoiceDaoImpl extends AbstractDaoImpl<Invoice, Integer> implements
 			resultPaging.setData(new ArrayList<Invoice>());
 		}
 		return resultPaging;
+	}
+
+	@Override
+	public Invoice findByCode(String code) {
+		return (Invoice) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("code", code)).uniqueResult();
 	}
 }

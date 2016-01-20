@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.metasoft.ibilling.bean.SaveResult;
 import com.metasoft.ibilling.bean.paging.InvoicePaging;
 import com.metasoft.ibilling.bean.paging.InvoiceSearchResultVoPaging;
 import com.metasoft.ibilling.bean.vo.InvoiceSearchResultVo;
@@ -46,25 +47,35 @@ public class InvoiceServiceImpl extends ModelBasedServiceImpl<InvoiceDao, Invoic
 
 	@Override
 	@Transactional
-	public int save(String claimIds, String invoiceNo, int createBy) {
+	public SaveResult save(String claimIds, String invoiceNo, int createBy) {
+		SaveResult saveResult = new SaveResult();
 		User user = userDao.findById(createBy);
 		
-		Invoice invoice = new Invoice();
-		invoice.setCode(invoiceNo);
-		invoice.setCreateBy(user);
-		invoice.setCreateDate(new Date());
-		invoiceDao.save(invoice);
+		Invoice invoice = invoiceDao.findByCode(invoiceNo);
 		
-		String[] arrClaimIds = claimIds.split(",");
-		for (String claimId : arrClaimIds) {
-			Claim claim = claimDao.findById(Integer.parseInt(claimId.trim()));
-			claim.setInvoice(invoice);
-			claim.setUpdateBy(user);
-			claim.setUpdateDate(new Date());
-			claimDao.saveOrUpdate(claim);
+		if(invoice == null){
+			invoice = new Invoice();
+			invoice.setCode(invoiceNo);
+			invoice.setCreateBy(user);
+			invoice.setCreateDate(new Date());
+			invoiceDao.save(invoice);
+			
+			String[] arrClaimIds = claimIds.split(",");
+			for (String claimId : arrClaimIds) {
+				Claim claim = claimDao.findById(Integer.parseInt(claimId.trim()));
+				claim.setInvoice(invoice);
+				claim.setUpdateBy(user);
+				claim.setUpdateDate(new Date());
+				claimDao.saveOrUpdate(claim);
+			}
+			
+			saveResult.setSeccess(true);
+			saveResult.setId(invoice.getId());
+		}else{
+			saveResult.setErrorDesc("เลขที่วางบิล เลขที่ " + invoiceNo  + " ซ้ำ");
 		}
-		
-		return invoice.getId();
+
+		return saveResult;
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.metasoft.ibilling.bean.SaveResult;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.InvoiceSearchResultVoPaging;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
@@ -85,10 +86,15 @@ public class InvoiceAjaxController extends BaseAjaxController {
 		
 		User loginUser = (User) session.getAttribute("loginUser");
 
-		int invoiceId = invoiceService.save(claimIds, invoiceNo, loginUser.getId());
+		SaveResult saveResult = invoiceService.save(claimIds, invoiceNo, loginUser.getId());
 		
-		resultVo.setMessage("บันทึกข้อมูลเรียบร้อย");
-		resultVo.setData(invoiceId);
+		if(saveResult.isSeccess()){
+			resultVo.setMessage("บันทึกข้อมูลเรียบร้อย");
+			resultVo.setData(saveResult.getId());
+		}else{
+			resultVo.setMessage(saveResult.getErrorDesc());
+			resultVo.setError(true);
+		}
 			
 		String json2 = gson.toJson(resultVo);
 		return json2;

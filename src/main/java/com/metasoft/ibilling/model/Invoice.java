@@ -30,6 +30,7 @@ public class Invoice extends BaseModel {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	@Column(unique=true)
 	private String code;
 	
 //	// ค่าบริการ
