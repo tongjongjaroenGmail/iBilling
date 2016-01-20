@@ -72,7 +72,15 @@ public class ClaimDetailVo {
 	private String remark = "";
 	private String createBy = "";
 	private String createDate = "";
+	
+	private boolean w7;
 
+	public boolean isW7() {
+		return w7;
+	}
+	public void setW7(boolean w7) {
+		this.w7 = w7;
+	}
 	public String getApproveBy() {
 		return approveBy;
 	}

@@ -176,6 +176,8 @@ public class ClaimAjaxController extends BaseAjaxController {
 			vo.setCreateBy(StringUtils.trimToEmpty(claim.getCreateBy().getName()));
 			vo.setCreateDate(DateToolsUtil.convertToString(claim.getCreateDate(), DateToolsUtil.LOCALE_TH));
 		}
+		
+		vo.setW7(claim.getW7() == null?false:claim.getW7());
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(vo);
