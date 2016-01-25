@@ -213,4 +213,16 @@ public class ClaimAjaxController extends BaseAjaxController {
     	String json = gson.toJson(resultVo);
 		return json;
     }
+	
+	@RequestMapping(value = "/claim/calcClaim", method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
+    public @ResponseBody String calcClaim(Model model,@RequestParam(required = false) String tempClaimNo) throws ParseException
+    {
+		ResultVo resultVo = new ResultVo();
+    	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    	
+    	claimService.calcClaim(tempClaimNo);
+
+    	String json = gson.toJson(resultVo);
+		return json;
+    }
 }

@@ -563,10 +563,10 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				}
 				if (claim.getDisperse() != null && claim.getDisperse()) {
 					surveyTrans = surveyTrans / 2;
-				} else if (workTime == 1) {
-					surveyTrans = surveyTrans + 100;
 				} else if (claimType == 0) {
 					surveyTrans = surveyTrans - 100;
+				} else if (workTime == 1) {
+					surveyTrans = surveyTrans + 100;
 				}
 			}
 			claim.setSurveyTrans(surveyTrans);
@@ -793,5 +793,18 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		}
 
 		return vos;
+	}
+
+	@Override
+	public void calcClaim(String claimNo) {
+		Claim claim = claimDao.findByClaimNo(claimNo);
+		try {
+			calcEmployeeSurveyPrice(claim);
+			
+			claimDao.saveOrUpdate(claim);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -32,4 +32,6 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 	
 	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurvey(String dispatchDateStart, String dispatchDateEnd, Integer areaType,
 			Integer branch);
+	
+	public void calcClaim(String claimNo);
 }
