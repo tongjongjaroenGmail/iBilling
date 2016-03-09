@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="e0e4914e-f92d-49e6-b0d3-6cb5b34074e5">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="11"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="invoiceNo" class="java.lang.String"/>
 	<parameter name="totalThai" class="java.lang.String"/>
@@ -17,6 +17,7 @@
 	<field name="surClaim" class="java.lang.Float"/>
 	<field name="surTel" class="java.lang.Float"/>
 	<field name="surOther" class="java.lang.Float"/>
+	<field name="claimType" class="java.lang.String"/>
 	<variable name="sumSurInvest" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{surInvest}]]></variableExpression>
 	</variable>
@@ -85,7 +86,7 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="31" height="20" uuid="50c48221-5090-4fc8-b8f2-438a12f25108"/>
+				<reportElement x="0" y="0" width="28" height="20" uuid="50c48221-5090-4fc8-b8f2-438a12f25108"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -98,7 +99,7 @@
 				<text><![CDATA[ลำดับ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="31" y="0" width="82" height="20" uuid="7c6407c5-7b7e-4052-b882-fc3a1541e4c3"/>
+				<reportElement x="28" y="0" width="80" height="20" uuid="7c6407c5-7b7e-4052-b882-fc3a1541e4c3"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -111,7 +112,7 @@
 				<text><![CDATA[หมายเลขอุบัติเหตุ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="175" y="0" width="60" height="20" uuid="0b0ec333-0534-4d17-96f0-ec32b8a22179"/>
+				<reportElement x="170" y="0" width="50" height="20" uuid="0b0ec333-0534-4d17-96f0-ec32b8a22179"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -124,7 +125,7 @@
 				<text><![CDATA[ค่าบริการ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="235" y="0" width="60" height="20" uuid="2d93af9d-974e-4750-94e8-0dd56f0d0db5"/>
+				<reportElement x="220" y="0" width="50" height="20" uuid="2d93af9d-974e-4750-94e8-0dd56f0d0db5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -137,7 +138,7 @@
 				<text><![CDATA[ค่าพาหนะ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="295" y="0" width="60" height="20" uuid="935512c4-ffe6-4936-ab42-376138586b9a"/>
+				<reportElement x="270" y="0" width="50" height="20" uuid="935512c4-ffe6-4936-ab42-376138586b9a"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -150,7 +151,7 @@
 				<text><![CDATA[ค่าปจว.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="355" y="0" width="60" height="20" uuid="88d95038-7bba-4b0d-8e6e-24ad1b670576"/>
+				<reportElement x="320" y="0" width="50" height="20" uuid="88d95038-7bba-4b0d-8e6e-24ad1b670576"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -163,7 +164,7 @@
 				<text><![CDATA[ค่ารูป]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="415" y="0" width="60" height="20" uuid="da15b97d-a137-419a-98df-b16a3a3a99f8"/>
+				<reportElement x="370" y="0" width="50" height="20" uuid="da15b97d-a137-419a-98df-b16a3a3a99f8"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -176,7 +177,7 @@
 				<text><![CDATA[ค่าเรียกร้อง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="475" y="0" width="60" height="20" uuid="9e3737f3-5026-401e-abfc-abe4699ccfee"/>
+				<reportElement x="420" y="0" width="60" height="20" uuid="9e3737f3-5026-401e-abfc-abe4699ccfee"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -189,7 +190,7 @@
 				<text><![CDATA[ค่าโทรศัพท์]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="113" y="0" width="62" height="20" uuid="da279b9d-5efa-4ad7-b3b2-3bf1127f71e5"/>
+				<reportElement x="108" y="0" width="62" height="20" uuid="da279b9d-5efa-4ad7-b3b2-3bf1127f71e5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -202,7 +203,7 @@
 				<text><![CDATA[วันที่จ่ายงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="535" y="0" width="60" height="20" uuid="b48dd669-e75e-4620-8375-6f251d81a4de"/>
+				<reportElement x="480" y="0" width="50" height="20" uuid="b48dd669-e75e-4620-8375-6f251d81a4de"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -214,12 +215,25 @@
 				</textElement>
 				<text><![CDATA[ค่าใช้จ่ายอื่นๆ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="530" y="0" width="65" height="20" uuid="819e3859-b733-4c45-9f4a-dd8ee57848c5"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[ประเภทเคลม]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="31" height="20" isPrintWhenDetailOverflows="true" uuid="77f52265-c7c9-4449-ab88-ffc80785d283"/>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="28" height="20" isPrintWhenDetailOverflows="true" uuid="77f52265-c7c9-4449-ab88-ffc80785d283"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -233,7 +247,7 @@
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="31" y="0" width="82" height="20" isPrintWhenDetailOverflows="true" uuid="ddec74c9-6919-450f-8604-2bd4980b2820"/>
+				<reportElement stretchType="RelativeToTallestObject" x="28" y="0" width="80" height="20" isPrintWhenDetailOverflows="true" uuid="ddec74c9-6919-450f-8604-2bd4980b2820"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -247,7 +261,7 @@
 				<textFieldExpression><![CDATA[$F{claimNo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="535" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="01aac1cf-bf79-47d0-be97-3fe60f27d932"/>
+				<reportElement stretchType="RelativeToTallestObject" x="480" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="01aac1cf-bf79-47d0-be97-3fe60f27d932"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -261,7 +275,7 @@
 				<textFieldExpression><![CDATA[$F{surOther}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="113" y="0" width="62" height="20" isPrintWhenDetailOverflows="true" uuid="83ef97dd-79a6-437e-9e28-4d589c4fc383"/>
+				<reportElement stretchType="RelativeToTallestObject" x="108" y="0" width="62" height="20" isPrintWhenDetailOverflows="true" uuid="83ef97dd-79a6-437e-9e28-4d589c4fc383"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -275,7 +289,7 @@
 				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy", new java.util.Locale("th","TH")).format($F{dispatchDate})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="175" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="eb5e3cfc-90f3-47bd-9536-41e5a2b9d5a4"/>
+				<reportElement stretchType="RelativeToTallestObject" x="170" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="eb5e3cfc-90f3-47bd-9536-41e5a2b9d5a4"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -289,7 +303,7 @@
 				<textFieldExpression><![CDATA[$F{surInvest}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="235" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="2f7d5cf2-08f5-4756-8ce4-251d9b7739e6"/>
+				<reportElement stretchType="RelativeToTallestObject" x="220" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="2f7d5cf2-08f5-4756-8ce4-251d9b7739e6"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -303,7 +317,7 @@
 				<textFieldExpression><![CDATA[$F{surTrans}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="295" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="69d64b55-69de-4b01-9cad-c6f3786f2766"/>
+				<reportElement stretchType="RelativeToTallestObject" x="270" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="69d64b55-69de-4b01-9cad-c6f3786f2766"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -317,7 +331,7 @@
 				<textFieldExpression><![CDATA[$F{surDaily}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="355" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="8ed14b60-d41a-4b05-a533-fd20e3591574"/>
+				<reportElement stretchType="RelativeToTallestObject" x="320" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="8ed14b60-d41a-4b05-a533-fd20e3591574"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -331,7 +345,7 @@
 				<textFieldExpression><![CDATA[$F{surPhoto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="415" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="7dc2e3c6-17dd-4f2d-ad23-590ef9e7b9a5"/>
+				<reportElement stretchType="RelativeToTallestObject" x="370" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="7dc2e3c6-17dd-4f2d-ad23-590ef9e7b9a5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -345,7 +359,7 @@
 				<textFieldExpression><![CDATA[$F{surClaim}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="475" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="a6698030-978b-4760-ad98-5bfdc478cd22"/>
+				<reportElement stretchType="RelativeToTallestObject" x="420" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="a6698030-978b-4760-ad98-5bfdc478cd22"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -358,6 +372,20 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{surTel}]]></textFieldExpression>
 			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="530" y="0" width="65" height="20" isPrintWhenDetailOverflows="true" uuid="2e967cbd-6a86-45cd-830f-2c2fabdbeae9"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claimType}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -369,7 +397,7 @@
 	<summary>
 		<band height="80" splitType="Stretch">
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="175" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="650671f8-0c5b-41a7-86b3-f4fb24bf3483"/>
+				<reportElement stretchType="RelativeToTallestObject" x="170" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="650671f8-0c5b-41a7-86b3-f4fb24bf3483"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -382,7 +410,7 @@
 				<textFieldExpression><![CDATA[$V{sumSurInvest}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="235" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="2cfeaa71-968b-433b-9f36-4d77e6b4e269"/>
+				<reportElement stretchType="RelativeToTallestObject" x="220" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="2cfeaa71-968b-433b-9f36-4d77e6b4e269"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -395,7 +423,7 @@
 				<textFieldExpression><![CDATA[$V{sumSurTrans}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="295" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="c3d91c77-3bdf-40b3-ab88-0b07284112c8"/>
+				<reportElement stretchType="RelativeToTallestObject" x="270" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="c3d91c77-3bdf-40b3-ab88-0b07284112c8"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -408,7 +436,7 @@
 				<textFieldExpression><![CDATA[$V{sumSurDaily}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="355" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="71e07c16-d504-45c5-aa0b-7b6dd316fec8"/>
+				<reportElement stretchType="RelativeToTallestObject" x="320" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="71e07c16-d504-45c5-aa0b-7b6dd316fec8"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -421,7 +449,7 @@
 				<textFieldExpression><![CDATA[$V{sumSurPhoto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="415" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="808c480d-9c20-4a41-8d7b-ab98eb7e6305"/>
+				<reportElement stretchType="RelativeToTallestObject" x="370" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="808c480d-9c20-4a41-8d7b-ab98eb7e6305"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -434,7 +462,7 @@
 				<textFieldExpression><![CDATA[$V{sumSurClaim}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="475" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="e35d0216-2de8-4928-8ee7-3408cb9f6fe2"/>
+				<reportElement stretchType="RelativeToTallestObject" x="420" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="e35d0216-2de8-4928-8ee7-3408cb9f6fe2"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -447,7 +475,7 @@
 				<textFieldExpression><![CDATA[$V{sumSurTel}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="535" y="0" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="8c76d2e8-051c-48b0-b566-17e5c3a07a02"/>
+				<reportElement stretchType="RelativeToTallestObject" x="480" y="0" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="8c76d2e8-051c-48b0-b566-17e5c3a07a02"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -460,7 +488,7 @@
 				<textFieldExpression><![CDATA[$V{sumSurOther}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="60" width="175" height="20" uuid="6c16b2f0-08c9-42c3-b191-38a8266d66a3"/>
+				<reportElement x="0" y="60" width="170" height="20" uuid="6c16b2f0-08c9-42c3-b191-38a8266d66a3"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>
@@ -468,7 +496,7 @@
 				<text><![CDATA[ตัวอักษร]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="175" y="60" width="240" height="20" isPrintWhenDetailOverflows="true" uuid="d807be53-e547-4663-84d8-df733fdb73ad"/>
+				<reportElement stretchType="RelativeToTallestObject" x="170" y="60" width="200" height="20" isPrintWhenDetailOverflows="true" uuid="d807be53-e547-4663-84d8-df733fdb73ad"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>
@@ -476,15 +504,15 @@
 				<textFieldExpression><![CDATA[$P{totalThai}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="415" y="60" width="120" height="20" uuid="891da6c7-54f5-41ce-ad8f-e7dfc7be52a3"/>
+				<reportElement x="370" y="60" width="110" height="20" uuid="891da6c7-54f5-41ce-ad8f-e7dfc7be52a3"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ยอดรมภาษี]]></text>
+				<text><![CDATA[ยอดรวมภาษี]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="535" y="60" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="1c42a845-c2ca-45df-9693-4e812f1cfa62"/>
+				<reportElement stretchType="RelativeToTallestObject" x="480" y="60" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="1c42a845-c2ca-45df-9693-4e812f1cfa62"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>
@@ -492,7 +520,7 @@
 				<textFieldExpression><![CDATA[$P{totalAll}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="415" y="40" width="120" height="20" uuid="19565eb2-4176-491b-a79d-14b17444805c"/>
+				<reportElement x="370" y="40" width="110" height="20" uuid="19565eb2-4176-491b-a79d-14b17444805c"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>
@@ -500,7 +528,7 @@
 				<text><![CDATA[ภาษี]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="415" y="20" width="120" height="20" uuid="6c2ee06d-8237-4141-a9a7-f62648aea626"/>
+				<reportElement x="370" y="20" width="110" height="20" uuid="6c2ee06d-8237-4141-a9a7-f62648aea626"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>
@@ -508,7 +536,7 @@
 				<text><![CDATA[รวมทั้งสิ้น]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="535" y="20" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="d6a3ba19-ece0-479d-abc7-5181b950c76f"/>
+				<reportElement stretchType="RelativeToTallestObject" x="480" y="20" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="d6a3ba19-ece0-479d-abc7-5181b950c76f"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>
@@ -516,7 +544,7 @@
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="535" y="40" width="60" height="20" isPrintWhenDetailOverflows="true" uuid="acc045f8-fb23-4ddb-92cc-a09fa601cdbf"/>
+				<reportElement stretchType="RelativeToTallestObject" x="480" y="40" width="50" height="20" isPrintWhenDetailOverflows="true" uuid="acc045f8-fb23-4ddb-92cc-a09fa601cdbf"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14" isBold="true"/>

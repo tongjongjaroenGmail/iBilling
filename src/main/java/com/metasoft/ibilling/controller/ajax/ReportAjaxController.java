@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.metasoft.ibilling.bean.InvoiceReport;
 import com.metasoft.ibilling.bean.vo.StatusResponse;
 import com.metasoft.ibilling.model.Claim;
 import com.metasoft.ibilling.model.Invoice;
@@ -83,11 +85,28 @@ public class ReportAjaxController {
 		
 		float surTotal = 0;
 		float surTax = 0;
+		
+		List<InvoiceReport> invoiceReports = new ArrayList<InvoiceReport>();
 		for (Claim claim : invoice.getClaims()) {
 			float surTotalTemp = ClaimServiceImpl.calcTotalSur(claim);
 			surTotal += surTotalTemp;
 			float surTaxTemp = ClaimServiceImpl.calcVat(surTotalTemp);
 			surTax += surTaxTemp;
+			
+			InvoiceReport invoiceReport = new InvoiceReport();
+			invoiceReport.setClaimNo(claim.getClaimNo());
+			invoiceReport.setDispatchDate(claim.getDispatchDate());
+			invoiceReport.setClaimType(claim.getClaimType() == null?"":claim.getClaimType().getName());
+			invoiceReport.setSurInvest(claim.getSurInvest());
+			invoiceReport.setSurTrans(claim.getSurTrans());
+			invoiceReport.setSurDaily(claim.getSurDaily());
+			invoiceReport.setSurPhoto(claim.getSurPhoto());
+			invoiceReport.setSurClaim(claim.getSurClaim());
+			invoiceReport.setSurTel(claim.getSurTel());
+			invoiceReport.setSurInsure(claim.getSurInsure());
+			invoiceReport.setSurTowcar(claim.getSurTowcar());
+			invoiceReport.setSurOther(claim.getSurOther());
+			invoiceReports.add(invoiceReport);
 		}
 		
 		param.put("invoiceNo", invoice.getCode());
@@ -98,7 +117,7 @@ public class ReportAjaxController {
 
 		downloadService.download(ExporterService.EXTENSION_TYPE_EXCEL, invoice.getCode(),
 				session.getServletContext().getRealPath("/jasperreport/invoice"),
-				param, invoice.getClaims(), token, response);
+				param, invoiceReports, token, response);
 	}
 	
 	@RequestMapping(value = "/paySurvey")

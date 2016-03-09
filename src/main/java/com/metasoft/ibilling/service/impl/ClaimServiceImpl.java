@@ -440,20 +440,33 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 							}
 						}
 					}
-	
+					
+					// ข้อมูลจาก loxbit
+					// ประเภทเคลม (เคลมสด,เคลมแห้ง,ติดตาม) 01,02,03	
+//					--------------
+//					follow(0, "ติดตาม"),
+//					party(1, "เคลมสด"),
+//					noParty(2, "เคลมแห้ง");
 					if (StringUtils.isNotBlank(rptData.getClaimTypeCode())) {
-						for (ClaimType bean : ClaimType.values()) {
-							if (rptData.getClaimTypeCode().equalsIgnoreCase(bean.getName())) {
-								claim.setClaimType(bean);
-							}
-						}
+						if("01".equals(rptData.getClaimTypeCode())){
+							claim.setClaimType(ClaimType.getById(1));	
+						}else if("02".equals(rptData.getClaimTypeCode())){
+							claim.setClaimType(ClaimType.getById(2));	
+						}else if("03".equals(rptData.getClaimTypeCode())){
+							claim.setClaimType(ClaimType.getById(0));	
+						}								
 					}
 	
+					// ข้อมูลจาก loxbit
+					// ประเภทการจ่าย (ว.4,นัดหมาย)
+//					--------------
+//					w4(0, "ว.4"),
+//					meet(1, "นัดหมาย");
 					if (StringUtils.isNotBlank(rptData.getDispatchTypeCode())) {
-						for (DispatchType bean : DispatchType.values()) {
-							if (rptData.getDispatchTypeCode().equalsIgnoreCase(bean.getName())) {
-								claim.setDispatchType(bean);
-							}
+						if("01".equals(rptData.getClaimTypeCode())){
+							claim.setDispatchType(DispatchType.getById(0));	
+						}else if("02".equals(rptData.getClaimTypeCode())){
+							claim.setDispatchType(DispatchType.getById(1));	
 						}
 					}
 	

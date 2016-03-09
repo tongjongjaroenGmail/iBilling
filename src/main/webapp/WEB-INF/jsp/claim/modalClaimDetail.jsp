@@ -196,9 +196,9 @@
 										</div>
 									</div>
 									
-									<div class="col-sm-2 no-padding-left">		
+									<div class="col-sm-1 no-padding-left">		
 										<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
-											<b>อำเภอที่ตรวจสอบ  : </b> 
+											<b>อำเภอ<br>ที่ตรวจสอบ  : </b> 
 										</div>
 									</div>
 									
@@ -208,9 +208,9 @@
 										</div>
 									</div>
 									
-									<div class="col-sm-2 no-padding-left">		
+									<div class="col-sm-1 no-padding-left">		
 										<div class="input-group col-sm-12 no-padding-left no-padding-right" style="text-align: right;">
-											<b>จังหวัดที่ตรวจสอบ : </b> 
+											<b>จังหวัด<br>ที่ตรวจสอบ : </b> 
 										</div>
 									</div>
 									
