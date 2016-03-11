@@ -41,4 +41,12 @@ public class SurveyEmployeeDaoImpl extends AbstractDaoImpl<SurveyEmployee, Integ
 		return criteria.list();
 	}
 
+	@Override
+	public SurveyEmployee findByCodeAndName(String code, String fullname) {
+		return (SurveyEmployee) getCurrentSession().createCriteria(entityClass)
+				.add(Restrictions.eq("code", code))
+				.add(Restrictions.eqOrIsNull("fullname", fullname))
+				.uniqueResult();
+	}
+
 }

@@ -364,6 +364,7 @@ public class Claim extends BaseModel {
 	@JoinColumn(name = "pay_survey_id")
 	private PaySurvey paySurvey;
 	
+	@Column(name="remark", columnDefinition="TEXT DEFAULT null")
 	private String remark;
 	
 	private Boolean w7;

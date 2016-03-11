@@ -5,6 +5,7 @@ package com.metasoft.ibilling.service.impl;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -322,7 +323,10 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	
 	@Override
 	public void loadClaimsFromWs() {
-		int totalSuccess = 0;
+		boolean isInsert = false;
+		boolean isUpdate = false;
+		int totalInsertSuccess = 0;
+		int totalUpdateSuccess = 0;
 		int totalError = 0;
 		List<ClaimLoadLogErrorDetail> claimLoadLogErrorDetails = new ArrayList<ClaimLoadLogErrorDetail>();
 		ClaimLoadLog claimLoadLog = new ClaimLoadLog();
@@ -333,8 +337,14 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		ClaimRs claimRs = null;
 		String rptDatastr = "";
 		try {
+			Date today = new Date(); 
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(today);
+			cal.add(Calendar.DATE, -1);
+			String dateBefore1Days = DateToolsUtil.convertToString(cal.getTime(), "yyyy-MM-dd", DateToolsUtil.LOCALE_EN);
+			
 			dpRptDataPortType = dpRptData.getdpRptDataPort();
-			rptDatastr = dpRptDataPortType.getRptData("", "", "");
+			rptDatastr = dpRptDataPortType.getRptData("", "", dateBefore1Days);
 			claimRs = new ObjectMapper().readValue(rptDatastr, ClaimRs.class);
 		} catch (Exception e1) {
 			ClaimLoadLogErrorDetail claimLoadLogErrorDetail = new ClaimLoadLogErrorDetail();
@@ -346,16 +356,22 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		}
 		if(claimLoadLog.isWsSuccess()){
 			for (RptData rptData : claimRs.getRptDatas()) {
+				isInsert = false;
+				isUpdate = false;
 				try {
-					Claim claim = claimDao.findByClaimNo(rptData.getClaimNo());
+					Claim claim = claimDao.findByRefWsId(rptData.getRefWsId());
 					User admin = userDao.findById(1);
 					if (claim != null) {
 						claim.setUpdateDate(new Date());
 						claim.setUpdateBy(admin);
+						
+						isUpdate = true;
 					} else {
 						claim = new Claim();
 						claim.setCreateDate(new Date());
 						claim.setCreateBy(admin);
+						
+						isInsert = true;
 					}
 	
 					PropertyDescriptor[] rptDataPD = BeanUtils.getPropertyDescriptors(RptData.class);
@@ -381,37 +397,35 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					claim.setBranch(branch);
 					
 					if (StringUtils.isNotBlank(rptData.getSurveyAmphurId())) {
-						Amphur surveyAmphur = amphurDao.findById(Integer.parseInt(rptData.getSurveyAmphurId()));
+						Amphur surveyAmphur = amphurDao.findById(Integer.parseInt(rptData.getSurveyAmphurId().trim()));
 						claim.setSurveyAmphur(surveyAmphur);
 					}
 					
 					if (StringUtils.isNotBlank(rptData.getSurveyProvinceId())) {
-						Province surveyProvince = provinceDao.findById(Integer.parseInt(rptData.getSurveyProvinceId()));
+						Province surveyProvince = provinceDao.findById(Integer.parseInt(rptData.getSurveyProvinceId().trim()));
 						claim.setSurveyProvince(surveyProvince);
 					}
 					
 					if (StringUtils.isNotBlank(rptData.getEmpcode())) {
-						SurveyEmployee surveyEmployee = surveyEmployeeDao.findByCode(rptData.getEmpcode().trim());
+						SurveyEmployee surveyEmployee = surveyEmployeeDao.findByCodeAndName(rptData.getEmpcode().trim(),rptData.getSurveyor().trim());
 						if (surveyEmployee == null) {
 							surveyEmployee = new SurveyEmployee();
 							surveyEmployee.setCode(rptData.getEmpcode());
-							surveyEmployee.setFullname(rptData.getSurveyor());
-							surveyEmployee.setBranch(branch);
-							surveyEmployeeDao.save(surveyEmployee);
+							surveyEmployee.setFullname(rptData.getSurveyor());	
 						}
-	
+						surveyEmployee.setBranch(branch);
+						surveyEmployeeDao.saveOrUpdate(surveyEmployee);
+						
 						claim.setSurveyEmployee(surveyEmployee);
 					}
-					
-					
-	
+
 					if (StringUtils.isNotBlank(rptData.getBranchCode())) {
-						claim.setBranchDhip(branchDhipDao.findByCode(rptData.getBranchCode().trim()));
+						claim.setBranchDhip(branchDhipDao.findByName(rptData.getBranchCode().trim()));
 					}
 	
 					if (StringUtils.isNotBlank(rptData.getWrkTimeCode())) {
 						for (WorkTime workTime : WorkTime.values()) {
-							if (rptData.getWrkTimeCode().equalsIgnoreCase(workTime.getName())) {
+							if (rptData.getWrkTimeCode().trim().equalsIgnoreCase(workTime.getName())) {
 								claim.setWrkTime(workTime);
 							}
 						}
@@ -419,7 +433,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	
 					if (StringUtils.isNotBlank(rptData.getServiceTypeCode())) {
 						for (ServiceType serviceType : ServiceType.values()) {
-							if (rptData.getServiceTypeCode().equalsIgnoreCase(serviceType.getName())) {
+							if (rptData.getServiceTypeCode().trim().equalsIgnoreCase(serviceType.getName())) {
 								claim.setServiceType(serviceType);
 							}
 						}
@@ -427,7 +441,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	
 					if (StringUtils.isNotBlank(rptData.getClaimTpCode())) {
 						for (ClaimTp bean : ClaimTp.values()) {
-							if (rptData.getClaimTpCode().equalsIgnoreCase(bean.getName())) {
+							if (rptData.getClaimTpCode().trim().equalsIgnoreCase(bean.getName())) {
 								claim.setClaimTp(bean);
 							}
 						}
@@ -435,7 +449,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	
 					if (StringUtils.isNotBlank(rptData.getcStatusCode())) {
 						for (ClaimStatus bean : ClaimStatus.values()) {
-							if (rptData.getcStatusCode().equalsIgnoreCase(bean.getName())) {
+							if (rptData.getcStatusCode().trim().equalsIgnoreCase(bean.getName())) {
 								claim.setClaimStatus(bean);
 							}
 						}
@@ -448,11 +462,11 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 //					party(1, "เคลมสด"),
 //					noParty(2, "เคลมแห้ง");
 					if (StringUtils.isNotBlank(rptData.getClaimTypeCode())) {
-						if("01".equals(rptData.getClaimTypeCode())){
+						if("01".equals(rptData.getClaimTypeCode().trim())){
 							claim.setClaimType(ClaimType.getById(1));	
-						}else if("02".equals(rptData.getClaimTypeCode())){
+						}else if("02".equals(rptData.getClaimTypeCode().trim())){
 							claim.setClaimType(ClaimType.getById(2));	
-						}else if("03".equals(rptData.getClaimTypeCode())){
+						}else if("03".equals(rptData.getClaimTypeCode().trim())){
 							claim.setClaimType(ClaimType.getById(0));	
 						}								
 					}
@@ -463,16 +477,16 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 //					w4(0, "ว.4"),
 //					meet(1, "นัดหมาย");
 					if (StringUtils.isNotBlank(rptData.getDispatchTypeCode())) {
-						if("01".equals(rptData.getClaimTypeCode())){
+						if("01".equals(rptData.getDispatchTypeCode().trim())){
 							claim.setDispatchType(DispatchType.getById(0));	
-						}else if("02".equals(rptData.getClaimTypeCode())){
+						}else if("02".equals(rptData.getDispatchTypeCode().trim())){
 							claim.setDispatchType(DispatchType.getById(1));	
 						}
 					}
 	
 					if (StringUtils.isNotBlank(rptData.getAccZoneCode())) {
 						for (AreaType bean : AreaType.values()) {
-							if (rptData.getAccZoneCode().equalsIgnoreCase(bean.getName())) {
+							if (rptData.getAccZoneCode().trim().equalsIgnoreCase(bean.getName())) {
 								claim.setAreaType(bean);
 							}
 						}
@@ -483,8 +497,12 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					}
 	
 					claimDao.saveOrUpdate(claim);
-					totalSuccess++;
-					
+					if(isInsert){
+						totalInsertSuccess++;
+					}else if(isUpdate){
+						totalUpdateSuccess++;
+					}
+
 					dpRptDataPortType.confirmReceiveRpt("", "", claim.getRefWsId(), claim.getClaimNo());
 				} catch (Exception e) {	
 					ClaimLoadLogErrorDetail claimLoadLogErrorDetail = new ClaimLoadLogErrorDetail();
@@ -499,7 +517,8 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 
 		claimLoadLog.setClaimLoadLogErrorDetails(claimLoadLogErrorDetails);
 		claimLoadLog.setTotalErrorData(totalError);
-		claimLoadLog.setTotalInsertData(totalSuccess);
+		claimLoadLog.setTotalInsertData(totalInsertSuccess);
+		claimLoadLog.setTotalUpdateData(totalUpdateSuccess);
 		claimLoadLog.setCreateDate(new Date());
 
 		claimLoadLogDao.save(claimLoadLog);
@@ -551,7 +570,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 						surveyTrans = 200f;
 				}
 				// ******************************************
-				if (claim.getCoArea()) {
+				if (claim.getCoArea() != null && claim.getCoArea()) {
 					surveyTrans = surveyTrans + 100;
 				}
 	
@@ -582,6 +601,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 					surveyTrans = surveyTrans + 100;
 				}
 			}
+			surveyTrans = surveyTrans < 0?0:surveyTrans;
 			claim.setSurveyTrans(surveyTrans);
 		}else{
 			claim.setSurveyTrans(0f);

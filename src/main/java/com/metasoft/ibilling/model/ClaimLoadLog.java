@@ -42,6 +42,9 @@ public class ClaimLoadLog extends BaseModel {
 
 	@Column(name = "total_insert_data")
 	private int totalInsertData;
+	
+	@Column(name = "total_update_data")
+	private int totalUpdateData;
 
 	@Column(name = "total_error_data")
 	private int totalErrorData;
@@ -109,4 +112,13 @@ public class ClaimLoadLog extends BaseModel {
 		this.claimLoadLogErrorDetails = claimLoadLogErrorDetails;
 	}
 
+	public int getTotalUpdateData() {
+		return totalUpdateData;
+	}
+
+	public void setTotalUpdateData(int totalUpdateData) {
+		this.totalUpdateData = totalUpdateData;
+	}
+
+	
 }

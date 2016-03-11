@@ -6,7 +6,6 @@ package com.metasoft.ibilling.dao.impl;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.metasoft.ibilling.dao.AbstractDaoImpl;
 import com.metasoft.ibilling.dao.BranchDhipDao;
@@ -27,6 +26,13 @@ public class BranchDhipDaoImpl extends AbstractDaoImpl<BranchDhip, Integer> impl
 	public BranchDhip findByCode(String code) {
 		Criteria criteria = getCurrentSession().createCriteria(entityClass);
 		criteria.add(Restrictions.eq("code", code));	
+		return (BranchDhip) criteria.uniqueResult();	
+	}
+	
+	@Override
+	public BranchDhip findByName(String name) {
+		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		criteria.add(Restrictions.eq("name", name));	
 		return (BranchDhip) criteria.uniqueResult();	
 	}
 }

@@ -312,4 +312,9 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 
 		return criteria.list();
 	}
+
+	@Override
+	public Claim findByRefWsId(String refWsId) {
+		return (Claim) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("refWsId", refWsId)).uniqueResult();
+	}
 }

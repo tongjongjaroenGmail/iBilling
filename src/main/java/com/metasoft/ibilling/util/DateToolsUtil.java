@@ -12,6 +12,7 @@ public class DateToolsUtil {
 	public static final String DATE_PATTERN_VIEW_DDMMYYYY_HHmmss = "dd/MM/yyyy HH:mm:ss";
 	
 	public static final Locale LOCALE_TH = new Locale("th", "TH");
+	public static final Locale LOCALE_EN = new Locale("en", "US");
 	
 	/**
 	 * Convert string to date (format dd/MM/yyyy)

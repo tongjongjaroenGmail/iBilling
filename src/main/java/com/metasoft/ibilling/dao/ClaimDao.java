@@ -21,6 +21,8 @@ public interface ClaimDao extends AbstractDao<Claim, Integer> {
 
 	public Claim findByClaimNo(String claimNo);
 	
+	public Claim findByRefWsId(String refWsId);
+	
 	public ClaimPaging searchReportStatisticsSurveyPaging(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch, int start, int length);
 	
 	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch);
