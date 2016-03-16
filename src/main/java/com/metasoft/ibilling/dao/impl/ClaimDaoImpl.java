@@ -66,6 +66,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		}
 		
 		criteriaCount.add(Restrictions.isNull("invoice"));
+		criteriaCount.add(Restrictions.eq("claimStatus", ClaimStatus.approve));
 
 		criteriaCount.setProjection(Projections.rowCount());
 		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
@@ -85,6 +86,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			}
 			
 			criteria.add(Restrictions.isNull("invoice"));
+			criteria.add(Restrictions.eq("claimStatus", ClaimStatus.approve));
 
 			criteria.addOrder(Order.asc("branch"));
 			criteria.setFirstResult(start);

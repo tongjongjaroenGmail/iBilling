@@ -492,7 +492,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 						}
 					}
 	
-					if (claim.getClaimStatus() != null && (claim.getClaimStatus().getId() == 2 || claim.getClaimStatus().getId() == 3)) {
+					if (claim.getClaimStatus() != null && (claim.getClaimStatus().getId() == 2 || claim.getClaimStatus().getId() == 3 || claim.getClaimStatus().getId() == 5)) {
 						calcEmployeeSurveyPrice(claim);
 					}
 	

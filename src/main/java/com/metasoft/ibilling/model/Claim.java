@@ -198,7 +198,7 @@ public class Claim extends BaseModel {
 	private String approveBy;
 
 	@Column(name = "c_status")
-	// สถานะ จ่ายงาน,รอการตรวจสอบ,ปิดการตรวจสอบ,สินไหมอนุมัติ,ยกเลิก
+	// สถานะ จ่ายงาน,รอการตรวจสอบ,ปิดการตรวจสอบ,สินไหมอนุมัติ,ยกเลิก,ไม่อนุมัติจ่าย
 	private ClaimStatus claimStatus;
 
 	@Temporal(TemporalType.TIMESTAMP)
