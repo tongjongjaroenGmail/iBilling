@@ -753,7 +753,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 			branch = branchDao.findById(selBranch);
 		}
 		
-		if(selAreaType != null && selAreaType != 0) {
+		if(selAreaType != null) {
 			areaType = AreaType.getById(selAreaType);
 		}
 

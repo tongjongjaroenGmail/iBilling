@@ -17,7 +17,7 @@
 			<div class="table-responsive">
 				<div class="col-sm-2">		
 					<div class="input-group col-sm-12 no-padding-left" style="text-align: right;">
-						<b>วันที่จ่ายเงิน : </b> 
+						<b>วันที่สร้างใบจ่ายเงิน : </b> 
 					</div>
 				</div>
 				<div class="col-sm-3">		
@@ -127,7 +127,7 @@
 				<tr>
 					<th><label><input name="chkAll" class="ace" type="checkbox" onclick="checkSelect(this,document.getElementsByName('chk'));"><span class="lbl"></span></label></th>
 					<th>เลขที่จ่าย</th>
-					<th>วันที่สร้างใบจ่ายงาน</th>
+					<th>วันที่สร้างใบจ่ายเงิน</th>
 					<th>พนักงาน</th>
 					<th>ค่าพาหนะ</th>
 					<th>ค่ารูป</th>

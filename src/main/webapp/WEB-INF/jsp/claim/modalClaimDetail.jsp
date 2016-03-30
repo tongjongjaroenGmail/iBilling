@@ -1109,6 +1109,12 @@ function setPageForClaimDetail(claimId){
 }
 
 function saveClaim(){
+	if($.trim($("#remark").val()) == ""){
+		alert("กรุณา กรอกหมายเหตุ");
+		$("#remark").focus();
+		return;
+	}
+	
 	$.ajax({
 		url : '${pageContext.request.contextPath}/claim/save',
 		type : "POST",

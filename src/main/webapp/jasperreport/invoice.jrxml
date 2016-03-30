@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="e0e4914e-f92d-49e6-b0d3-6cb5b34074e5">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="11"/>
+	<property name="ireport.x" value="6"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="invoiceNo" class="java.lang.String"/>
 	<parameter name="totalThai" class="java.lang.String"/>
@@ -76,7 +76,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="AngsanaUPC" size="14"/>
 				</textElement>
-				<text><![CDATA[สาขา สำนักงานใหญ่]]></text>
+				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
 	</title>
