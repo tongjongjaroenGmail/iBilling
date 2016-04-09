@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="statisticsSurvey" language="groovy" pageWidth="1890" pageHeight="595" orientation="Landscape" columnWidth="1890" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="e0e4914e-f92d-49e6-b0d3-6cb5b34074e5">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="statisticsSurvey" language="groovy" pageWidth="1950" pageHeight="595" orientation="Landscape" columnWidth="1950" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="e0e4914e-f92d-49e6-b0d3-6cb5b34074e5">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="1239"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="claimNo" class="java.lang.String"/>
 	<field name="dispatchDate" class="java.lang.String"/>
@@ -57,7 +57,7 @@
 				<text><![CDATA[วันที่จ่ายงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="230" y="0" width="94" height="20" uuid="0b0ec333-0534-4d17-96f0-ec32b8a22179"/>
+				<reportElement x="290" y="0" width="94" height="20" uuid="0b0ec333-0534-4d17-96f0-ec32b8a22179"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -70,7 +70,7 @@
 				<text><![CDATA[รหัสพนักงานสำรวจ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="324" y="0" width="93" height="20" uuid="2d93af9d-974e-4750-94e8-0dd56f0d0db5"/>
+				<reportElement x="384" y="0" width="93" height="20" uuid="2d93af9d-974e-4750-94e8-0dd56f0d0db5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -83,7 +83,7 @@
 				<text><![CDATA[ศูนย์]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="417" y="0" width="85" height="20" uuid="935512c4-ffe6-4936-ab42-376138586b9a"/>
+				<reportElement x="477" y="0" width="85" height="20" uuid="935512c4-ffe6-4936-ab42-376138586b9a"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -96,7 +96,7 @@
 				<text><![CDATA[ประเภทกรมธรรม์]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="502" y="0" width="57" height="20" uuid="88d95038-7bba-4b0d-8e6e-24ad1b670576"/>
+				<reportElement x="562" y="0" width="57" height="20" uuid="88d95038-7bba-4b0d-8e6e-24ad1b670576"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -109,7 +109,7 @@
 				<text><![CDATA[คู่กรณี]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="559" y="0" width="69" height="20" uuid="da15b97d-a137-419a-98df-b16a3a3a99f8"/>
+				<reportElement x="619" y="0" width="69" height="20" uuid="da15b97d-a137-419a-98df-b16a3a3a99f8"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -122,7 +122,7 @@
 				<text><![CDATA[ผลคดี(รับแจ้ง)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="628" y="0" width="76" height="20" uuid="9e3737f3-5026-401e-abfc-abe4699ccfee"/>
+				<reportElement x="688" y="0" width="76" height="20" uuid="9e3737f3-5026-401e-abfc-abe4699ccfee"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -135,7 +135,7 @@
 				<text><![CDATA[ผลคดี(สำรวจ)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="148" y="0" width="82" height="20" uuid="da279b9d-5efa-4ad7-b3b2-3bf1127f71e5"/>
+				<reportElement x="148" y="0" width="142" height="20" uuid="da279b9d-5efa-4ad7-b3b2-3bf1127f71e5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -148,7 +148,7 @@
 				<text><![CDATA[ชื่อพนักงานสำรวจ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="704" y="0" width="87" height="20" uuid="f1b8e9f5-859f-43ff-80aa-dd5e2509cd27"/>
+				<reportElement x="764" y="0" width="87" height="20" uuid="f1b8e9f5-859f-43ff-80aa-dd5e2509cd27"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -161,7 +161,7 @@
 				<text><![CDATA[ประกันภัยคู่กรณี]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="791" y="0" width="76" height="20" uuid="29230135-881e-445e-bfc3-e65095da7cf6"/>
+				<reportElement x="851" y="0" width="76" height="20" uuid="29230135-881e-445e-bfc3-e65095da7cf6"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -174,7 +174,7 @@
 				<text><![CDATA[ชนิดรถ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="867" y="0" width="61" height="20" uuid="0eec6bd5-ed93-4887-8e25-5a72acf7dd41"/>
+				<reportElement x="927" y="0" width="61" height="20" uuid="0eec6bd5-ed93-4887-8e25-5a72acf7dd41"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -187,7 +187,7 @@
 				<text><![CDATA[แยกย้าย]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="928" y="0" width="54" height="20" uuid="d1bf1e87-23c2-4a0c-ba23-5ed15d61bee1"/>
+				<reportElement x="988" y="0" width="54" height="20" uuid="d1bf1e87-23c2-4a0c-ba23-5ed15d61bee1"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -200,7 +200,7 @@
 				<text><![CDATA[เวร]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1155" y="0" width="65" height="20" uuid="6e6869e7-8834-49e0-8e17-afea1651f160"/>
+				<reportElement x="1215" y="0" width="65" height="20" uuid="6e6869e7-8834-49e0-8e17-afea1651f160"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -213,7 +213,7 @@
 				<text><![CDATA[พื้นที่]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1071" y="0" width="84" height="20" uuid="77346a92-98e7-49fd-8994-d0bbaca8363f"/>
+				<reportElement x="1131" y="0" width="84" height="20" uuid="77346a92-98e7-49fd-8994-d0bbaca8363f"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -226,7 +226,7 @@
 				<text><![CDATA[ประเภทเคลม]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="982" y="0" width="89" height="20" uuid="8c202962-aec7-431d-a540-e2b26a208e3c"/>
+				<reportElement x="1042" y="0" width="89" height="20" uuid="8c202962-aec7-431d-a540-e2b26a208e3c"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -239,7 +239,7 @@
 				<text><![CDATA[เงินเรียกร้องได้]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1314" y="0" width="98" height="20" uuid="5b8f0e50-df89-4067-851c-0580f11f9a40"/>
+				<reportElement x="1374" y="0" width="98" height="20" uuid="5b8f0e50-df89-4067-851c-0580f11f9a40"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -252,7 +252,7 @@
 				<text><![CDATA[ ผู้ตรวจสอบ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1220" y="0" width="94" height="20" uuid="e2413eae-d3ca-4f49-acb8-1f4c7f5a1db4"/>
+				<reportElement x="1280" y="0" width="94" height="20" uuid="e2413eae-d3ca-4f49-acb8-1f4c7f5a1db4"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -265,7 +265,7 @@
 				<text><![CDATA[ยอดวางบิลทิพย]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1640" y="0" width="148" height="20" uuid="94060cc9-4fb1-4aac-a0f0-214ee0f0f6e3"/>
+				<reportElement x="1700" y="0" width="148" height="20" uuid="94060cc9-4fb1-4aac-a0f0-214ee0f0f6e3"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -278,7 +278,7 @@
 				<text><![CDATA[ยอดจ่ายค่าสำรวจ พนักงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1412" y="0" width="88" height="20" uuid="17cd9e32-4528-4ad3-9199-8a6e05784d06"/>
+				<reportElement x="1472" y="0" width="88" height="20" uuid="17cd9e32-4528-4ad3-9199-8a6e05784d06"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -291,7 +291,7 @@
 				<text><![CDATA[ยอดทิพยอนุมัติ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1788" y="0" width="102" height="20" uuid="5feff00c-d3ba-4a99-8bdf-c25d44c06418"/>
+				<reportElement x="1848" y="0" width="102" height="20" uuid="5feff00c-d3ba-4a99-8bdf-c25d44c06418"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -304,7 +304,7 @@
 				<text><![CDATA[สถานะของงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1500" y="0" width="140" height="20" uuid="977097c3-a67b-412f-8ce6-351fe17aa335"/>
+				<reportElement x="1560" y="0" width="140" height="20" uuid="977097c3-a67b-412f-8ce6-351fe17aa335"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -335,7 +335,7 @@
 				<textFieldExpression><![CDATA[$F{claimNo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="982" y="0" width="89" height="20" isPrintWhenDetailOverflows="true" uuid="77429f13-857e-46e5-90aa-1155e77aec90"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1042" y="0" width="89" height="20" isPrintWhenDetailOverflows="true" uuid="77429f13-857e-46e5-90aa-1155e77aec90"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -363,7 +363,7 @@
 				<textFieldExpression><![CDATA[$F{dispatchDate}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="148" y="0" width="82" height="20" isPrintWhenDetailOverflows="true" uuid="3154b44b-b9b6-45b0-9d10-79f4f80ab70f"/>
+				<reportElement stretchType="RelativeToTallestObject" x="148" y="0" width="142" height="20" isPrintWhenDetailOverflows="true" uuid="3154b44b-b9b6-45b0-9d10-79f4f80ab70f"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -377,7 +377,7 @@
 				<textFieldExpression><![CDATA[$F{employeeName}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="230" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" uuid="e957d9d2-89dc-4808-8f43-4737d9ce81ea"/>
+				<reportElement stretchType="RelativeToTallestObject" x="290" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" uuid="e957d9d2-89dc-4808-8f43-4737d9ce81ea"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -391,7 +391,7 @@
 				<textFieldExpression><![CDATA[$F{employeeCode}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="324" y="0" width="93" height="20" isPrintWhenDetailOverflows="true" uuid="9610c83a-32d6-48ee-b561-6fc686912c8b"/>
+				<reportElement stretchType="RelativeToTallestObject" x="384" y="0" width="93" height="20" isPrintWhenDetailOverflows="true" uuid="9610c83a-32d6-48ee-b561-6fc686912c8b"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -405,7 +405,7 @@
 				<textFieldExpression><![CDATA[$F{branchName}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="417" y="0" width="85" height="20" isPrintWhenDetailOverflows="true" uuid="bbe35dd4-89c7-4415-8163-e2e8c06207fd"/>
+				<reportElement stretchType="RelativeToTallestObject" x="477" y="0" width="85" height="20" isPrintWhenDetailOverflows="true" uuid="bbe35dd4-89c7-4415-8163-e2e8c06207fd"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -419,7 +419,7 @@
 				<textFieldExpression><![CDATA[$F{policyType}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="502" y="0" width="57" height="20" isPrintWhenDetailOverflows="true" uuid="96ece649-50f7-4e71-bae8-69a4e00f9826"/>
+				<reportElement stretchType="RelativeToTallestObject" x="562" y="0" width="57" height="20" isPrintWhenDetailOverflows="true" uuid="96ece649-50f7-4e71-bae8-69a4e00f9826"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -433,7 +433,7 @@
 				<textFieldExpression><![CDATA[$F{hasTp}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="704" y="0" width="87" height="20" isPrintWhenDetailOverflows="true" uuid="c762bd62-75c0-4a58-aa1e-846f1e47759a"/>
+				<reportElement stretchType="RelativeToTallestObject" x="764" y="0" width="87" height="20" isPrintWhenDetailOverflows="true" uuid="c762bd62-75c0-4a58-aa1e-846f1e47759a"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -447,7 +447,7 @@
 				<textFieldExpression><![CDATA[$F{tpVeh}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="867" y="0" width="61" height="20" isPrintWhenDetailOverflows="true" uuid="34e991a8-980c-41ac-ad61-a3334ae4adfb"/>
+				<reportElement stretchType="RelativeToTallestObject" x="927" y="0" width="61" height="20" isPrintWhenDetailOverflows="true" uuid="34e991a8-980c-41ac-ad61-a3334ae4adfb"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -461,7 +461,7 @@
 				<textFieldExpression><![CDATA[$F{disperse}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="928" y="0" width="54" height="20" isPrintWhenDetailOverflows="true" uuid="bc1f180f-2536-4cb1-ad80-c2658f6dc09e"/>
+				<reportElement stretchType="RelativeToTallestObject" x="988" y="0" width="54" height="20" isPrintWhenDetailOverflows="true" uuid="bc1f180f-2536-4cb1-ad80-c2658f6dc09e"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -475,7 +475,7 @@
 				<textFieldExpression><![CDATA[$F{wrkTime}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1155" y="0" width="65" height="20" isPrintWhenDetailOverflows="true" uuid="22a709c2-986f-4c4a-9653-755a6ba11a4e"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1215" y="0" width="65" height="20" isPrintWhenDetailOverflows="true" uuid="22a709c2-986f-4c4a-9653-755a6ba11a4e"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -489,7 +489,7 @@
 				<textFieldExpression><![CDATA[$F{accZone}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="791" y="0" width="76" height="20" isPrintWhenDetailOverflows="true" uuid="721e0d4a-653d-4c8c-a7a9-30e29b9b6ffc"/>
+				<reportElement stretchType="RelativeToTallestObject" x="851" y="0" width="76" height="20" isPrintWhenDetailOverflows="true" uuid="721e0d4a-653d-4c8c-a7a9-30e29b9b6ffc"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -503,7 +503,7 @@
 				<textFieldExpression><![CDATA[$F{tpType}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1071" y="0" width="84" height="20" isPrintWhenDetailOverflows="true" uuid="a7479226-7887-4a9d-9ed3-c98466c5953c"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1131" y="0" width="84" height="20" isPrintWhenDetailOverflows="true" uuid="a7479226-7887-4a9d-9ed3-c98466c5953c"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -517,7 +517,7 @@
 				<textFieldExpression><![CDATA[$F{claimType}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="628" y="0" width="76" height="20" isPrintWhenDetailOverflows="true" uuid="0de24f76-ff9e-4521-bf3b-f104d480cb6f"/>
+				<reportElement stretchType="RelativeToTallestObject" x="688" y="0" width="76" height="20" isPrintWhenDetailOverflows="true" uuid="0de24f76-ff9e-4521-bf3b-f104d480cb6f"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -531,7 +531,7 @@
 				<textFieldExpression><![CDATA[$F{accResult}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="559" y="0" width="69" height="20" isPrintWhenDetailOverflows="true" uuid="886d2f75-5e40-475c-a6c1-8c96d46f7f9b"/>
+				<reportElement stretchType="RelativeToTallestObject" x="619" y="0" width="69" height="20" isPrintWhenDetailOverflows="true" uuid="886d2f75-5e40-475c-a6c1-8c96d46f7f9b"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -545,7 +545,7 @@
 				<textFieldExpression><![CDATA[$F{notiResult}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1314" y="0" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="71ed066f-a887-4047-be08-6b8c34be80b3"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1374" y="0" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="71ed066f-a887-4047-be08-6b8c34be80b3"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -559,7 +559,7 @@
 				<textFieldExpression><![CDATA[$F{reviewBy}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1220" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" uuid="19cb489d-28f8-4299-8486-878696add2d6"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1280" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" uuid="19cb489d-28f8-4299-8486-878696add2d6"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -573,7 +573,7 @@
 				<textFieldExpression><![CDATA[$F{surTotalWithTax}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1412" y="0" width="88" height="20" isPrintWhenDetailOverflows="true" uuid="3238c6a1-0c28-4ecb-b84a-99f036e64ac6"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1472" y="0" width="88" height="20" isPrintWhenDetailOverflows="true" uuid="3238c6a1-0c28-4ecb-b84a-99f036e64ac6"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -587,7 +587,7 @@
 				<textFieldExpression><![CDATA[$F{insTotalWithTax}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1640" y="0" width="148" height="20" isPrintWhenDetailOverflows="true" uuid="f45019f8-ca8e-49c3-ae83-59ad19535f9e"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1700" y="0" width="148" height="20" isPrintWhenDetailOverflows="true" uuid="f45019f8-ca8e-49c3-ae83-59ad19535f9e"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -601,7 +601,7 @@
 				<textFieldExpression><![CDATA[$F{surveyTotal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1788" y="0" width="102" height="20" isPrintWhenDetailOverflows="true" uuid="3702d451-5da5-4b3b-8bb6-44d71abb5552"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1848" y="0" width="102" height="20" isPrintWhenDetailOverflows="true" uuid="3702d451-5da5-4b3b-8bb6-44d71abb5552"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -615,7 +615,7 @@
 				<textFieldExpression><![CDATA[$F{claimStatus}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1500" y="0" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="9ae77ed8-5a60-49e0-aa54-1606bcbb5408"/>
+				<reportElement stretchType="RelativeToTallestObject" x="1560" y="0" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="9ae77ed8-5a60-49e0-aa54-1606bcbb5408"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
