@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="statisticsSurvey" language="groovy" pageWidth="1220" pageHeight="595" orientation="Landscape" columnWidth="1220" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="e0e4914e-f92d-49e6-b0d3-6cb5b34074e5">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="statisticsSurvey" language="groovy" pageWidth="1890" pageHeight="595" orientation="Landscape" columnWidth="1890" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" isIgnorePagination="true" uuid="e0e4914e-f92d-49e6-b0d3-6cb5b34074e5">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1239"/>
 	<property name="ireport.y" value="0"/>
 	<field name="claimNo" class="java.lang.String"/>
 	<field name="dispatchDate" class="java.lang.String"/>
@@ -19,6 +19,12 @@
 	<field name="surClaim" class="java.lang.Float"/>
 	<field name="claimType" class="java.lang.String"/>
 	<field name="accZone" class="java.lang.String"/>
+	<field name="reviewBy" class="java.lang.String"/>
+	<field name="surTotalWithTax" class="java.lang.Float"/>
+	<field name="insTotalWithTax" class="java.lang.Float"/>
+	<field name="surveyTotal" class="java.lang.Float"/>
+	<field name="claimStatus" class="java.lang.String"/>
+	<field name="approveBy" class="java.lang.String"/>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
@@ -231,6 +237,84 @@
 					<font fontName="AngsanaUPC" size="14"/>
 				</textElement>
 				<text><![CDATA[เงินเรียกร้องได้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1314" y="0" width="98" height="20" uuid="5b8f0e50-df89-4067-851c-0580f11f9a40"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[ ผู้ตรวจสอบ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1220" y="0" width="94" height="20" uuid="e2413eae-d3ca-4f49-acb8-1f4c7f5a1db4"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[ยอดวางบิลทิพย]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1640" y="0" width="148" height="20" uuid="94060cc9-4fb1-4aac-a0f0-214ee0f0f6e3"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[ยอดจ่ายค่าสำรวจ พนักงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1412" y="0" width="88" height="20" uuid="17cd9e32-4528-4ad3-9199-8a6e05784d06"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[ยอดทิพยอนุมัติ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1788" y="0" width="102" height="20" uuid="5feff00c-d3ba-4a99-8bdf-c25d44c06418"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[สถานะของงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1500" y="0" width="140" height="20" uuid="977097c3-a67b-412f-8ce6-351fe17aa335"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<text><![CDATA[ ผู้อนุมัติ]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -459,6 +543,90 @@
 					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{notiResult}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1314" y="0" width="98" height="20" isPrintWhenDetailOverflows="true" uuid="71ed066f-a887-4047-be08-6b8c34be80b3"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reviewBy}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1220" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" uuid="19cb489d-28f8-4299-8486-878696add2d6"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{surTotalWithTax}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1412" y="0" width="88" height="20" isPrintWhenDetailOverflows="true" uuid="3238c6a1-0c28-4ecb-b84a-99f036e64ac6"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{insTotalWithTax}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1640" y="0" width="148" height="20" isPrintWhenDetailOverflows="true" uuid="f45019f8-ca8e-49c3-ae83-59ad19535f9e"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{surveyTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1788" y="0" width="102" height="20" isPrintWhenDetailOverflows="true" uuid="3702d451-5da5-4b3b-8bb6-44d71abb5552"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claimStatus}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1500" y="0" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="9ae77ed8-5a60-49e0-aa54-1606bcbb5408"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="AngsanaUPC" size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{approveBy}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

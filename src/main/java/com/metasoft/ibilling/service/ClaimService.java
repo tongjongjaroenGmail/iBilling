@@ -26,12 +26,12 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 	public void loadClaimsFromWs();
 	
 	public ReportStatisticsSurveyVoPaging searchReportStatisticsSurveyPaging(String dispatchDateStart, String dispatchDateEnd, Integer areaType,
-			Integer branch,int start, int length);
+			Integer branch,Integer claimStatus,int start, int length);
 	
 	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurveyExport(Integer[] ids);
 	
 	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurvey(String dispatchDateStart, String dispatchDateEnd, Integer areaType,
-			Integer branch);
+			Integer branch, Integer claimStatus);
 	
 	public void calcClaim(String claimNo);
 }

@@ -233,7 +233,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 	}
 
 	@Override
-	public ClaimPaging searchReportStatisticsSurveyPaging(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch,
+	public ClaimPaging searchReportStatisticsSurveyPaging(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch, ClaimStatus claimStatus,
 			int start, int length) {
 		ClaimPaging resultPaging = new ClaimPaging();
 
@@ -259,6 +259,10 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		if (areaType != null) {
 			criteriaCount.add(Restrictions.eq("areaType", areaType));
 		}
+		
+		if (claimStatus != null) {
+			criteriaCount.add(Restrictions.eq("claimStatus", claimStatus));
+		}
 
 		criteriaCount.setProjection(Projections.rowCount());
 		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
@@ -280,6 +284,10 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			if (areaType != null) {
 				criteria.add(Restrictions.eq("areaType", areaType));
 			}
+			
+			if (claimStatus != null) {
+				criteria.add(Restrictions.eq("claimStatus", claimStatus));
+			}
 
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
@@ -293,7 +301,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 	}
 	
 	@Override
-	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch) {
+	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch, ClaimStatus claimStatus) {
 	
 		Criteria criteria = getCurrentSession().createCriteria(entityClass);
 		if (dispatchDateStart != null && dispatchDateEnd != null) {
@@ -310,6 +318,10 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		
 		if (areaType != null) {
 			criteria.add(Restrictions.eq("areaType", areaType));
+		}
+		
+		if (claimStatus != null) {
+			criteria.add(Restrictions.eq("claimStatus", claimStatus));
 		}
 
 		return criteria.list();

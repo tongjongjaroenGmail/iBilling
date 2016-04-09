@@ -646,7 +646,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		claim.setSurveyPhoto(surveyPhoto);
 
 		// 5. ค่าเรียกร้อง survey_claim
-		claim.setSurveyClaim((float) (surClaim * 0.15)); // ค่าเรียกร้อง15%
+		claim.setSurveyClaim((float) (surClaim * 5 * 0.15)); // ค่าเรียกร้อง15%
 
 		// 6. ค่าโทรศัพท์ survey_tel
 		float surveyTel = 0f;
@@ -730,16 +730,36 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		if (claim.getAreaType() != null) {
 			vo.setAccZone(claim.getAreaType().getName());
 		}
+		
+		if (claim.getClaimStatus() != null) {
+			vo.setClaimStatus(claim.getClaimStatus().getName());
+		}
+		
+		if (claim.getReviewBy() != null) {
+			vo.setReviewBy(claim.getReviewBy());
+		}
+		
+		if (claim.getApproveBy() != null) {
+			vo.setApproveBy(claim.getApproveBy());
+		}	
+
+		float surTotalNoTax = ClaimServiceImpl.calcTotalSur(claim);
+		vo.setSurTotalWithTax(surTotalNoTax + ClaimServiceImpl.calcVat(surTotalNoTax));
+		float insTotalNoTax = ClaimServiceImpl.calcTotalIns(claim);
+		vo.setInsTotalWithTax(insTotalNoTax + ClaimServiceImpl.calcVat(insTotalNoTax));
+		vo.setSurveyTotal(ClaimServiceImpl.calcTotalSurvey(claim));
+		
 		return vo;
 	}
 	
 	@Override
 	public ReportStatisticsSurveyVoPaging searchReportStatisticsSurveyPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selAreaType,
-			Integer selBranch, int start, int length) {
+			Integer selBranch,Integer selClaimStatus, int start, int length) {
 		Date dispatchDateStart = null;
 		Date dispatchDateEnd = null;
 		Branch branch = null;
 		AreaType areaType = null;
+		ClaimStatus claimStatus = null;
 
 		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
 			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
@@ -756,8 +776,12 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		if(selAreaType != null) {
 			areaType = AreaType.getById(selAreaType);
 		}
+		
+		if(selClaimStatus != null) {
+			claimStatus = ClaimStatus.getById(selClaimStatus);
+		}
 
-		ClaimPaging claimPaging = claimDao.searchReportStatisticsSurveyPaging(dispatchDateStart, dispatchDateEnd, areaType, branch, start, length);
+		ClaimPaging claimPaging = claimDao.searchReportStatisticsSurveyPaging(dispatchDateStart, dispatchDateEnd, areaType, branch,claimStatus, start, length);
 
 		ReportStatisticsSurveyVoPaging voPaging = new ReportStatisticsSurveyVoPaging();
 		voPaging.setDraw(claimPaging.getDraw());
@@ -776,11 +800,12 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	
 	@Override
 	public List<ReportStatisticsSurveyVo> searchReportStatisticsSurvey(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selAreaType,
-			Integer selBranch) {
+			Integer selBranch, Integer selClaimStatus) {
 		Date dispatchDateStart = null;
 		Date dispatchDateEnd = null;
 		Branch branch = null;
 		AreaType areaType = null;
+		ClaimStatus claimStatus = null;
 
 		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
 			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
@@ -794,11 +819,15 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 			branch = branchDao.findById(selBranch);
 		}
 		
-		if(selAreaType != null && selAreaType != 0) {
+		if(selAreaType != null) {
 			areaType = AreaType.getById(selAreaType);
 		}
+		
+		if(selClaimStatus != null) {
+			claimStatus = ClaimStatus.getById(selClaimStatus);
+		}
 
-		List<Claim> claims = claimDao.searchReportStatisticsSurvey(dispatchDateStart, dispatchDateEnd, areaType, branch);
+		List<Claim> claims = claimDao.searchReportStatisticsSurvey(dispatchDateStart, dispatchDateEnd, areaType, branch,claimStatus);
 
 		List<ReportStatisticsSurveyVo> reportStatisticsSurveyVos = new ArrayList<ReportStatisticsSurveyVo>();
 		

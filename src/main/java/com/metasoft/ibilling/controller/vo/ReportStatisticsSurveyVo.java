@@ -19,6 +19,51 @@ public class ReportStatisticsSurveyVo {
 	private String claimType = "";
 	private String accZone = "";
 	
+//	แก้ i-billing ครั้งที่4‏
+//	 "ผู้ตรวจสอบ","ยอดวางบิลทิพย","ยอดทิพยอนุมัติ","ยอดจ่ายค่าสำรวจ พนักงาน","สถานะของงาน","ผู้อนุมัติ"
+	private String reviewBy = "";
+	private String approveBy = "";
+	private Float surTotalWithTax = 0f;
+	private Float insTotalWithTax = 0f;
+	private Float surveyTotal = 0f;
+	private String claimStatus = "";
+
+	public String getApproveBy() {
+		return approveBy;
+	}
+	public void setApproveBy(String approveBy) {
+		this.approveBy = approveBy;
+	}
+	public String getReviewBy() {
+		return reviewBy;
+	}
+	public void setReviewBy(String reviewBy) {
+		this.reviewBy = reviewBy;
+	}
+	public Float getSurTotalWithTax() {
+		return surTotalWithTax;
+	}
+	public void setSurTotalWithTax(Float surTotalWithTax) {
+		this.surTotalWithTax = surTotalWithTax;
+	}
+	public Float getInsTotalWithTax() {
+		return insTotalWithTax;
+	}
+	public void setInsTotalWithTax(Float insTotalWithTax) {
+		this.insTotalWithTax = insTotalWithTax;
+	}
+	public Float getSurveyTotal() {
+		return surveyTotal;
+	}
+	public void setSurveyTotal(Float surveyTotal) {
+		this.surveyTotal = surveyTotal;
+	}
+	public String getClaimStatus() {
+		return claimStatus;
+	}
+	public void setClaimStatus(String claimStatus) {
+		this.claimStatus = claimStatus;
+	}
 	public Integer getClaimId() {
 		return claimId;
 	}

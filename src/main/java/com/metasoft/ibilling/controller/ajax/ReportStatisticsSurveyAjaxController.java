@@ -51,6 +51,7 @@ public class ReportStatisticsSurveyAjaxController extends BaseAjaxController {
 			@RequestParam(required = false) String paramDispatchDateEnd, 
 			@RequestParam(required = false) Integer paramAreaType,
 			@RequestParam(required = false) Integer paramBranch, 
+			@RequestParam(required = false) Integer paramClaimStatus, 
 			@RequestParam(required = true) String paramFirstTime,
 
 			@RequestParam(required = true) Integer draw, @RequestParam(required = true) Integer start,
@@ -63,7 +64,7 @@ public class ReportStatisticsSurveyAjaxController extends BaseAjaxController {
 			resultPaging.setRecordsTotal(0L);
 			resultPaging.setData(new ArrayList<ReportStatisticsSurveyVo>());
 		} else {
-			resultPaging = claimService.searchReportStatisticsSurveyPaging(paramDispatchDateStart, paramDispatchDateEnd, paramAreaType, paramBranch,
+			resultPaging = claimService.searchReportStatisticsSurveyPaging(paramDispatchDateStart, paramDispatchDateEnd, paramAreaType, paramBranch,paramClaimStatus,
 					start, length);
 		}
 
@@ -77,10 +78,11 @@ public class ReportStatisticsSurveyAjaxController extends BaseAjaxController {
 			@RequestParam(required = false) String txtDispatchDateEnd, 
 			@RequestParam(required = false) Integer selAreaType,
 			@RequestParam(required = false) Integer selBranch, 
+			@RequestParam(required = false) Integer selClaimStatus, 
 			@RequestParam(required = false) String token, HttpSession session, HttpServletResponse response) throws ServletException,
 			IOException, JRException, Exception {
 
-		List<ReportStatisticsSurveyVo> results = claimService.searchReportStatisticsSurvey(txtDispatchDateStart, txtDispatchDateEnd, selAreaType, selBranch);
+		List<ReportStatisticsSurveyVo> results = claimService.searchReportStatisticsSurvey(txtDispatchDateStart, txtDispatchDateEnd, selAreaType, selBranch,selClaimStatus);
 		
 		HashMap param =new HashMap();
 		downloadService.download(ExporterService.EXTENSION_TYPE_EXCEL, "statisticsSurvey",

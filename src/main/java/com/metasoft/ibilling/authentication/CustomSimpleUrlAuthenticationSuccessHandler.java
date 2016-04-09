@@ -25,6 +25,7 @@ import com.metasoft.ibilling.dao.DepartmentDao;
 import com.metasoft.ibilling.dao.PositionDao;
 import com.metasoft.ibilling.dao.SurveyEmployeeDao;
 import com.metasoft.ibilling.model.AreaType;
+import com.metasoft.ibilling.model.ClaimStatus;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.UserService;
 
@@ -82,6 +83,7 @@ public class CustomSimpleUrlAuthenticationSuccessHandler implements Authenticati
         session.setAttribute("surveyEmployees", surveyEmployeeDao.findAllOrderByBranch());
         session.setAttribute("branchDhips", branchDhipDao.findAll());
         session.setAttribute("areaTypes", AreaType.values());
+        session.setAttribute("claimStatuses", ClaimStatus.values());
          
     	User secUser = userService.findByUserName(authentication.getName());
     	session.setAttribute("loginUser", secUser);

@@ -71,6 +71,23 @@
 					</div>
 				</div>
 				
+				<div class="col-sm-2">		
+					<div class="input-group col-sm-12 no-padding-left" style="text-align: right;">
+						<b>สถานะของงาน : </b> 
+					</div>
+				</div>
+				
+				<div class="col-sm-3">	
+					<div class="input-group col-sm-12 no-padding-left">
+						<select class="col-sm-12" id="selClaimStatus" name="selClaimStatus">
+							<option value="">ทั้งหมด</option>
+							<c:forEach var="claimStatus" items="${claimStatuses}" varStatus="index">		
+								<option value="${claimStatus.id}">${claimStatus.name}</option>					
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+				
 			</div>
 		</div>		
 	</div>
@@ -146,7 +163,12 @@
 					<th>เงินเรียกร้องได้</th>
 					<th>ประเภทเคลม</th>	
 					<th>พื้นที่</th>
-					
+					<th>ยอดวางบิลทิพย</th>
+					<th>ผู้ตรวจสอบ</th>
+					<th>ยอดทิพยอนุมัติ</th>
+					<th>ผู้อนุมัติ</th>
+					<th>ยอดจ่ายค่าสำรวจพนักงาน</th>
+					<th>สถานะของงาน</th>				
 				</tr>
 			</thead>
 
@@ -191,35 +213,43 @@ $(document).ready(function() {
 	tblClaim = $("#tblClaim").dataTable(
 				{
 					"lengthMenu": [[10,15,20, 25, 50, 100,200,300,400,500,600,700,800,900,1000], [10,15,20, 25, 50, 100,200,300,400,500,600,700,800,900,1000]],
-					'bAutoWidth': false , 
+					'bAutoWidth': true , 
 					"aoColumns" : [
 
-								{ "mData" : "claimNo" },	
-								{ "mData" : "dispatchDate" },	
-								{ "mData" : "employeeName" },	
-								{ "mData" : "employeeCode" },	
-								{ "mData" : "branchName" },	
-								{ "mData" : "policyType" },	
-								{ "mData" : "hasTp" },	
-								{ "mData" : "notiResult" },
-								{ "mData" : "accResult" },
-								{ "mData" : "tpVeh" },
-								{ "mData" : "tpType" },
-								{ "mData" : "disperse" },
-								{ "mData" : "wrkTime" },
-								{ "mData" : "surClaim",
+								{ "mData" : "claimNo" , "sWidth" : "150px" },	
+								{ "mData" : "dispatchDate", "sWidth" : "100px" },	
+								{ "mData" : "employeeName", "sWidth" : "250px" },	
+								{ "mData" : "employeeCode", "sWidth" : "100px" },	
+								{ "mData" : "branchName", "sWidth" : "150px" },	
+								{ "mData" : "policyType", "sWidth" : "100px" },	
+								{ "mData" : "hasTp", "sWidth" : "50px" },	
+								{ "mData" : "notiResult", "sWidth" : "150px" },
+								{ "mData" : "accResult", "sWidth" : "150px" },
+								{ "mData" : "tpVeh", "sWidth" : "150px" },
+								{ "mData" : "tpType", "sWidth" : "150px" },
+								{ "mData" : "disperse", "sWidth" : "50px" },
+								{ "mData" : "wrkTime", "sWidth" : "100px" },
+								{ "mData" : "surClaim", "sWidth" : "150px",
 									"mRender" : function (data, type, full) {
 										return addCommas(data);
 									}	
 								},			
-								{ "mData" : "claimType" },
-								{ "mData" : "accZone" }
+								{ "mData" : "claimType", "sWidth" : "100px" },
+								{ "mData" : "accZone" , "sWidth" : "100px"},
+								
+								{ "mData" : "surTotalWithTax" , "sWidth" : "100px"},
+								{ "mData" : "reviewBy" , "sWidth" : "250px"},
+								{ "mData" : "insTotalWithTax" , "sWidth" : "100px"},
+								{ "mData" : "approveBy" , "sWidth" : "250px"},
+								{ "mData" : "surveyTotal" , "sWidth" : "100px"},
+								{ "mData" : "claimStatus" , "sWidth" : "100px"}	
 							   ],
 				columnDefs: [{ type: 'date-dd/mm/yyyy', targets: 1 }],
 				"processing": true,
                 "serverSide": true,
                 "bSort" : false,
                 "bFilter": false,
+                "scrollX": true,
                 "ajax": {
                 	"url": '${pageContext.request.contextPath}/report/statisticsSurvey/search',
                     "type": "POST",
@@ -227,7 +257,8 @@ $(document).ready(function() {
                          d.paramDispatchDateStart   =  $("#divParamSearch").find("#txtDispatchDateStart").val(),  
                          d.paramDispatchDateEnd     =  $("#divParamSearch").find("#txtDispatchDateEnd").val(),  
                          d.paramAreaType   			=  $("#divParamSearch").find("#selAreaType").val(),   
-                         d.paramBranch       		=  $("#divParamSearch").find("#selBranch").val(),  
+                         d.paramBranch       		=  $("#divParamSearch").find("#selBranch").val(),
+                         d.paramClaimStatus       	=  $("#divParamSearch").find("#selClaimStatus").val(),
                          d.paramFirstTime           =  firstTime
                     }
                 },

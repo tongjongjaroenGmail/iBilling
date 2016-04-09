@@ -23,7 +23,7 @@ public interface ClaimDao extends AbstractDao<Claim, Integer> {
 	
 	public Claim findByRefWsId(String refWsId);
 	
-	public ClaimPaging searchReportStatisticsSurveyPaging(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch, int start, int length);
+	public ClaimPaging searchReportStatisticsSurveyPaging(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch,ClaimStatus claimStatus, int start, int length);
 	
-	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch);
+	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch,ClaimStatus claimStatus);
 }
