@@ -182,6 +182,12 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 
 		Criteria criteriaRecordsTotal = getCurrentSession().createCriteria(entityClass);
 		
+		List<ClaimStatus> claimStatus = new ArrayList<ClaimStatus>();
+		claimStatus.add(ClaimStatus.closeCheck);
+		claimStatus.add(ClaimStatus.approve);
+		claimStatus.add(ClaimStatus.noPay);
+		claimStatus.add(ClaimStatus.waitEdit);
+		
 		criteriaRecordsTotal.add(Restrictions.isNull("paySurvey"));
 		criteriaRecordsTotal.add(Restrictions.eq("claimStatus",ClaimStatus.closeCheck));
 	
@@ -202,11 +208,6 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		}
 		
 		criteriaCount.add(Restrictions.isNull("paySurvey"));
-		List<ClaimStatus> claimStatus = new ArrayList<ClaimStatus>();
-		claimStatus.add(ClaimStatus.closeCheck);
-		claimStatus.add(ClaimStatus.approve);
-		claimStatus.add(ClaimStatus.noPay);
-		claimStatus.add(ClaimStatus.waitEdit);
 		criteriaCount.add(Restrictions.in("claimStatus",claimStatus));
 
 		criteriaCount.setProjection(Projections.rowCount());
