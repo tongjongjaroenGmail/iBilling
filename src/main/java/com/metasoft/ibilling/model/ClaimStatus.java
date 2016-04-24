@@ -6,7 +6,8 @@ public enum ClaimStatus {
 	closeCheck(2, "ปิดการตรวจสอบ"),
 	approve(3, "สินไหมอนุมัติ"),
 	cancel(4, "ยกเลิก"),
-	noPay(5,"ไม่อนุมัติจ่าย");
+	noPay(5,"ไม่อนุมัติจ่าย"),
+	waitEdit(6,"รอแก้ไข");
 
 	private int id;
 	private String name;

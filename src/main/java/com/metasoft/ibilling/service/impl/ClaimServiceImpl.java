@@ -20,10 +20,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.InvoiceReportVoPaging;
 import com.metasoft.ibilling.bean.paging.PaySurveyClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ReportStatisticsSurveyVoPaging;
 import com.metasoft.ibilling.bean.vo.CheckClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
+import com.metasoft.ibilling.bean.vo.InvoiceReportVo;
 import com.metasoft.ibilling.bean.vo.PaySurveyClaimSearchResultVo;
 import com.metasoft.ibilling.constant.SystemConstant;
 import com.metasoft.ibilling.controller.vo.ReportStatisticsSurveyVo;
@@ -102,11 +104,11 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 
 	@Override
 	public ClaimSearchResultVoPaging searchGroupClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer selBranch,
-			int start, int length) {
+			String claimStatus,int start, int length) {
 		Date dispatchDateStart = null;
 		Date dispatchDateEnd = null;
 		BranchDhip branchDhip = null;
-
+		List<ClaimStatus> claimStatusList = new ArrayList<ClaimStatus>();
 		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
 			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
 		}
@@ -118,8 +120,15 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		if (selBranch != null && selBranch != 0) {
 			branchDhip = branchDhipDao.findById(selBranch);
 		}
+		
+		if(StringUtils.isNotBlank(claimStatus)){
+			String[] claimStatusArray = claimStatus.split(",");
+			for (String claimStatusStr : claimStatusArray) {
+				claimStatusList.add(ClaimStatus.getById(Integer.parseInt(claimStatusStr.trim())));
+			}
+ 		}
 
-		ClaimPaging claimPaging = claimDao.searchPaging(dispatchDateStart, dispatchDateEnd, branchDhip, start, length);
+		ClaimPaging claimPaging = claimDao.searchPaging(dispatchDateStart, dispatchDateEnd, branchDhip,claimStatusList, start, length);
 
 		ClaimSearchResultVoPaging voPaging = new ClaimSearchResultVoPaging();
 		voPaging.setDraw(claimPaging.getDraw());
@@ -868,5 +877,77 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public InvoiceReportVoPaging searchInvoiceReportPaging(String txtDispatchDateStart, String txtDispatchDateEnd,
+			Integer selBranchDhip, Integer selType, int start, int length) {
+		Date dispatchDateStart = null;
+		Date dispatchDateEnd = null;
+		BranchDhip branchDhip = null;
+		Boolean groupInvoice = null;
+
+		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
+			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (StringUtils.isNotBlank(txtDispatchDateEnd)) {
+			dispatchDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (selBranchDhip != null && selBranchDhip != 0) {
+			branchDhip = branchDhipDao.findById(selBranchDhip);
+		}
+		
+		if(selType != null) {
+			if(selType == 1){
+				groupInvoice = false;
+			}else{
+				groupInvoice = true;
+			}
+		}
+
+		ClaimPaging claimPaging = claimDao.searchInvoiceReportPaging(dispatchDateStart, dispatchDateEnd, branchDhip, groupInvoice, start, length);
+
+		InvoiceReportVoPaging voPaging = new InvoiceReportVoPaging();
+		voPaging.setDraw(claimPaging.getDraw());
+		voPaging.setRecordsFiltered(claimPaging.getRecordsFiltered());
+		voPaging.setRecordsTotal(claimPaging.getRecordsTotal());
+		voPaging.setData(new ArrayList<InvoiceReportVo>());
+		if (claimPaging != null && claimPaging.getData() != null) {
+			for (Claim claim : claimPaging.getData()) {
+				InvoiceReportVo vo = setInvoiceReportVo(claim);
+				voPaging.getData().add(vo);
+			}
+		}
+		return voPaging;
+	}
+	
+	private InvoiceReportVo setInvoiceReportVo(Claim claim){
+		InvoiceReportVo vo = new InvoiceReportVo();
+		vo.setClaimNo(StringUtils.trimToEmpty(claim.getClaimNo()));
+		if (claim.getDispatchDate() != null) {
+			vo.setDispatchDate(DateToolsUtil.convertToString(claim.getDispatchDate(), DateToolsUtil.LOCALE_TH));
+		}
+	
+		if (claim.getBranchDhip() != null) {
+			vo.setBranchDhipName(claim.getBranchDhip().getName());
+		}
+		
+		float totalSur = calcTotalSur(claim);		
+		vo.setSurveyTotal(totalSur + calcVat(totalSur));
+		
+		if (claim.getClaimStatus() != null) {
+			vo.setClaimStatus(claim.getClaimStatus().getName());
+		}
+		
+		if (claim.getInvoice() != null) {
+			vo.setInvoiceNo(claim.getInvoice().getCode());
+			vo.setType("จัดชุดแล้ว");
+		}else{
+			vo.setType("ยังไม่จัดชุด");
+		}
+		
+		return vo;
 	}
 }

@@ -5,7 +5,7 @@
 
 <div class="page-content col-xs-12">
 	<div class="page-header">
-		<h1>จัดชุดวางบิล (ทิพยอนุมัติ)</h1>
+		<h1>จัดชุดวางบิล (หัวหน้าปิดงาน)</h1>
 	</div>
 	<!-- /.page-header -->
 
@@ -230,8 +230,8 @@ $(document).ready(function() {
                     "data": function ( d ) {
                          d.txtDispatchDateStart       =  $("#divParamSearch").find("#txtDispatchDateStart").val(),  
                          d.txtDispatchDateEnd         =  $("#divParamSearch").find("#txtDispatchDateEnd").val(),  
-                         d.selBranch   =  $("#divParamSearch").find("#selBranch").val(),  
-                         d.selClaimStatus   =  '3',  
+                         d.selBranch   =  $("#divParamSearch").find("#selBranch").val(),
+                         d.selClaimStatus   =  '2 , 3, 5, 6',  
                          d.firstTime          =  firstTime
                     }
                 },

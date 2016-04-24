@@ -8,7 +8,7 @@
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 				</button>
-				<h5 class="modal-title" id="modalSaveHeaderLabel">จัดชุดวางบิล</h5>
+				<h5 class="modal-title" id="modalSaveHeaderLabel">จัดชุดวางบิล (ทิพยอนุมัติ)</h5>
 			</div>
 			
 			<div class="modal-body" style="padding: 5px;">	

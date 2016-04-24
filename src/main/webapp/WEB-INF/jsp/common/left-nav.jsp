@@ -57,7 +57,14 @@
 				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceGroupPage'}">class="active"</c:if>>
 					<a href="${pageContext.request.contextPath}/invoiceGroupPage"> 
 						<i class="icon-double-angle-right"></i> 
-						<span class="menu-text">จัดชุดวางบิล</span>
+						<span class="menu-text">จัดชุดวางบิล (ทิพยอนุมัติ)</span>
+					</a>
+				</li>
+				
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceGroupClosePage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/invoiceGroupClosePage"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">จัดชุดวางบิล (หัวหน้าปิดงาน)</span>
 					</a>
 				</li>
 				
@@ -65,6 +72,13 @@
 					<a href="${pageContext.request.contextPath}/invoiceSearchPage"> 
 						<i class="icon-double-angle-right"></i> 
 						<span class="menu-text">ค้นหาข้อมูลวางบิล</span>
+					</a>
+				</li>
+				
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/invoiceReportPage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/invoiceReportPage"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">รายงานการจัดชุดวางบิล</span>
 					</a>
 				</li>
 			</ul>

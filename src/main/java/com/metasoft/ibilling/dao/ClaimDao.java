@@ -12,7 +12,7 @@ import com.metasoft.ibilling.model.ClaimStatus;
 import com.metasoft.ibilling.model.SurveyEmployee;
 
 public interface ClaimDao extends AbstractDao<Claim, Integer> {
-	public ClaimPaging searchPaging(Date dispatchDateStart, Date dispatchDateEnd, BranchDhip branchDhip, int start, int length);
+	public ClaimPaging searchPaging(Date dispatchDateStart, Date dispatchDateEnd, BranchDhip branchDhip,List<ClaimStatus> claimStatusList, int start, int length);
 
 	public ClaimPaging searchCheckClaimPaging(Date dispatchDateStart, Date dispatchDateEnd, String claimNo, SurveyEmployee surveyEmployee,
 			ClaimStatus claimStatus, int start, int length);
@@ -26,4 +26,7 @@ public interface ClaimDao extends AbstractDao<Claim, Integer> {
 	public ClaimPaging searchReportStatisticsSurveyPaging(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch,ClaimStatus claimStatus, int start, int length);
 	
 	public List<Claim> searchReportStatisticsSurvey(Date dispatchDateStart, Date dispatchDateEnd, AreaType areaType, Branch branch,ClaimStatus claimStatus);
+	
+	public ClaimPaging searchInvoiceReportPaging(Date dispatchDateStart, Date dispatchDateEnd,BranchDhip branchDhip,Boolean groupInvoice, int start, int length);
+	
 }

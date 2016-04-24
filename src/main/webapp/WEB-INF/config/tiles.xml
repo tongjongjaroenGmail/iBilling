@@ -26,6 +26,16 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/invoice/invoiceGroupSearch.jsp"></put-attribute>
     </definition>
     
+    <definition name="invoiceGroupClosePage" extends="base.definition">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/jsp/invoice/invoiceGroupCloseSearch.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="invoiceReportPage" extends="base.definition">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/jsp/invoice/invoiceReportSearch.jsp"></put-attribute>
+    </definition>
+    
     <definition name="invoiceSearchPage" extends="base.definition">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/jsp/invoice/invoiceSearch.jsp"></put-attribute>

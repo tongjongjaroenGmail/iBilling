@@ -3,10 +3,17 @@
  */
 package com.metasoft.ibilling.controller.ajax;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import net.sf.jasperreports.engine.JRException;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +28,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.metasoft.ibilling.bean.SaveResult;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.InvoiceReportVoPaging;
 import com.metasoft.ibilling.bean.paging.InvoiceSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.ReportStatisticsSurveyVoPaging;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.InvoiceDetailVo;
+import com.metasoft.ibilling.bean.vo.InvoiceReportVo;
 import com.metasoft.ibilling.bean.vo.InvoiceSearchResultVo;
 import com.metasoft.ibilling.bean.vo.ResultVo;
+import com.metasoft.ibilling.controller.vo.ReportStatisticsSurveyVo;
 import com.metasoft.ibilling.dao.InvoiceDao;
 import com.metasoft.ibilling.dao.UserDao;
 import com.metasoft.ibilling.model.Claim;
@@ -34,6 +45,9 @@ import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.ClaimService;
 import com.metasoft.ibilling.service.InvoiceService;
 import com.metasoft.ibilling.service.impl.ClaimServiceImpl;
+import com.metasoft.ibilling.service.impl.report.DownloadService;
+import com.metasoft.ibilling.service.impl.report.ExporterService;
+import com.metasoft.ibilling.service.impl.report.TokenService;
 import com.metasoft.ibilling.util.DateToolsUtil;
 import com.metasoft.ibilling.util.NumberToolsUtil;
 
@@ -51,12 +65,19 @@ public class InvoiceAjaxController extends BaseAjaxController {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private DownloadService downloadService;
+
+	@Autowired
+	private TokenService tokenService;
+	
 	@RequestMapping(value = "/invoiceGroup/search", method = RequestMethod.POST)
 	public @ResponseBody
 	String searchClaim(Model model,
 			@RequestParam(required = false) String txtDispatchDateStart,
 			@RequestParam(required = false) String txtDispatchDateEnd,
-			@RequestParam(required = false) Integer selBranch,			
+			@RequestParam(required = false) Integer selBranch,	
+			@RequestParam(required = true) String selClaimStatus,
 			@RequestParam(required = false) String firstTime,
 			@RequestParam(required = true) Integer draw,
 			@RequestParam(required = true) Integer start,
@@ -69,7 +90,7 @@ public class InvoiceAjaxController extends BaseAjaxController {
 			resultPaging.setRecordsTotal(0L);
 			resultPaging.setData(new ArrayList<ClaimSearchResultVo>());
 		}else{
-			resultPaging = claimService.searchGroupClaimPaging(txtDispatchDateStart, txtDispatchDateEnd, selBranch, start, length);
+			resultPaging = claimService.searchGroupClaimPaging(txtDispatchDateStart, txtDispatchDateEnd, selBranch,selClaimStatus, start, length);
 		}
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -160,5 +181,49 @@ public class InvoiceAjaxController extends BaseAjaxController {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(invoiceDetailVo);
 		return json;
+	}
+	
+	@RequestMapping(value = "/invoice/report/search", method = RequestMethod.POST)
+	public @ResponseBody String searchInvoiceReport(Model model, 
+			
+			@RequestParam(required = false) String paramDispatchDateStart,
+			@RequestParam(required = false) String paramDispatchDateEnd, 
+			@RequestParam(required = false) Integer paramBranchDhip, 
+			@RequestParam(required = false) Integer paramType, 
+			@RequestParam(required = true) String paramFirstTime,
+
+			@RequestParam(required = true) Integer draw, @RequestParam(required = true) Integer start,
+			@RequestParam(required = true) Integer length) throws ParseException {
+
+		InvoiceReportVoPaging resultPaging = new InvoiceReportVoPaging();
+		resultPaging.setDraw(++draw);
+		if (new Boolean(paramFirstTime)) {
+			resultPaging.setRecordsFiltered(0L);
+			resultPaging.setRecordsTotal(0L);
+			resultPaging.setData(new ArrayList<InvoiceReportVo>());
+		} else {
+			resultPaging = claimService.searchInvoiceReportPaging(paramDispatchDateStart, paramDispatchDateEnd, paramBranchDhip, paramType,
+					start, length);
+		}
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(resultPaging);
+		return json;
+	}
+	
+	@RequestMapping(value = "/invoice/report/export", method = RequestMethod.POST)
+	public void export(@RequestParam(required = false) String txtDispatchDateStart,
+			@RequestParam(required = false) String txtDispatchDateEnd, 
+			@RequestParam(required = false) Integer selBranchDhip, 
+			@RequestParam(required = false) Integer selType, 
+			@RequestParam(required = false) String token, HttpSession session, HttpServletResponse response) throws ServletException,
+			IOException, JRException, Exception {
+
+		InvoiceReportVoPaging results = claimService.searchInvoiceReportPaging(txtDispatchDateStart, txtDispatchDateEnd, selBranchDhip, selType,0,0);
+		
+		HashMap param =new HashMap();
+		downloadService.download(ExporterService.EXTENSION_TYPE_EXCEL, "invoiceReport",
+				session.getServletContext().getRealPath("/report/invoiceReport"),
+				param, results.getData(), token, response);		
 	}
 }

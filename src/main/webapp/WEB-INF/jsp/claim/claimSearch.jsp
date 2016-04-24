@@ -132,6 +132,11 @@ pageContext.setAttribute("claimStatuses", ClaimStatus.values());
 					<button class="btn btn-info" type="button" id="btnSearch" onclick="searchClaim();">
 						<i class="icon-search"></i> ค้นหา
 					</button>
+					
+					<input type="text" id="tempClaimNo">
+					<button class="btn btn-info" type="button" id="btnSearch" onclick="calcClaim();">
+						<i class="icon-search"></i> calcClaim
+					</button>
 				</div>
 			</div>
 			<!-- /.table-responsive -->
@@ -240,6 +245,19 @@ function openclaimDetailModal(claimId){
 			backdrop:'static'
 		}
 	);
+}
+
+function calcClaim(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/claim/calcClaim?tempClaimNo=' + $("#tempClaimNo").val() ,
+		dataType: 'json',
+		data : "",
+		contentType: 'application/json',
+	    mimeType: 'application/json',
+		success : function(data) {
+			alert("success");
+		}
+	});
 }
 </script>
 

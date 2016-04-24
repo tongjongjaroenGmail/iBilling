@@ -42,7 +42,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 	}
 
 	@Override
-	public ClaimPaging searchPaging(Date dispatchDateStart,Date dispatchDateEnd,BranchDhip branchDhip,
+	public ClaimPaging searchPaging(Date dispatchDateStart,Date dispatchDateEnd,BranchDhip branchDhip,List<ClaimStatus> claimStatusList,
 			int start,int length) {
 		ClaimPaging resultPaging = new ClaimPaging();
 
@@ -66,7 +66,9 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		}
 		
 		criteriaCount.add(Restrictions.isNull("invoice"));
-		criteriaCount.add(Restrictions.eq("claimStatus", ClaimStatus.approve));
+		if (claimStatusList != null && claimStatusList.size() > 0) {
+			criteriaCount.add(Restrictions.in("claimStatus", claimStatusList));
+		}
 
 		criteriaCount.setProjection(Projections.rowCount());
 		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
@@ -86,8 +88,11 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			}
 			
 			criteria.add(Restrictions.isNull("invoice"));
-			criteria.add(Restrictions.eq("claimStatus", ClaimStatus.approve));
+			if (claimStatusList != null && claimStatusList.size() > 0) {
+				criteria.add(Restrictions.in("claimStatus", claimStatusList));
+			}
 
+			criteria.addOrder(Order.desc("dispatchDate"));
 			criteria.addOrder(Order.asc("branch"));
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
@@ -197,7 +202,12 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		}
 		
 		criteriaCount.add(Restrictions.isNull("paySurvey"));
-		criteriaCount.add(Restrictions.eq("claimStatus",ClaimStatus.closeCheck));
+		List<ClaimStatus> claimStatus = new ArrayList<ClaimStatus>();
+		claimStatus.add(ClaimStatus.closeCheck);
+		claimStatus.add(ClaimStatus.approve);
+		claimStatus.add(ClaimStatus.noPay);
+		claimStatus.add(ClaimStatus.waitEdit);
+		criteriaCount.add(Restrictions.in("claimStatus",claimStatus));
 
 		criteriaCount.setProjection(Projections.rowCount());
 		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
@@ -218,8 +228,9 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			}
 			
 			criteria.add(Restrictions.isNull("paySurvey"));
-			criteria.add(Restrictions.eq("claimStatus",ClaimStatus.closeCheck));
+			criteria.add(Restrictions.in("claimStatus",claimStatus));
 
+			criteria.addOrder(Order.desc("dispatchDate"));
 			criteria.addOrder(Order.asc("claimNo"));
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
@@ -289,6 +300,8 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 				criteria.add(Restrictions.eq("claimStatus", claimStatus));
 			}
 
+			criteria.addOrder(Order.desc("dispatchDate"));
+			
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
 			resultPaging.setData(criteria.list());
@@ -330,5 +343,78 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 	@Override
 	public Claim findByRefWsId(String refWsId) {
 		return (Claim) getCurrentSession().createCriteria(entityClass).add(Restrictions.eq("refWsId", refWsId)).uniqueResult();
+	}
+	
+	@Override
+	public ClaimPaging searchInvoiceReportPaging(Date dispatchDateStart, Date dispatchDateEnd, BranchDhip branchDhip,Boolean groupInvoice,
+			int start, int length) {
+		ClaimPaging resultPaging = new ClaimPaging();
+
+		Criteria criteriaRecordsTotal = getCurrentSession().createCriteria(entityClass);
+
+		criteriaRecordsTotal.setProjection(Projections.rowCount());
+		resultPaging.setRecordsTotal((Long) criteriaRecordsTotal.uniqueResult());
+
+		Criteria criteriaCount = getCurrentSession().createCriteria(entityClass);
+		if (dispatchDateStart != null && dispatchDateEnd != null) {
+			criteriaCount.add(Restrictions.between("dispatchDate", dispatchDateStart, dispatchDateEnd));
+		} else if (dispatchDateStart != null) {
+			criteriaCount.add(Restrictions.ge("dispatchDate", dispatchDateStart));
+		} else if (dispatchDateEnd != null) {
+			criteriaCount.add(Restrictions.le("dispatchDate", dispatchDateEnd));
+		}
+
+		if (branchDhip != null) {
+			criteriaCount.add(Restrictions.eq("branchDhip", branchDhip));
+		}
+		
+		if (groupInvoice != null) {
+			if(groupInvoice){
+				criteriaCount.add(Restrictions.isNotNull("invoice"));
+			}else{
+				criteriaCount.add(Restrictions.isNull("invoice"));
+			}	
+		}
+
+		criteriaCount.setProjection(Projections.rowCount());
+		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
+
+		if (resultPaging.getRecordsFiltered() != 0) {
+			Criteria criteria = getCurrentSession().createCriteria(entityClass);
+			if (dispatchDateStart != null && dispatchDateEnd != null) {
+				criteria.add(Restrictions.between("dispatchDate", dispatchDateStart, dispatchDateEnd));
+			} else if (dispatchDateStart != null) {
+				criteria.add(Restrictions.ge("dispatchDate", dispatchDateStart));
+			} else if (dispatchDateEnd != null) {
+				criteria.add(Restrictions.le("dispatchDate", dispatchDateEnd));
+			}
+
+			if (branchDhip != null) {
+				criteria.add(Restrictions.eq("branchDhip", branchDhip));
+			}
+			
+			if (groupInvoice != null) {
+				if(groupInvoice){
+					criteria.add(Restrictions.isNotNull("invoice"));
+				}else{
+					criteria.add(Restrictions.isNull("invoice"));
+				}	
+			}
+			
+			criteria.addOrder(Order.desc("dispatchDate"));
+
+			if(start != 0){
+				criteria.setFirstResult(start);
+			}
+			if(length != 0){
+				criteria.setMaxResults(length);
+			}
+			resultPaging.setData(criteria.list());
+		}
+
+		if (resultPaging.getData() == null) {
+			resultPaging.setData(new ArrayList<Claim>());
+		}
+		return resultPaging;
 	}
 }

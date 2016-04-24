@@ -92,6 +92,12 @@ public class SiteController extends BaseController
 		return "invoiceGroupPage";
     }
     
+    @RequestMapping(value = "/invoiceGroupClosePage", method = RequestMethod.GET)
+    public String invoiceGroupClosePage()
+    {	
+		return "invoiceGroupClosePage";
+    }
+    
     @RequestMapping(value = "/invoiceSearchPage", method = RequestMethod.GET)
     public String invoiceSearchPage()
     {	
@@ -120,5 +126,11 @@ public class SiteController extends BaseController
     public String reportStatisticsSurveyPage()
     {	
 		return "reportStatisticsSurveyPage";
+    }
+    
+    @RequestMapping(value = "/invoiceReportPage", method = RequestMethod.GET)
+    public String invoiceReportPage()
+    {	
+		return "invoiceReportPage";
     }
 }
