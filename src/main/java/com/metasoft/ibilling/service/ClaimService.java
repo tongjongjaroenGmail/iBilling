@@ -3,6 +3,7 @@
  */
 package com.metasoft.ibilling.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
@@ -24,7 +25,7 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 	public PaySurveyClaimSearchResultVoPaging searchPaySurveyClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer employeeId,
 			int start, int length);
 	
-	public void loadClaimsFromWs();
+	public void loadClaimsFromWs(Date loadDate);
 	
 	public ReportStatisticsSurveyVoPaging searchReportStatisticsSurveyPaging(String dispatchDateStart, String dispatchDateEnd, Integer areaType,
 			Integer branch,Integer claimStatus,int start, int length);

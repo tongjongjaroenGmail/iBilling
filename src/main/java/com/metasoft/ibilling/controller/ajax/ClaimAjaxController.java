@@ -225,4 +225,21 @@ public class ClaimAjaxController extends BaseAjaxController {
     	String json = gson.toJson(resultVo);
 		return json;
     }
+	
+	@RequestMapping(value = "/claim/claimLoadWS", method = RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
+    public @ResponseBody String LoadWS(Model model,@RequestParam(required = true) String txtLoadDate) throws ParseException
+    {
+		ResultVo resultVo = new ResultVo();
+    	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    	
+    	Date loadDate = null;
+    	if (StringUtils.isNotBlank(txtLoadDate)) {
+    		loadDate = DateToolsUtil.convertStringToDateWithStartTime(txtLoadDate, DateToolsUtil.LOCALE_TH);
+		}
+    	
+    	claimService.loadClaimsFromWs(loadDate);		
+
+    	String json = gson.toJson(resultVo);
+		return json;
+    }
 }

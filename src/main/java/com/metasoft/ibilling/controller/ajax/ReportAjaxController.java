@@ -171,6 +171,7 @@ public class ReportAjaxController {
 			param.put("sumSurveyFine", sumSurveyFine);
 			param.put("totalThai", "=" + thaiBaht.getText(sumSurveyTotal) + "=");
 			param.put("total", sumSurveyTotal);
+			param.put("sumSurveyPart1", sumSurveyTrans + sumSurveyInvest + sumSurveyDaily + sumSurveyConditionRight);
 			
 			SurveyEmployee surveyEmployee = paySurvey.getClaims().get(0).getSurveyEmployee();
 			if(surveyEmployee != null){

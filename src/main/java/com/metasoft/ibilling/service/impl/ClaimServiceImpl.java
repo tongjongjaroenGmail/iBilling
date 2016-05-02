@@ -331,7 +331,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 	}
 	
 	@Override
-	public void loadClaimsFromWs() {
+	public void loadClaimsFromWs(Date loadDate) {
 		boolean isInsert = false;
 		boolean isUpdate = false;
 		int totalInsertSuccess = 0;
@@ -346,14 +346,15 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		ClaimRs claimRs = null;
 		String rptDatastr = "";
 		try {
-			Date today = new Date(); 
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(today);
-			cal.add(Calendar.DATE, -1);
-			String dateBefore1Days = DateToolsUtil.convertToString(cal.getTime(), "yyyy-MM-dd", DateToolsUtil.LOCALE_EN);
-			
+			if(loadDate == null){
+				Date today = new Date(); 
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(today);
+				cal.add(Calendar.DATE, -1);
+				loadDate = cal.getTime();
+			}
 			dpRptDataPortType = dpRptData.getdpRptDataPort();
-			rptDatastr = dpRptDataPortType.getRptData("", "", dateBefore1Days);
+			rptDatastr = dpRptDataPortType.getRptData("", "", DateToolsUtil.convertToString(loadDate, "yyyy-MM-dd", DateToolsUtil.LOCALE_EN));
 			claimRs = new ObjectMapper().readValue(rptDatastr, ClaimRs.class);
 		} catch (Exception e1) {
 			ClaimLoadLogErrorDetail claimLoadLogErrorDetail = new ClaimLoadLogErrorDetail();
@@ -430,6 +431,10 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 
 					if (StringUtils.isNotBlank(rptData.getBranchCode())) {
 						claim.setBranchDhip(branchDhipDao.findByName(rptData.getBranchCode().trim()));
+					}
+					
+					if(claim.getBranchDhip() == null){
+						throw new Exception("BranchDhip is null.");
 					}
 	
 					if (StringUtils.isNotBlank(rptData.getWrkTimeCode())) {
@@ -565,13 +570,13 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		
 			float surveyTrans = 0f;
 			if (accZone == 0 || accZone == 1) {
-				if (empCode.startsWith("L")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "L"
+				if (empCode.startsWith("L") || empCode.startsWith("l")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "L"
 				{
 					if (workTime == 1)
 						surveyTrans = 400f;
 					else
 						surveyTrans = 300f;
-				} else if (empCode.startsWith("D")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "D"
+				} else if (empCode.startsWith("D") || empCode.startsWith("d")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "D"
 				{
 					if (workTime == 1)
 						surveyTrans = 300f;

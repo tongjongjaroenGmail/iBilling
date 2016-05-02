@@ -133,4 +133,10 @@ public class SiteController extends BaseController
     {	
 		return "invoiceReportPage";
     }
+    
+    @RequestMapping(value = "/claimLoadWSPage", method = RequestMethod.GET)
+    public String claimLoadWSPage()
+    {	
+		return "claimLoadWSPage";
+    }
 }

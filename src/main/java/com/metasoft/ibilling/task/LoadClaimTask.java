@@ -17,6 +17,6 @@ public class LoadClaimTask {
 	private ClaimLoadLogDao claimLoadLogDao;
 
 	public void loadClaim() {
-		claimService.loadClaimsFromWs();
+		claimService.loadClaimsFromWs(null);
 	}
 }

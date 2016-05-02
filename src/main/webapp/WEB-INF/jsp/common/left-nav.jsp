@@ -136,6 +136,17 @@
 		</li>
 
 		</c:if>
+		
+		<c:if test="${loginUser.id == 1}">
+       	
+	       	<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/claimLoadWSPage'}">class="active"</c:if>>
+				<a href="${pageContext.request.contextPath}/claimLoadWSPage"> 
+							<i class="icon-double-angle-right"></i> 
+							<span class="menu-text">โหลดเคลม</span>
+						</a>
+			</li>
+
+		</c:if>
 	</ul>
 
 

@@ -92,7 +92,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 				criteria.add(Restrictions.in("claimStatus", claimStatusList));
 			}
 
-			criteria.addOrder(Order.desc("dispatchDate"));
+			criteria.addOrder(Order.asc("dispatchDate"));
 			criteria.addOrder(Order.asc("branch"));
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
@@ -163,6 +163,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 				criteria.add(Restrictions.eq("claimStatus", claimStatus));
 			}
 
+			criteria.addOrder(Order.asc("dispatchDate"));
 			criteria.addOrder(Order.asc("claimNo"));
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
@@ -231,7 +232,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 			criteria.add(Restrictions.isNull("paySurvey"));
 			criteria.add(Restrictions.in("claimStatus",claimStatus));
 
-			criteria.addOrder(Order.desc("dispatchDate"));
+			criteria.addOrder(Order.asc("dispatchDate"));
 			criteria.addOrder(Order.asc("claimNo"));
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
@@ -301,7 +302,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 				criteria.add(Restrictions.eq("claimStatus", claimStatus));
 			}
 
-			criteria.addOrder(Order.desc("dispatchDate"));
+			criteria.addOrder(Order.asc("dispatchDate"));
 			
 			criteria.setFirstResult(start);
 			criteria.setMaxResults(length);
@@ -402,7 +403,7 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 				}	
 			}
 			
-			criteria.addOrder(Order.desc("dispatchDate"));
+			criteria.addOrder(Order.asc("dispatchDate"));
 
 			if(start != 0){
 				criteria.setFirstResult(start);
