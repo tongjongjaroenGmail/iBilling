@@ -20,7 +20,10 @@ public class DateDeserializer extends JsonDeserializer<Date> {
         JsonNode node = oc.readTree(jsonParser);
         String str = node.asText();
         if(StringUtils.isNotBlank(str)){
-        	if(str.length() == 16){
+        	str = str.trim();
+        	if(str.length() == 19){
+        		return DateToolsUtil.convertStringToDate(str, "yyyy-MM-dd HH:mm:ss", Locale.US);
+        	}else if(str.length() == 16){
         		return DateToolsUtil.convertStringToDate(str, "yyyy-MM-dd HH:mm", Locale.US);
         	}else if(str.length() == 10){
         		return DateToolsUtil.convertStringToDate(str, "yyyy-MM-dd", Locale.US);
