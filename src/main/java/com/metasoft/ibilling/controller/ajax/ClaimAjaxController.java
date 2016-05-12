@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ import com.metasoft.ibilling.model.PaySurvey;
 import com.metasoft.ibilling.model.User;
 import com.metasoft.ibilling.service.ClaimService;
 import com.metasoft.ibilling.service.impl.ClaimServiceImpl;
+import com.metasoft.ibilling.task.LoadWSTask;
 import com.metasoft.ibilling.util.DateToolsUtil;
 
 @Controller
@@ -44,6 +46,9 @@ public class ClaimAjaxController extends BaseAjaxController {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ThreadPoolTaskExecutor taskExecutor;
 	
 	@RequestMapping(value = "/claim/search", method = RequestMethod.POST)
 	public @ResponseBody
@@ -236,8 +241,13 @@ public class ClaimAjaxController extends BaseAjaxController {
     	if (StringUtils.isNotBlank(txtLoadDate)) {
     		loadDate = DateToolsUtil.convertStringToDateWithStartTime(txtLoadDate, DateToolsUtil.LOCALE_TH);
 		}
-    	
-    	claimService.loadClaimsFromWs(loadDate);		
+    	int count = taskExecutor.getActiveCount();
+    	if(count > 0){
+    		resultVo.setMessage("มีการ load อยู่แล้ว");
+    	}else{
+    		taskExecutor.execute(new LoadWSTask(claimService,loadDate));
+    		resultVo.setMessage("เริ่มต้น load");
+    	}
 
     	String json = gson.toJson(resultVo);
 		return json;

@@ -533,7 +533,7 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		claimLoadLog.setTotalErrorData(totalError);
 		claimLoadLog.setTotalInsertData(totalInsertSuccess);
 		claimLoadLog.setTotalUpdateData(totalUpdateSuccess);
-		claimLoadLog.setCreateDate(new Date());
+		claimLoadLog.setEndDate(new Date());
 
 		claimLoadLogDao.save(claimLoadLog);
 		

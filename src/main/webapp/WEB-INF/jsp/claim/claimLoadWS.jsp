@@ -71,7 +71,7 @@ function claimLoadWS(){
 		contentType: 'application/json',
 	    mimeType: 'application/json',
 		success : function(data) {
-			alert("success");
+			alert(data.message);
 		}
 	});
 }

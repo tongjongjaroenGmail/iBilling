@@ -39,6 +39,10 @@ public class ClaimLoadLog extends BaseModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_date")
 	private Date createDate = new Date();
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "end_date")
+	private Date endDate = null;
 
 	@Column(name = "total_insert_data")
 	private int totalInsertData;
@@ -118,6 +122,14 @@ public class ClaimLoadLog extends BaseModel {
 
 	public void setTotalUpdateData(int totalUpdateData) {
 		this.totalUpdateData = totalUpdateData;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	
