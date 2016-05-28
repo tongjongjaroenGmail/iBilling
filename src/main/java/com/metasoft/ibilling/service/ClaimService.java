@@ -10,6 +10,7 @@ import com.metasoft.ibilling.bean.paging.CheckClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.InvoiceReportVoPaging;
 import com.metasoft.ibilling.bean.paging.PaySurveyClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.PaySurveyReportSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ReportStatisticsSurveyVoPaging;
 import com.metasoft.ibilling.controller.vo.ReportStatisticsSurveyVo;
 import com.metasoft.ibilling.dao.ClaimDao;
@@ -24,6 +25,9 @@ public interface ClaimService extends ModelBasedService<ClaimDao, Claim, Integer
 	
 	public PaySurveyClaimSearchResultVoPaging searchPaySurveyClaimPaging(String txtDispatchDateStart, String txtDispatchDateEnd, Integer employeeId,
 			int start, int length);
+	
+	public PaySurveyReportSearchResultVoPaging searchPaySurveyReportPaging(String txtDispatchDateStart, String txtDispatchDateEnd, String hasPaySurvey,
+			Integer branchId,Integer employeeId,int start, int length);
 	
 	public void loadClaimsFromWs(Date loadDate);
 	

@@ -104,6 +104,13 @@
 						<span class="menu-text">ค้นหาข้อมูลใบสำรวจ</span>
 					</a>
 				</li>
+				
+				<li <c:if test="${requestScope['javax.servlet.forward.servlet_path'] == '/reportPaySurveyPage'}">class="active"</c:if>>
+					<a href="${pageContext.request.contextPath}/paySurveyReportPage"> 
+						<i class="icon-double-angle-right"></i> 
+						<span class="menu-text">รายงานจัดชุดจ่ายค่าสำรวจพนักงาน</span>
+					</a>
+				</li>
 			</ul>
 		</li>
 		

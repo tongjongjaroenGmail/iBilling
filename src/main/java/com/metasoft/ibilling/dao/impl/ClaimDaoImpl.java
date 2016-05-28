@@ -419,4 +419,85 @@ public class ClaimDaoImpl extends AbstractDaoImpl<Claim, Integer> implements Cla
 		}
 		return resultPaging;
 	}
+
+	@Override
+	public ClaimPaging searchPaySurveyReportPaging(Date dispatchDateStart, Date dispatchDateEnd, Boolean hasPaySurvey, Branch branch,
+			SurveyEmployee surveyEmployee, int start, int length) {
+		ClaimPaging resultPaging = new ClaimPaging();
+
+		Criteria criteriaRecordsTotal = getCurrentSession().createCriteria(entityClass);
+
+		criteriaRecordsTotal.setProjection(Projections.rowCount());
+		resultPaging.setRecordsTotal((Long) criteriaRecordsTotal.uniqueResult());
+
+		Criteria criteriaCount = getCurrentSession().createCriteria(entityClass);
+		if (dispatchDateStart != null && dispatchDateEnd != null) {
+			criteriaCount.add(Restrictions.between("dispatchDate", dispatchDateStart, dispatchDateEnd));
+		} else if (dispatchDateStart != null) {
+			criteriaCount.add(Restrictions.ge("dispatchDate", dispatchDateStart));
+		} else if (dispatchDateEnd != null) {
+			criteriaCount.add(Restrictions.le("dispatchDate", dispatchDateEnd));
+		}
+
+		if (hasPaySurvey != null) {
+			if(hasPaySurvey){
+				criteriaCount.add(Restrictions.isNotNull("paySurvey"));
+			}else{
+				criteriaCount.add(Restrictions.isNull("paySurvey"));
+			}	
+		}
+		
+		if (branch != null) {
+			criteriaCount.add(Restrictions.eq("branch", branch));
+		}
+		
+		if (surveyEmployee != null) {
+			criteriaCount.add(Restrictions.eq("surveyEmployee", surveyEmployee));
+		}
+
+		criteriaCount.setProjection(Projections.rowCount());
+		resultPaging.setRecordsFiltered((Long) criteriaCount.uniqueResult());
+
+		if (resultPaging.getRecordsFiltered() != 0) {
+			Criteria criteria = getCurrentSession().createCriteria(entityClass);
+			if (dispatchDateStart != null && dispatchDateEnd != null) {
+				criteria.add(Restrictions.between("dispatchDate", dispatchDateStart, dispatchDateEnd));
+			} else if (dispatchDateStart != null) {
+				criteria.add(Restrictions.ge("dispatchDate", dispatchDateStart));
+			} else if (dispatchDateEnd != null) {
+				criteria.add(Restrictions.le("dispatchDate", dispatchDateEnd));
+			}
+
+			if (hasPaySurvey != null) {
+				if(hasPaySurvey){
+					criteria.add(Restrictions.isNotNull("paySurvey"));
+				}else{
+					criteria.add(Restrictions.isNull("paySurvey"));
+				}	
+			}
+			
+			if (branch != null) {
+				criteria.add(Restrictions.eq("branch", branch));
+			}
+			
+			if (surveyEmployee != null) {
+				criteria.add(Restrictions.eq("surveyEmployee", surveyEmployee));
+			}
+			
+			criteria.addOrder(Order.asc("dispatchDate"));
+
+			if(start != 0){
+				criteria.setFirstResult(start);
+			}
+			if(length != 0){
+				criteria.setMaxResults(length);
+			}
+			resultPaging.setData(criteria.list());
+		}
+
+		if (resultPaging.getData() == null) {
+			resultPaging.setData(new ArrayList<Claim>());
+		}
+		return resultPaging;
+	}
 }

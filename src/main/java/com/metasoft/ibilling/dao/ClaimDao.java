@@ -29,4 +29,6 @@ public interface ClaimDao extends AbstractDao<Claim, Integer> {
 	
 	public ClaimPaging searchInvoiceReportPaging(Date dispatchDateStart, Date dispatchDateEnd,BranchDhip branchDhip,Boolean groupInvoice, int start, int length);
 	
+	public ClaimPaging searchPaySurveyReportPaging(Date dispatchDateStart, Date dispatchDateEnd,Boolean hasPaySurvey ,Branch branch,SurveyEmployee surveyEmployee, int start, int length);
+	
 }

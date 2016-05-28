@@ -22,11 +22,13 @@ import com.metasoft.ibilling.bean.paging.ClaimPaging;
 import com.metasoft.ibilling.bean.paging.ClaimSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.InvoiceReportVoPaging;
 import com.metasoft.ibilling.bean.paging.PaySurveyClaimSearchResultVoPaging;
+import com.metasoft.ibilling.bean.paging.PaySurveyReportSearchResultVoPaging;
 import com.metasoft.ibilling.bean.paging.ReportStatisticsSurveyVoPaging;
 import com.metasoft.ibilling.bean.vo.CheckClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.ClaimSearchResultVo;
 import com.metasoft.ibilling.bean.vo.InvoiceReportVo;
 import com.metasoft.ibilling.bean.vo.PaySurveyClaimSearchResultVo;
+import com.metasoft.ibilling.bean.vo.PaySurveyReportSearchResultVo;
 import com.metasoft.ibilling.constant.SystemConstant;
 import com.metasoft.ibilling.controller.vo.ReportStatisticsSurveyVo;
 import com.metasoft.ibilling.dao.AmphurDao;
@@ -570,26 +572,38 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		
 			float surveyTrans = 0f;
 			if (accZone == 0 || accZone == 1) {
-				if (empCode.startsWith("L") || empCode.startsWith("l")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "L"
-				{
-					if (workTime == 1)
-						surveyTrans = 400f;
-					else
-						surveyTrans = 300f;
-				} else if (empCode.startsWith("D") || empCode.startsWith("d")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "D"
-				{
-					if (workTime == 1)
-						surveyTrans = 300f;
-					else
-						surveyTrans = 200f;
-				}
-				// ******************************************
-				if (claim.getCoArea() != null && claim.getCoArea()) {
-					surveyTrans = surveyTrans + 100;
-				}
-	
-				if (claim.getW7() != null && claim.getW7()) {
-					surveyTrans = surveyTrans + 50;
+				if (claim.getDisperse())	
+			    {	
+					surveyTrans = 50;	
+			    }	
+				else{			
+					if (empCode.startsWith("L") || empCode.startsWith("l")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "L"
+					{
+						if (workTime == 1)
+							surveyTrans = 400f;
+						else
+							surveyTrans = 300f;
+					} else if (empCode.startsWith("D") || empCode.startsWith("d")) // ถ้าอักษรตัวแรกขึ้นต้นด้วย "D"
+					{
+						if (workTime == 1)
+							surveyTrans = 300f;
+						else
+							surveyTrans = 200f;
+					}else if(empCode.startsWith("S") || empCode.startsWith("s")) //ถ้าอักษรตัวแรกขึ้นต้นด้วย "S", "s"			
+					{			
+						if (workTime == 1)		
+							surveyTrans = 200;		
+						else		
+							surveyTrans = 100;		
+					}			
+					// ******************************************
+					if (claim.getCoArea() != null && claim.getCoArea()) {
+						surveyTrans = surveyTrans + 100;
+					}
+		
+					if (claim.getW7() != null && claim.getW7()) {
+						surveyTrans = surveyTrans + 50;
+					}
 				}
 			} else if (accZone == 2) {
 				if (serviceType == 3) {
@@ -954,5 +968,74 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 		}
 		
 		return vo;
+	}
+
+	@Override
+	public PaySurveyReportSearchResultVoPaging searchPaySurveyReportPaging(String txtDispatchDateStart, String txtDispatchDateEnd,
+			String txtHasPaySurvey, Integer branchId, Integer employeeId, int start, int length) {
+		Date dispatchDateStart = null;
+		Date dispatchDateEnd = null;
+		SurveyEmployee surveyEmployee = null;
+		Branch branch = null;
+		Boolean hasPaySurvey = null;
+		
+		if (StringUtils.isNotBlank(txtDispatchDateStart)) {
+			dispatchDateStart = DateToolsUtil.convertStringToDateWithStartTime(txtDispatchDateStart, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (StringUtils.isNotBlank(txtDispatchDateEnd)) {
+			dispatchDateEnd = DateToolsUtil.convertStringToDateWithEndTime(txtDispatchDateEnd, DateToolsUtil.LOCALE_TH);
+		}
+
+		if (branchId != null && branchId != 0) {
+			branch = branchDao.findById(branchId);
+		}
+		
+		if (employeeId != null && employeeId != 0) {
+			surveyEmployee = surveyEmployeeDao.findById(employeeId);
+		}
+		
+		if(StringUtils.isNotBlank(txtHasPaySurvey)){
+			hasPaySurvey = "Y".equals(txtHasPaySurvey.trim())?true:false;
+		}
+
+		ClaimPaging claimPaging = claimDao.searchPaySurveyReportPaging(dispatchDateStart, dispatchDateEnd,hasPaySurvey,branch, surveyEmployee, start, length);
+
+		PaySurveyReportSearchResultVoPaging voPaging = new PaySurveyReportSearchResultVoPaging();
+		voPaging.setDraw(claimPaging.getDraw());
+		voPaging.setRecordsFiltered(claimPaging.getRecordsFiltered());
+		voPaging.setRecordsTotal(claimPaging.getRecordsTotal());
+		voPaging.setData(new ArrayList<PaySurveyReportSearchResultVo>());
+		if (claimPaging != null && claimPaging.getData() != null) {
+			for (Claim claim : claimPaging.getData()) {
+				PaySurveyReportSearchResultVo vo = new PaySurveyReportSearchResultVo();
+				vo.setClaimNo(StringUtils.trimToEmpty(claim.getClaimNo()));
+				if (claim.getDispatchDate() != null) {
+					vo.setDispatchDate(DateToolsUtil.convertToString(claim.getDispatchDate(), DateToolsUtil.LOCALE_TH));
+				}
+				
+				if (claim.getSurveyEmployee() != null) {
+					vo.setEmployeeName(claim.getSurveyEmployee().getCode());
+				}
+				
+				if (claim.getBranch() != null) {
+					vo.setBranchName(claim.getBranch().getName());
+				}
+				
+				if (claim.getClaimStatus() != null) {
+					vo.setClaimStatus(claim.getClaimStatus().getName());
+				}
+				
+				if (claim.getPaySurvey() != null) {
+					vo.setPaySurveyCode(claim.getPaySurvey().getCode());
+				}
+
+				vo.setSurveyTotal(calcTotalSurvey(claim));
+
+				voPaging.getData().add(vo);
+			}
+		}
+
+		return voPaging;
 	}
 }

@@ -139,4 +139,10 @@ public class SiteController extends BaseController
     {	
 		return "claimLoadWSPage";
     }
+    
+    @RequestMapping(value = "/paySurveyReportPage", method = RequestMethod.GET)
+    public String paySurveyReportPage()
+    {	
+		return "paySurveyReportPage";
+    }
 }

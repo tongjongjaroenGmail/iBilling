@@ -58,7 +58,7 @@
 				</div>
 				<div class="col-sm-3">		
 					<div class="input-group col-sm-12 no-padding-left">
-						<select class="col-sm-12" id="selBranch" onchange="getEmployeeFromBranch($(this).val(),'selEmployee');">
+						<select class="col-sm-12" id="selBranch" onchange="getEmployeeFromBranch($(this).val(),'selEmployee',false);">
 							<option value=""></option>
 							<c:forEach var="branchData" items="${branchs}" varStatus="index">		
 								<option value="${branchData.id}">${branchData.name}</option>						
