@@ -86,8 +86,13 @@ public class ReportAjaxController {
 		float surTotal = 0;
 		float surTax = 0;
 		
+		String branchDhipName = "";
+		
 		List<InvoiceReport> invoiceReports = new ArrayList<InvoiceReport>();
 		for (Claim claim : invoice.getClaims()) {
+			if(claim.getBranchDhip() != null){
+				branchDhipName = claim.getBranchDhip().getName();
+			}
 			float surTotalTemp = ClaimServiceImpl.calcTotalSur(claim);
 			surTotal += surTotalTemp;
 			float surTaxTemp = ClaimServiceImpl.calcVat(surTotalTemp);
@@ -109,6 +114,7 @@ public class ReportAjaxController {
 			invoiceReports.add(invoiceReport);
 		}
 		
+		param.put("branchDhipName", branchDhipName);
 		param.put("invoiceNo", invoice.getCode());
 		param.put("total", surTotal);
 		param.put("tax", surTax);

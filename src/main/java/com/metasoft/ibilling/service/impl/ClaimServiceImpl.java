@@ -960,6 +960,15 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 			vo.setBranchDhipName(claim.getBranchDhip().getName());
 		}
 		
+		vo.setSurInvest( claim.getSurInvest());
+		vo.setSurTrans (claim.getSurTrans());
+		vo.setSurDaily (claim.getSurDaily()); 
+		vo.setSurPhoto (claim.getSurPhoto());
+		vo.setSurClaim (claim.getSurClaim());
+		vo.setSurTel (claim.getSurTel());
+		vo.setSurInsure (claim.getSurInsure());
+		vo.setSurTowcar (claim.getSurTowcar());
+		vo.setSurOther (claim.getSurOther());
 		float totalSur = calcTotalSur(claim);		
 		vo.setSurveyTotal(totalSur + calcVat(totalSur));
 		
@@ -1036,6 +1045,16 @@ public class ClaimServiceImpl extends ModelBasedServiceImpl<ClaimDao, Claim, Int
 				if (claim.getPaySurvey() != null) {
 					vo.setPaySurveyCode(claim.getPaySurvey().getCode());
 				}
+				
+				vo.setSurveyInvest(claim.getSurveyInvest());
+				vo.setSurveyTrans(claim.getSurveyTrans());
+				vo.setSurveyDaily(claim.getSurveyDaily());
+				vo.setSurveyPhoto(claim.getSurveyPhoto());
+				vo.setSurveyClaim(claim.getSurveyClaim());
+				vo.setSurveyTel(claim.getSurveyTel());
+				vo.setSurveyConditionRight(claim.getSurveyConditionRight());
+				vo.setSurveyOther(claim.getSurveyOther());
+				vo.setSurveyFine(claim.getSurveyFine());
 
 				vo.setSurveyTotal(calcTotalSurvey(claim));
 

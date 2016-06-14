@@ -58,7 +58,7 @@
 				<div class="col-sm-3">		
 					<div class="input-group col-sm-12 no-padding-left">
 						<select class="col-sm-12" id="selBranch">
-							<option value="">ทั้งหมด</option>
+							<option value=""></option>
 							<c:forEach var="branch" items="${branchDhips}" varStatus="index">		
 								<option value="${branch.id}">${branch.name}</option>					
 							</c:forEach>
@@ -256,6 +256,12 @@ $(document).ready(function() {
 });
 
 function searchClaim(){
+	if($("#selBranch").val() == ""){
+		alert("กรุณาเลือก สาขา");
+		$("#selBranch").focus();
+		return;
+	}
+	
 	delay(function(){
 		tblClaimDt.fnDraw();
 	}, 500 );

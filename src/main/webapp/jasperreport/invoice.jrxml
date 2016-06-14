@@ -8,6 +8,7 @@
 	<parameter name="total" class="java.lang.Float"/>
 	<parameter name="tax" class="java.lang.Float"/>
 	<parameter name="totalAll" class="java.lang.Float"/>
+	<parameter name="branchDhipName" class="java.lang.String"/>
 	<field name="claimNo" class="java.lang.String"/>
 	<field name="dispatchDate" class="java.util.Date"/>
 	<field name="surInvest" class="java.lang.Float"/>
@@ -84,9 +85,9 @@
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="40" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="28" height="20" uuid="50c48221-5090-4fc8-b8f2-438a12f25108"/>
+				<reportElement x="0" y="20" width="28" height="20" uuid="50c48221-5090-4fc8-b8f2-438a12f25108"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -99,7 +100,7 @@
 				<text><![CDATA[ลำดับ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="28" y="0" width="80" height="20" uuid="7c6407c5-7b7e-4052-b882-fc3a1541e4c3"/>
+				<reportElement x="28" y="20" width="80" height="20" uuid="7c6407c5-7b7e-4052-b882-fc3a1541e4c3"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -112,7 +113,7 @@
 				<text><![CDATA[หมายเลขอุบัติเหตุ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="170" y="0" width="50" height="20" uuid="0b0ec333-0534-4d17-96f0-ec32b8a22179"/>
+				<reportElement x="170" y="20" width="50" height="20" uuid="0b0ec333-0534-4d17-96f0-ec32b8a22179"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -125,7 +126,7 @@
 				<text><![CDATA[ค่าบริการ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="220" y="0" width="50" height="20" uuid="2d93af9d-974e-4750-94e8-0dd56f0d0db5"/>
+				<reportElement x="220" y="20" width="50" height="20" uuid="2d93af9d-974e-4750-94e8-0dd56f0d0db5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -138,7 +139,7 @@
 				<text><![CDATA[ค่าพาหนะ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="270" y="0" width="45" height="20" uuid="935512c4-ffe6-4936-ab42-376138586b9a"/>
+				<reportElement x="270" y="20" width="45" height="20" uuid="935512c4-ffe6-4936-ab42-376138586b9a"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -151,7 +152,7 @@
 				<text><![CDATA[ค่าปจว.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="315" y="0" width="45" height="20" uuid="88d95038-7bba-4b0d-8e6e-24ad1b670576"/>
+				<reportElement x="315" y="20" width="45" height="20" uuid="88d95038-7bba-4b0d-8e6e-24ad1b670576"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -164,7 +165,7 @@
 				<text><![CDATA[ค่ารูป]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="360" y="0" width="50" height="20" uuid="da15b97d-a137-419a-98df-b16a3a3a99f8"/>
+				<reportElement x="360" y="20" width="50" height="20" uuid="da15b97d-a137-419a-98df-b16a3a3a99f8"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -177,7 +178,7 @@
 				<text><![CDATA[ค่าเรียกร้อง]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="0" width="60" height="20" uuid="9e3737f3-5026-401e-abfc-abe4699ccfee"/>
+				<reportElement x="410" y="20" width="60" height="20" uuid="9e3737f3-5026-401e-abfc-abe4699ccfee"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -190,7 +191,7 @@
 				<text><![CDATA[ค่าโทรศัพท์]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="108" y="0" width="62" height="20" uuid="da279b9d-5efa-4ad7-b3b2-3bf1127f71e5"/>
+				<reportElement x="108" y="20" width="62" height="20" uuid="da279b9d-5efa-4ad7-b3b2-3bf1127f71e5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -203,7 +204,7 @@
 				<text><![CDATA[วันที่จ่ายงาน]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="0" width="60" height="20" uuid="b48dd669-e75e-4620-8375-6f251d81a4de"/>
+				<reportElement x="470" y="20" width="60" height="20" uuid="b48dd669-e75e-4620-8375-6f251d81a4de"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -216,7 +217,7 @@
 				<text><![CDATA[ค่าใช้จ่ายอื่นๆ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="530" y="0" width="65" height="20" uuid="819e3859-b733-4c45-9f4a-dd8ee57848c5"/>
+				<reportElement x="530" y="20" width="65" height="20" uuid="819e3859-b733-4c45-9f4a-dd8ee57848c5"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -228,6 +229,13 @@
 				</textElement>
 				<text><![CDATA[ประเภทเคลม]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="595" height="20" uuid="d7c62968-1e53-4072-b5fd-c17ba64656f7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="AngsanaUPC" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" สาขา " + $P{branchDhipName}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
